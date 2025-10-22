@@ -14,6 +14,13 @@
     --card-bg: #1a1a1a;
     --input-bg: #2a2a2a;
     --hover-bg: #333333;
+
+    /* valeurs contrôlables pour perf */
+    --particle-size: 10px;
+    --energy-particle-size: 3px;
+    --particle-duration: 20s;
+    --energy-duration: 3s;
+    --anim-ease: ease-in-out;
 }
 
 [data-theme="light"] {
@@ -51,15 +58,17 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+/* particles configurable et moins chères (transform/opacity seulement) */
 .particle {
     position: absolute;
-    width: var(--particle-size, 10px);   /* fix: consistent size via variable */
-    height: var(--particle-size, 10px);
-    background: rgba(255, 0, 0, 0.5);
+    width: var(--particle-size);
+    height: var(--particle-size);
+    background: rgba(255,0,0,0.45);
     border-radius: 50%;
-    animation: float 20s linear infinite;
-    pointer-events: none; /* perf + UX */
+    animation: float var(--particle-duration) linear infinite;
+    pointer-events: none;
     will-change: transform, opacity;
+    backface-visibility: hidden;
 }
 
 @keyframes float {
@@ -67,6 +76,14 @@ body {
     10% { opacity: 1; }
     90% { opacity: 1; }
     100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+/* énergie */
+.energy-particle {
+    width: var(--energy-particle-size);
+    height: var(--energy-particle-size);
+    animation: energyFloat var(--energy-duration) var(--anim-ease) infinite;
+    will-change: transform, opacity;
 }
 
 /* Energy Particles for Loading */
