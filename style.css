@@ -41,6 +41,7 @@ body {
 
 .infrared-bg {
     background: linear-gradient(45deg, #ff0000, #800080, #000000);
+    background-size: 400% 400%; /* fix: allow background-position animation to work */
     animation: infraredShift 10s ease-in-out infinite;
 }
 
@@ -52,9 +53,13 @@ body {
 
 .particle {
     position: absolute;
+    width: var(--particle-size, 10px);   /* fix: consistent size via variable */
+    height: var(--particle-size, 10px);
     background: rgba(255, 0, 0, 0.5);
     border-radius: 50%;
     animation: float 20s linear infinite;
+    pointer-events: none; /* perf + UX */
+    will-change: transform, opacity;
 }
 
 @keyframes float {
@@ -67,14 +72,16 @@ body {
 /* Energy Particles for Loading */
 .energy-particle {
     position: absolute;
-    width: 2px;
-    height: 2px;
+    width: var(--energy-particle-size, 3px); /* slightly larger and configurable */
+    height: var(--energy-particle-size, 3px);
     background: radial-gradient(circle, #ff0000, #800080);
     border-radius: 50%;
     opacity: 0;
     transform: scale(0);
     animation: energyFloat 3s ease-in-out infinite;
     box-shadow: 0 0 4px rgba(255, 0, 0, 0.6);
+    pointer-events: none;
+    will-change: transform, opacity;
 }
 
 @keyframes energyFloat {
@@ -189,6 +196,7 @@ body {
 /* Infrared Gradient Text */
 .infrared-text {
     background: linear-gradient(45deg, #ff0000, #800080, #ff0000);
+    background-size: 400% 400%; /* fix: allow gradient animation */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -272,6 +280,7 @@ button:focus, input:focus, textarea:focus, a:focus {
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 /* Lazy loading for images */
