@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités - Infrarouge</title>
+    <!-- Preconnect pour optimiser le chargement des fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tailwind doit être chargé de manière synchrone pour éviter le FOUC -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Scripts d'animation peuvent être chargés en defer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black bg-opacity-50 backdrop-blur-md z-40">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-red-500">INFRAROUGE</a>
+            <div class="flex items-center space-x-6">
+                <ul class="flex space-x-6">
+                    <li><a href="index.html#home" class="hover:text-red-400 transition">Accueil</a></li>
+                    <li><a href="artists.html" class="hover:text-red-400 transition">Artistes</a></li>
+                    <li><a href="news.html" class="hover:text-red-400 transition">Actualités</a></li>
+                    <li><a href="events.html" class="hover:text-red-400 transition">Événements</a></li>
+                    <li><a href="gallery.html" class="hover:text-red-400 transition">Galerie</a></li>
+                    <li><a href="about.html" class="hover:text-red-400 transition">À Propos</a></li>
+                    <li><a href="contact.html" class="hover:text-red-400 transition">Contact</a></li>
+                </ul>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero News Section -->
+    <section class="pt-20 pb-10 relative overflow-hidden">
+        <canvas id="star-field" class="absolute inset-0 z-0"></canvas>
+        <div class="absolute inset-0 infrared-bg opacity-10"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-8xl font-bold mb-6 infrared-text">ACTUALITÉS</h1>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Les dernières nouvelles du monde underground artistique</p>
+        </div>
+    </section>
+
+    <!-- Featured News Article -->
+    <section class="py-10 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto mb-16">
+                <article class="relative overflow-hidden rounded-lg hover-lift metallic pulse-border group cursor-pointer">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                        <div class="relative">
+                            <img src="https://cdn-images.dzcdn.net/images/cover/d1d110bbcb0dffcd35246f0b5ff315c9/0x1900-000000-80-0-0.jpg" alt="Petite Sœur annonce son nouveau single" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-40"></div>
+                            <div class="absolute top-6 left-6">
+                                <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">À LA UNE</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-900 p-8 flex flex-col justify-center">
+                            <div class="mb-4">
+                                <span class="text-red-500 text-sm font-bold uppercase tracking-wide">Rap Underground • France</span>
+                            </div>
+                            <h2 class="text-3xl font-bold mb-4 leading-tight">Petite Sœur annonce son nouveau single "La Vie Est Belle"</h2>
+                            <p class="text-gray-300 mb-6 leading-relaxed">La rappeuse marseillaise revient avec un titre introspectif qui explore les thèmes de la vie urbaine et des émotions profondes. Une production innovante qui confirme son statut de nouvelle voix du rap underground français.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-400 text-sm">15 octobre 2023</span>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-red-500 text-sm">Lire la suite</span>
+                                    <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- News Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <article class="bg-gray-800 rounded-lg overflow-hidden hover-lift metallic pulse-border group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://static.fnac-static.com/multimedia/Images/FR/NR/50/3f/e0/14696272/1507-1/tsp20221025160347/Nouvel-album.jpg" alt="Album Sex in the City de Lorenzo" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="250">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div class="absolute top-3 right-3">
+                            <span class="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold glitch" data-text="HOT">HOT</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <span class="text-red-400 text-xs font-bold">France / Rap</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-red-400 transition-colors">Lorenzo dévoile "Sex in the City"</h3>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">L'album tant attendu du rappeur marseillais est enfin disponible, avec des productions innovantes et des textes engagés.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs">10 juin 2023</span>
+                            <span class="text-red-500 text-sm group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-gray-800 rounded-lg overflow-hidden hover-lift metallic pulse-border group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://cdn-images.dzcdn.net/images/cover/d1d110bbcb0dffcd35246f0b5ff315c9/0x1900-000000-80-0-0.jpg" alt="Collaboration Petite Sœur et Lorenzo" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="250">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div class="absolute top-3 right-3">
+                            <span class="bg-purple-600 text-white px-2 py-1 rounded text-xs font-bold">COLLAB</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <span class="text-purple-400 text-xs font-bold">France / Rap</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors">Collaboration explosive entre Petite Sœur et Lorenzo</h3>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Les deux rappeurs marseillais s'associent pour un featuring qui promet de faire vibrer la scène underground française.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs">20 septembre 2023</span>
+                            <span class="text-purple-500 text-sm group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-gray-800 rounded-lg overflow-hidden hover-lift metallic pulse-border group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://i.scdn.co/image/ab6761610000e5eb5b5b5b5b5b5b5b5b5b5b5b5b5b" alt="Laylow en concert à Paris" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="250">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div class="absolute top-3 right-3">
+                            <span class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">CONCERT</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <span class="text-blue-400 text-xs font-bold">France / Concert</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">Laylow annonce un concert à l'Olympia</h3>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Le rappeur parisien revient sur scène pour une date exceptionnelle à Paris, promettant un show mémorable.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs">5 novembre 2023</span>
+                            <span class="text-blue-500 text-sm group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Additional News Items -->
+                <article class="bg-gray-800 rounded-lg overflow-hidden hover-lift metallic pulse-border group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://cdn-images.dzcdn.net/images/cover/d1d110bbcb0dffcd35246f0b5ff315c9/0x1900-000000-80-0-0.jpg" alt="Interview avec rappeurs underground français" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="250">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div class="absolute top-3 right-3">
+                            <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">INTERVIEW</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <span class="text-green-400 text-xs font-bold">France / Interview</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-green-400 transition-colors">Interview exclusive avec Petite Sœur, Lorenzo et Laylow</h3>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Les figures montantes du rap underground français se confient sur leur parcours et leurs projets futurs.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs">1er octobre 2023</span>
+                            <span class="text-green-500 text-sm group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-gray-800 rounded-lg overflow-hidden hover-lift metallic pulse-border group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=250&fit=crop" alt="Concert de rap français avec public nombreux" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="250">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div class="absolute top-3 right-3">
+                            <span class="bg-yellow-600 text-white px-2 py-1 rounded text-xs font-bold">ÉVÉNEMENT</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <span class="text-yellow-400 text-xs font-bold">France / Festival</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-yellow-400 transition-colors">Nouveau festival rap underground à Marseille</h3>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Infrarouge organise un événement majeur rassemblant Petite Sœur, Lorenzo et d'autres talents locaux pour une soirée inoubliable.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs">15 décembre 2023</span>
+                            <span class="text-yellow-500 text-sm group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-gray-800 rounded-lg overflow-hidden hover-lift metallic pulse-border group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://cdn-images.dzcdn.net/images/cover/d1d110bbcb0dffcd35246f0b5ff315c9/0x1900-000000-80-0-0.jpg" alt="Petite Sœur récompensée" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" width="400" height="250">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                        <div class="absolute top-3 right-3">
+                            <span class="bg-pink-600 text-white px-2 py-1 rounded text-xs font-bold">PRIX</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <span class="text-pink-400 text-xs font-bold">France / Prix</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-pink-400 transition-colors">Petite Sœur récompensée aux Victoires du Rap Underground</h3>
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">La rappeuse marseillaise reçoit le prix de la révélation de l'année pour son EP "Confessions Nocturnes".</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs">25 mai 2023</span>
+                            <span class="text-pink-500 text-sm group-hover:translate-x-1 transition-transform">→</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-full text-white font-bold transition-all duration-300 hover-lift pulse-glow">
+                    Charger plus d'actualités
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script defer>
+        // Three.js Star Field
+        window.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('star-field');
+            if (canvas && typeof THREE !== 'undefined') {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.position.z = 5;
+
+                const starsGeometry = new THREE.BufferGeometry();
+                const starsMaterial = new THREE.PointsMaterial({ color: 0xff0000, size: 0.5 });
+                const starsVertices = [];
+                for (let i = 0; i < 300; i++) {
+                    const x = (Math.random() - 0.5) * 2000;
+                    const y = (Math.random() - 0.5) * 2000;
+                    const z = (Math.random() - 0.5) * 2000;
+                    starsVertices.push(x, y, z);
+                }
+                starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+                const stars = new THREE.Points(starsGeometry, starsMaterial);
+                scene.add(stars);
+
+                function animateStars() {
+                    requestAnimationFrame(animateStars);
+                    stars.rotation.x += 0.0002;
+                    stars.rotation.y += 0.0002;
+                    renderer.render(scene, camera);
+                }
+                animateStars();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+        });
+
+        // GSAP Animations
+        if (typeof gsap !== 'undefined') {
+            gsap.from('h1', { opacity: 0, y: 50, duration: 1 });
+            gsap.from('article', { opacity: 0, y: 50, duration: 1, stagger: 0.2, delay: 0.5 });
+        }
+    </script>
+</body>
+</html>

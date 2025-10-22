@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block access to admin areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow access to CSS and JS files
+Allow: *.css
+Allow: *.js
+
+# Sitemap
+Sitemap: https://infrarouge.art/sitemap.xml

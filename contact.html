@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Infrarouge</title>
+    <!-- Preconnect pour optimiser le chargement des fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tailwind doit être chargé de manière synchrone pour éviter le FOUC -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Scripts d'animation peuvent être chargés en defer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black bg-opacity-50 backdrop-blur-md z-40">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-red-500">INFRAROUGE</a>
+            <div class="flex items-center space-x-6">
+                <ul class="flex space-x-6">
+                    <li><a href="index.html#home" class="hover:text-red-400 transition">Accueil</a></li>
+                    <li><a href="artists.html" class="hover:text-red-400 transition">Artistes</a></li>
+                    <li><a href="news.html" class="hover:text-red-400 transition">Actualités</a></li>
+                    <li><a href="events.html" class="hover:text-red-400 transition">Événements</a></li>
+                    <li><a href="gallery.html" class="hover:text-red-400 transition">Galerie</a></li>
+                    <li><a href="about.html" class="hover:text-red-400 transition">À Propos</a></li>
+                    <li><a href="contact.html" class="hover:text-red-400 transition">Contact</a></li>
+                </ul>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Contact Section -->
+    <section class="pt-20 pb-10 relative overflow-hidden">
+        <canvas id="star-field" class="absolute inset-0 z-0"></canvas>
+        <div class="absolute inset-0 infrared-bg opacity-10"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-8xl font-bold mb-6 infrared-text">CONTACT</h1>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Rejoignez notre collectif underground et partagez votre vision artistique</p>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <div>
+                            <h2 class="text-4xl font-bold mb-6 infrared-text">Connectons-nous</h2>
+                            <p class="text-gray-300 leading-relaxed mb-8">
+                                Vous êtes un artiste underground talentueux ? Une galerie innovante ? Un événement artistique unique ?
+                                Nous voulons découvrir votre travail et le partager avec notre communauté internationale.
+                            </p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Email</h3>
+                                    <p class="text-gray-400">contact@infrarouge.art</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Localisation</h3>
+                                    <p class="text-gray-400">Paris, France</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Réseaux Sociaux</h3>
+                                    <p class="text-gray-400">@infrarouge_art</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="pt-8">
+                            <h3 class="text-lg font-bold mb-4">Suivez-nous</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors">
+                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center transition-colors">
+                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-2.105.837-3.218 2.437-3.218.406 0 1.15.063 1.15.063l.125-1.874c-.562-.187-1.656-.375-2.437-.375-2.25 0-3.5 1.312-3.75 3.562 0 0-.75 3.562-.75 7.874 0 1.5-.062 3.562-.062 3.562s-.312 2.25-1.875 2.25c-1.562 0-4.5-1.5-6.375-3.375C4.687 15.75 3.75 13.5 3.75 12s.937-3.75 2.812-3.75c1.875 0 3.75 1.5 5.625 3.375.75.75 1.5 1.5 2.25 1.5l.375-.75c-1.125-1.125-2.25-2.25-3-3z"/></svg>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors">
+                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="metallic rounded-lg overflow-hidden pulse-border">
+                        <form id="contactForm" class="bg-gray-900 p-8">
+                            <h3 class="text-2xl font-bold mb-6 infrared-text">Soumettre un artiste</h3>
+
+                            <div class="mb-6">
+                                <label for="artistName" class="block text-sm font-bold mb-2 text-gray-300">Nom de l'artiste</label>
+                                <input type="text" id="artistName" name="artistName" required
+                                       class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                <span class="text-red-500 text-xs mt-1 hidden" id="artistNameError">Ce champ est requis</span>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="artistType" class="block text-sm font-bold mb-2 text-gray-300">Type d'art</label>
+                                <select id="artistType" name="artistType" required
+                                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                    <option value="">Sélectionnez un type d'art</option>
+                                    <option value="rap">Rap/Hip-Hop</option>
+                                    <option value="street-art">Street Art</option>
+                                    <option value="photography">Photographie</option>
+                                    <option value="digital-art">Art Numérique</option>
+                                    <option value="painting">Peinture</option>
+                                    <option value="music">Musique</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                                <span class="text-red-500 text-xs mt-1 hidden" id="artistTypeError">Veuillez sélectionner un type d'art</span>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="location" class="block text-sm font-bold mb-2 text-gray-300">Localisation</label>
+                                <input type="text" id="location" name="location" placeholder="Ville, Pays"
+                                       class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="email" class="block text-sm font-bold mb-2 text-gray-300">Email de contact</label>
+                                <input type="email" id="email" name="email" required
+                                       class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                <span class="text-red-500 text-xs mt-1 hidden" id="emailError">Veuillez entrer un email valide</span>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="socialLinks" class="block text-sm font-bold mb-2 text-gray-300">Liens réseaux sociaux</label>
+                                <textarea id="socialLinks" name="socialLinks" rows="3" placeholder="Instagram, SoundCloud, Behance, etc."
+                                          class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"></textarea>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="description" class="block text-sm font-bold mb-2 text-gray-300">Description de l'artiste</label>
+                                <textarea id="description" name="description" rows="4" required placeholder="Décrivez brièvement l'artiste, son style, ses influences..."
+                                          class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"></textarea>
+                                <span class="text-red-500 text-xs mt-1 hidden" id="descriptionError">Ce champ est requis</span>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="terms" name="terms" required class="mr-3">
+                                    <span class="text-sm text-gray-400">J'accepte que mes informations soient utilisées pour présenter mon travail artistique</span>
+                                </label>
+                                <span class="text-red-500 text-xs mt-1 hidden block" id="termsError">Vous devez accepter les conditions</span>
+                            </div>
+
+                            <button type="submit" id="submitBtn"
+                                    class="w-full bg-red-600 hover:bg-red-700 px-6 py-4 rounded-lg font-bold transition-all duration-300 hover-lift pulse-glow disabled:opacity-50 disabled:cursor-not-allowed">
+                                <span id="submitText">Envoyer la candidature</span>
+                                <div id="loadingSpinner" class="hidden inline-block ml-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            </button>
+
+                            <div id="successMessage" class="mt-4 p-4 bg-green-600 text-white rounded-lg hidden">
+                                Merci ! Votre candidature a été envoyée avec succès. Nous vous contacterons bientôt.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script defer>
+        // Three.js Star Field
+        window.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('star-field');
+            if (canvas && typeof THREE !== 'undefined') {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.position.z = 5;
+
+                const starsGeometry = new THREE.BufferGeometry();
+                const starsMaterial = new THREE.PointsMaterial({ color: 0xff0000, size: 0.5 });
+                const starsVertices = [];
+                for (let i = 0; i < 300; i++) {
+                    const x = (Math.random() - 0.5) * 2000;
+                    const y = (Math.random() - 0.5) * 2000;
+                    const z = (Math.random() - 0.5) * 2000;
+                    starsVertices.push(x, y, z);
+                }
+                starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+                const stars = new THREE.Points(starsGeometry, starsMaterial);
+                scene.add(stars);
+
+                function animateStars() {
+                    requestAnimationFrame(animateStars);
+                    stars.rotation.x += 0.0002;
+                    stars.rotation.y += 0.0002;
+                    renderer.render(scene, camera);
+                }
+                animateStars();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+        });
+
+        // GSAP Animations
+        if (typeof gsap !== 'undefined') {
+            gsap.from('h1', { opacity: 0, y: 50, duration: 1 });
+            gsap.from('.space-y-8', { opacity: 0, x: -50, duration: 1, delay: 0.3 });
+            gsap.from('form', { opacity: 0, x: 50, duration: 1, delay: 0.5 });
+        }
+
+        // Auto-save functionality
+        const contactForm = document.getElementById('contactForm');
+        const formFields = ['artistName', 'artistType', 'location', 'email', 'socialLinks', 'description'];
+        const autoSaveKey = 'contactFormDraft';
+
+        // Load saved data on page load
+        window.addEventListener('load', function() {
+            const savedData = localStorage.getItem(autoSaveKey);
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                formFields.forEach(field => {
+                    if (data[field]) {
+                        document.getElementById(field).value = data[field];
+                    }
+                });
+                if (data.terms) {
+                    document.getElementById('terms').checked = data.terms;
+                }
+                console.log('Brouillon chargé automatiquement');
+            }
+        });
+
+        // Auto-save every 5 seconds
+        setInterval(function() {
+            const data = {};
+            formFields.forEach(field => {
+                data[field] = document.getElementById(field).value;
+            });
+            data.terms = document.getElementById('terms').checked;
+            localStorage.setItem(autoSaveKey, JSON.stringify(data));
+        }, 5000);
+
+        // Clear saved data on successful submission
+        contactForm.addEventListener('submit', function(e) {
+            if (validateForm()) {
+                localStorage.removeItem(autoSaveKey);
+            }
+        });
+
+        // Form validation and submission (only if gsap is loaded)
+        if (typeof gsap !== 'undefined') {
+            const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const successMessage = document.getElementById('successMessage');
+
+        // Validation functions
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+            gsap.from(errorElement, { opacity: 0, y: -10, duration: 0.3 });
+        }
+
+        function hideError(elementId) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.classList.add('hidden');
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validateForm() {
+            let isValid = true;
+
+            // Reset errors
+            hideError('artistNameError');
+            hideError('artistTypeError');
+            hideError('emailError');
+            hideError('descriptionError');
+            hideError('termsError');
+
+            // Validate artist name
+            const artistName = document.getElementById('artistName').value.trim();
+            if (!artistName) {
+                showError('artistNameError', 'Le nom de l\'artiste est requis');
+                isValid = false;
+            }
+
+            // Validate artist type
+            const artistType = document.getElementById('artistType').value;
+            if (!artistType) {
+                showError('artistTypeError', 'Veuillez sélectionner un type d\'art');
+                isValid = false;
+            }
+
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            if (!email) {
+                showError('emailError', 'L\'email est requis');
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                showError('emailError', 'Veuillez entrer un email valide');
+                isValid = false;
+            }
+
+            // Validate description
+            const description = document.getElementById('description').value.trim();
+            if (!description) {
+                showError('descriptionError', 'La description est requise');
+                isValid = false;
+            }
+
+            // Validate terms
+            const terms = document.getElementById('terms').checked;
+            if (!terms) {
+                showError('termsError', 'Vous devez accepter les conditions');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Form submission
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.textContent = 'Envoi en cours...';
+            loadingSpinner.classList.remove('hidden');
+
+            // Simulate form submission (replace with actual API call)
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+
+                // Hide loading state
+                submitBtn.disabled = false;
+                submitText.textContent = 'Envoyer la candidature';
+                loadingSpinner.classList.add('hidden');
+
+                // Show success message
+                successMessage.classList.remove('hidden');
+                gsap.from(successMessage, { opacity: 0, y: 20, duration: 0.5 });
+
+                // Reset form
+                contactForm.reset();
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    gsap.to(successMessage, {
+                        opacity: 0,
+                        duration: 0.5,
+                        onComplete: () => successMessage.classList.add('hidden')
+                    });
+                }, 5000);
+
+            } catch (error) {
+                console.error('Form submission error:', error);
+                submitBtn.disabled = false;
+                submitText.textContent = 'Envoyer la candidature';
+                loadingSpinner.classList.add('hidden');
+
+                // Show error message (you can add an error message element)
+                alert('Une erreur s\'est produite. Veuillez réessayer.');
+            }
+        });
+
+        // Real-time validation
+        document.getElementById('artistName').addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                showError('artistNameError', 'Le nom de l\'artiste est requis');
+            } else {
+                hideError('artistNameError');
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                showError('emailError', 'L\'email est requis');
+            } else if (!validateEmail(this.value.trim())) {
+                showError('emailError', 'Veuillez entrer un email valide');
+            } else {
+                hideError('emailError');
+            }
+        });
+
+        document.getElementById('description').addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                showError('descriptionError', 'La description est requise');
+            } else {
+                hideError('descriptionError');
+            }
+        });
+        }
+    </script>
+</body>
+</html>
