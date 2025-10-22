@@ -334,42 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Mobile Menu Functionality
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const navMenu = document.getElementById('nav-menu');
 
-    if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-
-            // Change hamburger icon to X
-            const icon = mobileMenuBtn.querySelector('svg');
-            if (navMenu.classList.contains('active')) {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-            } else {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-            }
-        });
-
-        // Close menu when clicking on a link
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('svg');
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuBtn.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('svg');
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-            }
-        });
-    }
 
     // Newsletter Functionality
     const newsletterForm = document.getElementById('newsletter-form');
