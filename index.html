@@ -3,297 +3,865 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infrarouge - Magazine Underground pour Artistes du Monde</title>
-    <meta name="description" content="Magazine underground français dédié aux artistes émergents. Découvrez Petite Sœur, Lorenzo, Laylow et les talents du rap, street art, photographie et art numérique.">
-    <meta name="keywords" content="magazine underground, rap français, street art, art numérique, Petite Sœur, Lorenzo, Laylow, musique indépendante, artistes émergents">
-    <meta name="author" content="Infrarouge Magazine">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="fr-FR">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://infrarouge.art/">
-    <meta property="og:title" content="Infrarouge - Magazine Underground pour Artistes du Monde">
-    <meta property="og:description" content="Magazine underground français dédié aux artistes émergents. Découvrez Petite Sœur, Lorenzo, Laylow et les talents du rap, street art, photographie et art numérique.">
-    <meta property="og:image" content="https://infrarouge.art/og-image.jpg">
-    <meta property="og:locale" content="fr_FR">
-    <meta property="og:site_name" content="Infrarouge Magazine">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://infrarouge.art/">
-    <meta property="twitter:title" content="Infrarouge - Magazine Underground pour Artistes du Monde">
-    <meta property="twitter:description" content="Magazine underground français dédié aux artistes émergents. Découvrez Petite Sœur, Lorenzo, Laylow et les talents du rap, street art, photographie et art numérique.">
-    <meta property="twitter:image" content="https://infrarouge.art/og-image.jpg">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://infrarouge.art/">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <!-- Preconnect pour optimiser le chargement des fonts -->
+    <title>INFRAROUGE - Magazine Underground</title>
+    <meta name="description" content="Magazine underground français dédié aux artistes émergents. Découvrez la nouvelle scène artistique française.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- Preload des ressources critiques -->
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-    
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style-mobile.css">
-    
-    <!-- Tailwind doit être chargé de manière synchrone pour éviter le FOUC -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Scripts d'animation peuvent être chargés en defer -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer integrity="sha384-..." crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer integrity="sha384-..." crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer integrity="sha384-..." crossorigin="anonymous"></script>
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Infrarouge Magazine",
-        "url": "https://infrarouge.art",
-        "logo": "https://infrarouge.art/logo.png",
-        "description": "Magazine underground français dédié aux artistes émergents",
-        "foundingDate": "2020",
-        "sameAs": [
-            "https://www.instagram.com/infrarouge_art",
-            "https://soundcloud.com/infrarouge_art"
-        ],
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "contact@infrarouge.art",
-            "contactType": "customer service"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Paris",
-            "addressCountry": "FR"
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
-    </script>
+
+        :root {
+            --red: #FF0000;
+            --dark-red: #8B0000;
+            --purple: #6B0F9D;
+            --black: #000000;
+            --dark-gray: #0a0a0a;
+            --mid-gray: #1a1a1a;
+            --light-gray: #2a2a2a;
+            --white: #ffffff;
+            --glow-red: rgba(255, 0, 0, 0.6);
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Cursor personnalisé */
+        body {
+            cursor: none;
+        }
+
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--red);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        #cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.05s ease;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            background: linear-gradient(135deg, var(--red), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { filter: drop-shadow(0 0 10px var(--glow-red)); }
+            50% { filter: drop-shadow(0 0 20px var(--glow-red)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--red), var(--purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: var(--red);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1), transparent 70%);
+            animation: pulse-bg 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--white), var(--red), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slide-up 1.2s ease-out;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            animation: slide-up 1.4s ease-out;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--red), var(--purple));
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: slide-up 1.6s ease-out;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--purple), var(--red));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        /* Particles Canvas */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Featured Section */
+        .featured {
+            padding: 8rem 4rem;
+            background: var(--dark-gray);
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--white), var(--red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .featured-card {
+            background: var(--mid-gray);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 0, 0, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.3);
+        }
+
+        .featured-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--dark-red), var(--purple));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-category {
+            color: var(--red);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            color: var(--red);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .card-link:hover {
+            gap: 1rem;
+        }
+
+        /* Latest Section */
+        .latest {
+            padding: 8rem 4rem;
+            background: var(--black);
+        }
+
+        .latest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .latest-item {
+            background: var(--mid-gray);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .latest-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--red);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .latest-date {
+            color: var(--red);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .latest-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .latest-excerpt {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            padding: 4rem 4rem 2rem;
+            border-top: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--red);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--red);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--red);
+            transform: translateY(-3px);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--red), transparent);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: var(--black);
+                flex-direction: column;
+                padding: 5rem 2rem;
+                transition: right 0.3s ease;
+                border-left: 1px solid rgba(255, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .featured, .latest {
+                padding: 4rem 2rem;
+            }
+
+            .featured-grid, .latest-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                padding: 3rem 2rem 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            #custom-cursor, #cursor-dot {
+                display: none;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--red), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+    </style>
 </head>
-<body class="overflow-x-hidden">
-    <!-- Skip to main content link for accessibility -->
-    <a href="#home" class="skip-link">Aller au contenu principal</a>
+<body>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+    <div id="cursor-dot"></div>
 
-    <!-- Loading Animation -->
-    <div id="loading" class="fixed inset-0 bg-black flex items-center justify-center z-50 overflow-hidden">
-        <div class="text-center relative">
-            <!-- Energy particles background -->
-            <div id="energy-particles" class="absolute inset-0"></div>
-
-            <!-- Logo with tracing effect -->
-            <div class="relative mb-8">
-                <div id="logo-outline" class="text-6xl font-bold text-transparent mb-4 opacity-30"
-                     style="text-shadow: 0 0 20px rgba(255, 0, 0, 0.3); -webkit-text-stroke: 1px rgba(255, 0, 0, 0.5);">
-                    INFRAROUGE
-                </div>
-                <div id="logo-trace" class="text-6xl font-bold text-red-500 mb-4 absolute top-0 left-0 overflow-hidden"
-                     style="width: 0; white-space: nowrap;">
-                    INFRAROUGE
-                </div>
-                <div id="energy-line" class="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"
-                     style="width: 0; box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;"></div>
-            </div>
-
-            <!-- Progress indicator -->
-            <div class="relative">
-                <div class="w-64 h-1 bg-gray-800 rounded mt-4 relative overflow-hidden">
-                    <div id="progress-bar" class="h-full bg-gradient-to-r from-red-600 via-red-500 to-purple-600 rounded transition-all duration-1000 relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 animate-pulse"></div>
-                    </div>
-                </div>
-                <div id="loading-text" class="text-red-400 text-sm mt-2 opacity-0">Chargement du spectre infrarouge...</div>
-            </div>
-        </div>
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div class="loading-logo">INFRAROUGE</div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-black bg-opacity-50 backdrop-blur-md z-40">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-red-500">INFRAROUGE</a>
-            <div class="flex items-center space-x-6">
-                <ul class="flex space-x-6">
-                    <li><a href="#home" class="hover:text-red-400 transition">Accueil</a></li>
-                    <li><a href="artists.html" class="hover:text-red-400 transition">Artistes</a></li>
-                    <li><a href="news.html" class="hover:text-red-400 transition">Actualités</a></li>
-                    <li><a href="events.html" class="hover:text-red-400 transition">Événements</a></li>
-                    <li><a href="gallery.html" class="hover:text-red-400 transition">Galerie</a></li>
-                    <li><a href="about.html" class="hover:text-red-400 transition">À Propos</a></li>
-                    <li><a href="contact.html" class="hover:text-red-400 transition">Contact</a></li>
-                </ul>
-                <!-- Search Bar -->
-                <div class="relative">
-                    <input type="text" id="search-input" placeholder="Rechercher..." class="bg-gray-800 text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 w-48 focus:w-64">
-                    <button id="search-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-500 transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
-                </div>
-                <!-- Theme Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
-                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                    <svg id="moon-icon" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                    </svg>
-                </button>
-            </div>
+    <nav>
+        <div class="logo">INFRAROUGE</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home">ACCUEIL</a></li>
+            <li><a href="artists.html">ARTISTES</a></li>
+            <li><a href="news.html">ACTUALITÉS</a></li>
+            <li><a href="events.html">ÉVÉNEMENTS</a></li>
+            <li><a href="gallery.html">GALERIE</a></li>
+            <li><a href="about.html">À PROPOS</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <canvas id="star-field" class="absolute inset-0 z-0"></canvas>
-        <div class="absolute inset-0 infrared-bg opacity-20"></div>
-        <div class="text-center z-10">
-            <h1 class="text-8xl font-bold text-white mb-4 glow">INFRAROUGE</h1>
-            <p class="text-xl text-gray-300 mb-8">Magazine Underground pour Artistes du Monde</p>
-            <a href="#news" class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-full text-white font-bold transition">Explorer</a>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="particles-canvas"></canvas>
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1>INFRAROUGE</h1>
+            <p class="hero-subtitle">LE MAGAZINE UNDERGROUND QUI RÉVÈLE L'ART INVISIBLE</p>
+            <a href="#featured" class="cta-button">
+                <span>DÉCOUVRIR</span>
+            </a>
         </div>
-        <!-- Particles -->
-        <div id="particles"></div>
+        <div class="scroll-indicator"></div>
     </section>
 
-    <!-- News Section -->
-    <section id="news" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-red-500">Dernières Actualités Rap Underground</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 p-6 rounded-lg hover:scale-105 transition transform">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f" alt="Couverture de l'album Sex in the City de Lorenzo" class="w-full h-48 object-cover rounded mb-4" loading="lazy" width="400" height="250">
-                    <h3 class="text-xl font-bold mb-2">"Sex in the City" - Lorenzo</h3>
-                    <p class="text-gray-400">Le nouveau chef-d'œuvre du rappeur français explore les thèmes de la maturité et des relations modernes.</p>
-                    <span class="text-red-500 text-sm">France / Rap</span>
+    <!-- Featured Section -->
+    <section class="featured" id="featured">
+        <h2 class="section-title">À LA UNE</h2>
+        <div class="featured-grid">
+            <div class="featured-card">
+                <div class="card-image"></div>
+                <div class="card-content">
+                    <div class="card-category">RAP FRANÇAIS</div>
+                    <h3 class="card-title">Petite Sœur : L'Ascension d'une Voix Unique</h3>
+                    <p class="card-description">
+                        Découvrez le parcours fascinant de cette artiste qui redéfinit les codes du rap français avec une authenticité rare.
+                    </p>
+                    <a href="artists.html" class="card-link">
+                        LIRE L'ARTICLE →
+                    </a>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg hover:scale-105 transition transform">
-                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96" alt="Mur de street art coloré avec tags et graffitis urbains" class="w-full h-48 object-cover rounded mb-4" loading="lazy" width="400" height="250">
-                    <h3 class="text-xl font-bold mb-2">Festival Street Art Paris</h3>
-                    <p class="text-gray-400">Le festival "Urban Canvas" transforme les murs de Belleville en galeries à ciel ouvert.</p>
-                    <span class="text-red-500 text-sm">France / Street Art</span>
+            </div>
+
+            <div class="featured-card">
+                <div class="card-image"></div>
+                <div class="card-content">
+                    <div class="card-category">INTERVIEW</div>
+                    <h3 class="card-title">Lorenzo : Entre Provocation et Poésie</h3>
+                    <p class="card-description">
+                        Une conversation intime avec l'un des artistes les plus controversés et fascinants de la scène underground.
+                    </p>
+                    <a href="artists.html" class="card-link">
+                        LIRE L'INTERVIEW →
+                    </a>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-lg hover:scale-105 transition transform">
-                    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" alt="Portrait artistique en noir et blanc d'un artiste peintre" class="w-full h-48 object-cover rounded mb-4" loading="lazy" width="400" height="250">
-                    <h3 class="text-xl font-bold mb-2">Portrait d'Artiste</h3>
-                    <p class="text-gray-400">Rencontre avec un peintre émergent.</p>
-                    <span class="text-red-500 text-sm">USA / Peinture</span>
+            </div>
+
+            <div class="featured-card">
+                <div class="card-image"></div>
+                <div class="card-content">
+                    <div class="card-category">ANALYSE</div>
+                    <h3 class="card-title">Laylow : L'Architecte du Rap Spatial</h3>
+                    <p class="card-description">
+                        Plongée dans l'univers créatif d'un artiste qui repousse constamment les limites de la musique urbaine.
+                    </p>
+                    <a href="artists.html" class="card-link">
+                        DÉCOUVRIR →
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Artist Focus -->
-    <section id="artist-focus" class="py-20 bg-black">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-12 text-red-500">Artiste du Mois</h2>
-            <div class="max-w-4xl mx-auto">
-                <img src="https://cdn-www.konbini.com/files/2025/10/Design-sans-titre-6-3.png?width=3840&quality=75&format=webp" alt="Portrait artistique de Petite Sœur, rappeuse française" class="w-full h-96 object-cover rounded-lg mb-8" loading="lazy" width="800" height="600">
-                <h3 class="text-3xl font-bold mb-4">Ptite Sœur</h3>
-                <p class="text-gray-400 mb-6">Avec le projet "PRETTY DOLLCORPSE" sorti vendredi, la rappeuse arrive en tête des charts sur le site référence de paroles.</p>
-                <div class="flex justify-center space-x-4">
-                    <a href="https://www.instagram.com/ptiteso3ur/" class="text-red-500 hover:text-red-400 transition">Instagram</a>
-                    <a href="https://soundcloud.com/ptite-soeur" class="text-red-500 hover:text-red-400 transition">SoundCloud</a>
-                </div>
+    <!-- Latest Section -->
+    <section class="latest">
+        <h2 class="section-title">DERNIÈRES ACTUALITÉS</h2>
+        <div class="latest-grid">
+            <div class="latest-item">
+                <div class="latest-date">22 DÉC 2025</div>
+                <h3 class="latest-title">La Scène Underground Française en 2025</h3>
+                <p class="latest-excerpt">
+                    Un état des lieux de la nouvelle génération d'artistes qui façonne le paysage culturel français.
+                </p>
             </div>
-        </div>
-    </section>
 
-    <!-- Discovery -->
-    <section id="discovery" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-red-500">Découverte Visuelle</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=300&h=300&fit=crop" alt="Oeuvre de street art urbain avec couleurs vives" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
-                <img src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=300&h=300&fit=crop" alt="Portrait artistique en noir et blanc" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
-                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop" alt="Mur coloré avec graffitis artistiques" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
-                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" alt="Composition musicale abstraite" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
+            <div class="latest-item">
+                <div class="latest-date">20 DÉC 2025</div>
+                <h3 class="latest-title">Le Street Art Prend d'Assaut Paris</h3>
+                <p class="latest-excerpt">
+                    Comment le street art devient le média privilégié des nouvelles voix artistiques de la capitale.
+                </p>
             </div>
-        </div>
-    </section>
 
-    <!-- Newsletter Signup -->
-    <section class="py-20 bg-black">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6 infrared-text">Restez branchés</h2>
-            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-                Recevez les dernières actualités, sorties et événements directement dans votre boîte mail.
-            </p>
-            <div class="max-w-md mx-auto">
-                <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4">
-                    <input type="email" id="newsletter-email" placeholder="Votre email" required
-                           class="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg text-white font-bold transition-all duration-300 hover-lift">
-                        S'abonner
-                    </button>
-                </form>
-                <div id="newsletter-success" class="mt-4 p-4 bg-green-600 text-white rounded-lg hidden">
-                    Merci ! Vous êtes maintenant inscrit à notre newsletter.
-                </div>
+            <div class="latest-item">
+                <div class="latest-date">18 DÉC 2025</div>
+                <h3 class="latest-title">Festival Infrarouge : Les Dates Annoncées</h3>
+                <p class="latest-excerpt">
+                    Le premier festival dédié à la culture underground arrive en 2026. Toutes les infos exclusives.
+                </p>
+            </div>
+
+            <div class="latest-item">
+                <div class="latest-date">15 DÉC 2025</div>
+                <h3 class="latest-title">Photographie : Les Nouvelles Perspectives</h3>
+                <p class="latest-excerpt">
+                    Rencontre avec les photographes qui capturent l'essence de la culture underground française.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold text-red-500 mb-4">INFRAROUGE</h3>
-                    <p class="text-gray-400">Magazine underground pour artistes du monde entier.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Navigation</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-red-400 transition">Accueil</a></li>
-                        <li><a href="artists.html" class="text-gray-400 hover:text-red-400 transition">Artistes</a></li>
-                        <li><a href="news.html" class="text-gray-400 hover:text-red-400 transition">Actualités</a></li>
-                        <li><a href="events.html" class="text-gray-400 hover:text-red-400 transition">Événements</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Communauté</h4>
-                    <ul class="space-y-2">
-                        <li><a href="gallery.html" class="text-gray-400 hover:text-red-400 transition">Galerie</a></li>
-                        <li><a href="about.html" class="text-gray-400 hover:text-red-400 transition">À Propos</a></li>
-                        <li><a href="contact.html" class="text-gray-400 hover:text-red-400 transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">Suivez-nous</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-red-400 transition">Instagram</a>
-                        <a href="#" class="text-gray-400 hover:text-red-400 transition">Twitter</a>
-                        <a href="#" class="text-gray-400 hover:text-red-400 transition">Tiktok</a>
-                    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>INFRAROUGE</h3>
+                <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.6;">
+                    Le magazine qui révèle l'invisible. Depuis 2020, nous mettons en lumière les artistes qui façonnent la culture de demain.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Twitter">TW</a>
+                    <a href="#" aria-label="SoundCloud">SC</a>
+                    <a href="#" aria-label="YouTube">YT</a>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-                <p class="text-gray-400">&copy; 2025 Infrarouge. Tous droits réservés.</p>
+
+            <div class="footer-section">
+                <h3>NAVIGATION</h3>
+                <ul class="footer-links">
+                    <li><a href="artists.html">Artistes</a></li>
+                    <li><a href="news.html">Actualités</a></li>
+                    <li><a href="events.html">Événements</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
+
+            <div class="footer-section">
+                <h3>NEWSLETTER</h3>
+                <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
+                    Recevez nos dernières découvertes directement dans votre boîte mail.
+                </p>
+                <form style="display: flex; gap: 0.5rem;">
+                    <input type="email" placeholder="Votre email" style="flex: 1; padding: 0.8rem; background: var(--light-gray); border: 1px solid rgba(255, 0, 0, 0.2); border-radius: 5px; color: white;">
+                    <button type="submit" style="padding: 0.8rem 1.5rem; background: var(--red); border: none; border-radius: 5px; color: white; font-weight: 600; cursor: pointer;">S'INSCRIRE</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 INFRAROUGE. Tous droits réservés. | Design by Infrarouge Studio</p>
         </div>
     </footer>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
+        // Custom cursor
+        const cursor = document.getElementById('custom-cursor');
+        const cursorDot = document.getElementById('cursor-dot');
 
-    <script src="script.js" defer></script>
-</body>
-</html>
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                cursorDot.style.left = (e.clientX - 3) + 'px';
+                cursorDot.style.top = (e.clientY - 3) + 'px';
+            });
+
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.background = 'rgba(255, 0, 0, 0.2)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.background = 'transparent';
+                });
+            });
+        }
+
+        // Loading animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Particles animation
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Draw connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 0, 0, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 0.
