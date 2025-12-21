@@ -3,324 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFRAROUGE - Beyond The Spectrum</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Infrarouge - Magazine Underground pour Artistes du Monde</title>
+    <meta name="description" content="Magazine underground français dédié aux artistes émergents. Découvrez Petite Sœur, Lorenzo, Laylow et les talents du rap, street art, photographie et art numérique.">
+    <meta name="keywords" content="magazine underground, rap français, street art, art numérique, Petite Sœur, Lorenzo, Laylow, musique indépendante, artistes émergents">
+    <meta name="author" content="Infrarouge Magazine">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="fr-FR">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://infrarouge.art/">
+    <meta property="og:title" content="Infrarouge - Magazine Underground pour Artistes du Monde">
+    <meta property="og:description" content="Magazine underground français dédié aux artistes émergents. Découvrez Petite Sœur, Lorenzo, Laylow et les talents du rap, street art, photographie et art numérique.">
+    <meta property="og:image" content="https://infrarouge.art/og-image.jpg">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Infrarouge Magazine">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://infrarouge.art/">
+    <meta property="twitter:title" content="Infrarouge - Magazine Underground pour Artistes du Monde">
+    <meta property="twitter:description" content="Magazine underground français dédié aux artistes émergents. Découvrez Petite Sœur, Lorenzo, Laylow et les talents du rap, street art, photographie et art numérique.">
+    <meta property="twitter:image" content="https://infrarouge.art/og-image.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://infrarouge.art/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- Preconnect pour optimiser le chargement des fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Particules de fond -->
-    <canvas id="particles"></canvas>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     
-    <!-- Curseur personnalisé -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Preload des ressources critiques -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-mobile.css">
+    
+    <!-- Tailwind doit être chargé de manière synchrone pour éviter le FOUC -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Scripts d'animation peuvent être chargés en defer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer integrity="sha384-..." crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer integrity="sha384-..." crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer integrity="sha384-..." crossorigin="anonymous"></script>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Infrarouge Magazine",
+        "url": "https://infrarouge.art",
+        "logo": "https://infrarouge.art/logo.png",
+        "description": "Magazine underground français dédié aux artistes émergents",
+        "foundingDate": "2020",
+        "sameAs": [
+            "https://www.instagram.com/infrarouge_art",
+            "https://soundcloud.com/infrarouge_art"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "contact@infrarouge.art",
+            "contactType": "customer service"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Paris",
+            "addressCountry": "FR"
+        }
+    }
+    </script>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#home" class="skip-link">Aller au contenu principal</a>
+
+    <!-- Loading Animation -->
+    <div id="loading" class="fixed inset-0 bg-black flex items-center justify-center z-50 overflow-hidden">
+        <div class="text-center relative">
+            <!-- Energy particles background -->
+            <div id="energy-particles" class="absolute inset-0"></div>
+
+            <!-- Logo with tracing effect -->
+            <div class="relative mb-8">
+                <div id="logo-outline" class="text-6xl font-bold text-transparent mb-4 opacity-30"
+                     style="text-shadow: 0 0 20px rgba(255, 0, 0, 0.3); -webkit-text-stroke: 1px rgba(255, 0, 0, 0.5);">
+                    INFRAROUGE
+                </div>
+                <div id="logo-trace" class="text-6xl font-bold text-red-500 mb-4 absolute top-0 left-0 overflow-hidden"
+                     style="width: 0; white-space: nowrap;">
+                    INFRAROUGE
+                </div>
+                <div id="energy-line" class="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent"
+                     style="width: 0; box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;"></div>
+            </div>
+
+            <!-- Progress indicator -->
+            <div class="relative">
+                <div class="w-64 h-1 bg-gray-800 rounded mt-4 relative overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-red-600 via-red-500 to-purple-600 rounded transition-all duration-1000 relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 animate-pulse"></div>
+                    </div>
+                </div>
+                <div id="loading-text" class="text-red-400 text-sm mt-2 opacity-0">Chargement du spectre infrarouge...</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-logo">
-            <span class="logo-bracket">[</span>
-            <span class="logo-text">INFRAROUGE</span>
-            <span class="logo-bracket">]</span>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="#home" class="nav-link">ACCUEIL</a></li>
-            <li><a href="#about" class="nav-link">À PROPOS</a></li>
-            <li><a href="#services" class="nav-link">SERVICES</a></li>
-            <li><a href="#portfolio" class="nav-link">PORTFOLIO</a></li>
-            <li><a href="#contact" class="nav-link">CONTACT</a></li>
-        </ul>
-        <div class="nav-burger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <nav class="fixed top-0 w-full bg-black bg-opacity-50 backdrop-blur-md z-40">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-red-500">INFRAROUGE</a>
+            <div class="flex items-center space-x-6">
+                <ul class="flex space-x-6">
+                    <li><a href="#home" class="hover:text-red-400 transition">Accueil</a></li>
+                    <li><a href="artists.html" class="hover:text-red-400 transition">Artistes</a></li>
+                    <li><a href="news.html" class="hover:text-red-400 transition">Actualités</a></li>
+                    <li><a href="events.html" class="hover:text-red-400 transition">Événements</a></li>
+                    <li><a href="gallery.html" class="hover:text-red-400 transition">Galerie</a></li>
+                    <li><a href="about.html" class="hover:text-red-400 transition">À Propos</a></li>
+                    <li><a href="contact.html" class="hover:text-red-400 transition">Contact</a></li>
+                </ul>
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="Rechercher..." class="bg-gray-800 text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 w-48 focus:w-64">
+                    <button id="search-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-500 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="glitch-container">
-                <h1 class="hero-title glitch" data-text="INFRAROUGE">INFRAROUGE</h1>
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <canvas id="star-field" class="absolute inset-0 z-0"></canvas>
+        <div class="absolute inset-0 infrared-bg opacity-20"></div>
+        <div class="text-center z-10">
+            <h1 class="text-8xl font-bold text-white mb-4 glow">INFRAROUGE</h1>
+            <p class="text-xl text-gray-300 mb-8">Magazine Underground pour Artistes du Monde</p>
+            <a href="#news" class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-full text-white font-bold transition">Explorer</a>
+        </div>
+        <!-- Particles -->
+        <div id="particles"></div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-red-500">Dernières Actualités Rap Underground</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg hover:scale-105 transition transform">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f" alt="Couverture de l'album Sex in the City de Lorenzo" class="w-full h-48 object-cover rounded mb-4" loading="lazy" width="400" height="250">
+                    <h3 class="text-xl font-bold mb-2">"Sex in the City" - Lorenzo</h3>
+                    <p class="text-gray-400">Le nouveau chef-d'œuvre du rappeur français explore les thèmes de la maturité et des relations modernes.</p>
+                    <span class="text-red-500 text-sm">France / Rap</span>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg hover:scale-105 transition transform">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96" alt="Mur de street art coloré avec tags et graffitis urbains" class="w-full h-48 object-cover rounded mb-4" loading="lazy" width="400" height="250">
+                    <h3 class="text-xl font-bold mb-2">Festival Street Art Paris</h3>
+                    <p class="text-gray-400">Le festival "Urban Canvas" transforme les murs de Belleville en galeries à ciel ouvert.</p>
+                    <span class="text-red-500 text-sm">France / Street Art</span>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg hover:scale-105 transition transform">
+                    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" alt="Portrait artistique en noir et blanc d'un artiste peintre" class="w-full h-48 object-cover rounded mb-4" loading="lazy" width="400" height="250">
+                    <h3 class="text-xl font-bold mb-2">Portrait d'Artiste</h3>
+                    <p class="text-gray-400">Rencontre avec un peintre émergent.</p>
+                    <span class="text-red-500 text-sm">USA / Peinture</span>
+                </div>
             </div>
-            <div class="hero-subtitle-container">
-                <p class="hero-subtitle">
-                    <span class="typing-text">Au-delà du spectre visible_</span>
-                </p>
+        </div>
+    </section>
+
+    <!-- Artist Focus -->
+    <section id="artist-focus" class="py-20 bg-black">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-12 text-red-500">Artiste du Mois</h2>
+            <div class="max-w-4xl mx-auto">
+                <img src="https://cdn-www.konbini.com/files/2025/10/Design-sans-titre-6-3.png?width=3840&quality=75&format=webp" alt="Portrait artistique de Petite Sœur, rappeuse française" class="w-full h-96 object-cover rounded-lg mb-8" loading="lazy" width="800" height="600">
+                <h3 class="text-3xl font-bold mb-4">Ptite Sœur</h3>
+                <p class="text-gray-400 mb-6">Avec le projet "PRETTY DOLLCORPSE" sorti vendredi, la rappeuse arrive en tête des charts sur le site référence de paroles.</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://www.instagram.com/ptiteso3ur/" class="text-red-500 hover:text-red-400 transition">Instagram</a>
+                    <a href="https://soundcloud.com/ptite-soeur" class="text-red-500 hover:text-red-400 transition">SoundCloud</a>
+                </div>
             </div>
-            <p class="hero-description">
-                Nous créons des expériences digitales qui défient les limites de l'imagination.
-                <br>Design. Code. Innovation.
+        </div>
+    </section>
+
+    <!-- Discovery -->
+    <section id="discovery" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-red-500">Découverte Visuelle</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=300&h=300&fit=crop" alt="Oeuvre de street art urbain avec couleurs vives" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
+                <img src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=300&h=300&fit=crop" alt="Portrait artistique en noir et blanc" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop" alt="Mur coloré avec graffitis artistiques" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
+                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop" alt="Composition musicale abstraite" class="w-full h-64 object-cover rounded hover:scale-110 transition transform" loading="lazy" width="300" height="300">
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6 infrared-text">Restez branchés</h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+                Recevez les dernières actualités, sorties et événements directement dans votre boîte mail.
             </p>
-            <div class="hero-cta">
-                <button class="btn btn-primary" data-hover="EXPLORER">
-                    <span>DÉCOUVRIR</span>
-                </button>
-                <button class="btn btn-secondary" data-hover="CONNECTER">
-                    <span>NOUS CONTACTER</span>
-                </button>
-            </div>
-        </div>
-        <div class="hero-stats">
-            <div class="stat-item">
-                <span class="stat-number" data-target="250">0</span>
-                <span class="stat-label">Projets Réalisés</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="15">0</span>
-                <span class="stat-label">Années d'Excellence</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="98">0</span>
-                <span class="stat-label">% Satisfaction Client</span>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            <span>SCROLL</span>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">// QUI SOMMES-NOUS</span>
-                <h2 class="section-title">Dans l'ombre de <span class="highlight">l'innovation</span></h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-paragraph">
-                        <strong>INFRAROUGE</strong> n'est pas une simple agence digitale. 
-                        Nous sommes des artisans du code, des architectes de l'impossible, 
-                        des visionnaires qui repoussent les frontières du web.
-                    </p>
-                    <p class="about-paragraph">
-                        Notre philosophie ? Créer des expériences qui marquent les esprits, 
-                        des interfaces qui respirent, des sites qui racontent des histoires. 
-                        Chaque pixel compte. Chaque animation a un sens.
-                    </p>
-                    <div class="about-features">
-                        <div class="feature-card">
-                            <div class="feature-icon">⚡</div>
-                            <h3>Performance Extrême</h3>
-                            <p>Sites ultra-rapides, optimisés jusqu'au dernier octet</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🎨</div>
-                            <h3>Design Innovant</h3>
-                            <p>Interfaces qui défient les conventions</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🔒</div>
-                            <h3>Sécurité Maximale</h3>
-                            <p>Protection contre toutes les menaces</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="code-window">
-                        <div class="code-header">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="code-title">manifest.json</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code><span class="code-key">"mission"</span>: <span class="code-string">"Innovation"</span>,
-<span class="code-key">"values"</span>: [
-  <span class="code-string">"Excellence"</span>,
-  <span class="code-string">"Créativité"</span>,
-  <span class="code-string">"Audace"</span>
-],
-<span class="code-key">"status"</span>: <span class="code-string">"Active"</span>,
-<span class="code-key">"nextLevel"</span>: <span class="code-boolean">true</span></code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section services">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">// NOS COMPÉTENCES</span>
-                <h2 class="section-title">Expertise <span class="highlight">Multi-Dimensionnelle</span></h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card" data-service="1">
-                    <div class="service-number">01</div>
-                    <div class="service-icon">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <path d="M10 10 L50 10 L50 50 L10 50 Z" stroke="#ff0033" stroke-width="2" fill="none"/>
-                            <path d="M20 20 L40 20 L40 40 L20 40 Z" stroke="#ff0033" stroke-width="2" fill="none"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Web Design</h3>
-                    <p class="service-description">
-                        Interfaces modernes, animations fluides, expériences immersives. 
-                        Nous créons des designs qui captivent et convertissent.
-                    </p>
-                    <ul class="service-tags">
-                        <li>UI/UX</li>
-                        <li>Prototypage</li>
-                        <li>Branding</li>
-                    </ul>
-                </div>
-
-                <div class="service-card" data-service="2">
-                    <div class="service-number">02</div>
-                    <div class="service-icon">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <rect x="15" y="15" width="30" height="30" stroke="#ff0033" stroke-width="2" fill="none"/>
-                            <path d="M25 25 L35 30 L25 35 Z" fill="#ff0033"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">Développement</h3>
-                    <p class="service-description">
-                        Code propre, architectures scalables, technologies de pointe. 
-                        Du frontend au backend, nous maîtrisons l'art du développement.
-                    </p>
-                    <ul class="service-tags">
-                        <li>React</li>
-                        <li>Node.js</li>
-                        <li>Python</li>
-                    </ul>
-                </div>
-
-                <div class="service-card" data-service="3">
-                    <div class="service-number">03</div>
-                    <div class="service-icon">
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-                            <circle cx="30" cy="30" r="15" stroke="#ff0033" stroke-width="2" fill="none"/>
-                            <path d="M30 15 L30 30 L40 35" stroke="#ff0033" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3 class="service-title">SEO & Performance</h3>
-                    <p class="service-description">
-                        Visibilité maximale, vitesse éclair. Nous optimisons chaque aspect 
-                        pour que votre site domine les résultats de recherche.
-                    </p>
-                    <ul class="service-tags">
-                        <li>SEO Technique</li>
-                        <li>Optimisation</li>
-                        <li>Analytics</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section portfolio">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">// NOS RÉALISATIONS</span>
-                <h2 class="section-title">Portfolio <span class="highlight">Élite</span></h2>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>PROJECT ALPHA</h3>
-                            <p>E-Commerce Next-Gen</p>
-                            <button class="btn-view">VOIR LE PROJET</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>QUANTUM DASH</h3>
-                            <p>Dashboard Analytics</p>
-                            <button class="btn-view">VOIR LE PROJET</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>NEON STRIKE</h3>
-                            <p>Expérience Interactive</p>
-                            <button class="btn-view">VOIR LE PROJET</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">// CONNECTONS-NOUS</span>
-                <h2 class="section-title">Prêt à <span class="highlight">franchir le seuil</span> ?</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Lançons votre projet</h3>
-                    <p>Que vous ayez une idée précise ou simplement une vision, 
-                       nous sommes là pour la transformer en réalité digitale.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <span class="contact-icon">📧</span>
-                            <span>contact@infrarouge.dev</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-icon">📱</span>
-                            <span>+33 6 XX XX XX XX</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-icon">📍</span>
-                            <span>Paris, France</span>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link">GITHUB</a>
-                        <a href="#" class="social-link">LINKEDIN</a>
-                        <a href="#" class="social-link">TWITTER</a>
-                    </div>
-                </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" placeholder="Votre nom" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Votre email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea rows="5" placeholder="Votre message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <span>ENVOYER LE MESSAGE</span>
+            <div class="max-w-md mx-auto">
+                <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4">
+                    <input type="email" id="newsletter-email" placeholder="Votre email" required
+                           class="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg text-white font-bold transition-all duration-300 hover-lift">
+                        S'abonner
                     </button>
                 </form>
+                <div id="newsletter-success" class="mt-4 p-4 bg-green-600 text-white rounded-lg hidden">
+                    Merci ! Vous êtes maintenant inscrit à notre newsletter.
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-bracket">[</span>
-                    <span class="logo-text">INFRAROUGE</span>
-                    <span class="logo-bracket">]</span>
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-red-500 mb-4">INFRAROUGE</h3>
+                    <p class="text-gray-400">Magazine underground pour artistes du monde entier.</p>
                 </div>
-                <p class="footer-tagline">Beyond The Spectrum</p>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-red-400 transition">Accueil</a></li>
+                        <li><a href="artists.html" class="text-gray-400 hover:text-red-400 transition">Artistes</a></li>
+                        <li><a href="news.html" class="text-gray-400 hover:text-red-400 transition">Actualités</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-red-400 transition">Événements</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Communauté</h4>
+                    <ul class="space-y-2">
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-red-400 transition">Galerie</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-red-400 transition">À Propos</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-red-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Suivez-nous</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-red-400 transition">Instagram</a>
+                        <a href="#" class="text-gray-400 hover:text-red-400 transition">Twitter</a>
+                        <a href="#" class="text-gray-400 hover:text-red-400 transition">Tiktok</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 INFRAROUGE. Tous droits réservés.</p>
-                <p class="footer-signature">Crafted with <span class="heart">❤️</span> and code</p>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Infrarouge. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
