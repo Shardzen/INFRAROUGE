@@ -3,617 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFRAROUGE - Magazine Underground</title>
-    <meta name="description" content="Magazine underground français dédié aux artistes émergents. Découvrez la nouvelle scène artistique française.">
-    
-    <!-- Fonts -->
+    <title>INFRAROUGE - Beyond The Spectrum</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --red: #FF0000;
-            --dark-red: #8B0000;
-            --purple: #6B0F9D;
-            --black: #000000;
-            --dark-gray: #0a0a0a;
-            --mid-gray: #1a1a1a;
-            --light-gray: #2a2a2a;
-            --white: #ffffff;
-            --glow-red: rgba(255, 0, 0, 0.6);
-        }
-
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--black);
-            color: var(--white);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Cursor personnalisé */
-        body {
-            cursor: none;
-        }
-
-        #custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--red);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
-
-        #cursor-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--red);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.05s ease;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 2rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            background: rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 0, 0, 0.1);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            background: linear-gradient(135deg, var(--red), var(--purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% { filter: drop-shadow(0 0 10px var(--glow-red)); }
-            50% { filter: drop-shadow(0 0 20px var(--glow-red)); }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
-            letter-spacing: 0.05em;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--red), var(--purple));
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--red);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            width: 30px;
-            height: 2px;
-            background: var(--red);
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1), transparent 70%);
-            animation: pulse-bg 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse-bg {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 10;
-            max-width: 1200px;
-            padding: 0 2rem;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(4rem, 15vw, 12rem);
-            font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--white), var(--red), var(--purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: slide-up 1.2s ease-out;
-        }
-
-        @keyframes slide-up {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 3rem;
-            letter-spacing: 0.1em;
-            animation: slide-up 1.4s ease-out;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, var(--red), var(--purple));
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            animation: slide-up 1.6s ease-out;
-            letter-spacing: 0.05em;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, var(--purple), var(--red));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .cta-button:hover::before {
-            opacity: 1;
-        }
-
-        .cta-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
-        }
-
-        /* Particles Canvas */
-        #particles-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* Featured Section */
-        .featured {
-            padding: 8rem 4rem;
-            background: var(--dark-gray);
-            position: relative;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 4rem;
-            background: linear-gradient(135deg, var(--white), var(--red));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .featured-card {
-            background: var(--mid-gray);
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255, 0, 0, 0.1);
-        }
-
-        .featured-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent, rgba(255, 0, 0, 0.1));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .featured-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.3);
-        }
-
-        .featured-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, var(--dark-red), var(--purple));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .card-content {
-            padding: 2rem;
-        }
-
-        .card-category {
-            color: var(--red);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .card-description {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-link {
-            color: var(--red);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s ease;
-        }
-
-        .card-link:hover {
-            gap: 1rem;
-        }
-
-        /* Latest Section */
-        .latest {
-            padding: 8rem 4rem;
-            background: var(--black);
-        }
-
-        .latest-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .latest-item {
-            background: var(--mid-gray);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .latest-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--red);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
-        }
-
-        .latest-date {
-            color: var(--red);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .latest-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-        }
-
-        .latest-excerpt {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-gray);
-            padding: 4rem 4rem 2rem;
-            border-top: 1px solid rgba(255, 0, 0, 0.1);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto 3rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: var(--red);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--red);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--red);
-            transform: translateY(-3px);
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-
-        .scroll-indicator::before {
-            content: '';
-            width: 2px;
-            height: 40px;
-            background: linear-gradient(to bottom, var(--red), transparent);
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            nav {
-                padding: 1.5rem 2rem;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                height: 100vh;
-                width: 70%;
-                background: var(--black);
-                flex-direction: column;
-                padding: 5rem 2rem;
-                transition: right 0.3s ease;
-                border-left: 1px solid rgba(255, 0, 0, 0.2);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .featured, .latest {
-                padding: 4rem 2rem;
-            }
-
-            .featured-grid, .latest-grid {
-                grid-template-columns: 1fr;
-            }
-
-            footer {
-                padding: 3rem 2rem 2rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-
-            body {
-                cursor: auto;
-            }
-
-            #custom-cursor, #cursor-dot {
-                display: none;
-            }
-        }
-
-        /* Loading animation */
-        .loading {
-            position: fixed;
-            inset: 0;
-            background: var(--black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--red), var(--purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div id="custom-cursor"></div>
-    <div id="cursor-dot"></div>
-
-    <!-- Loading -->
-    <div class="loading" id="loading">
-        <div class="loading-logo">INFRAROUGE</div>
-    </div>
+    <!-- Particules de fond -->
+    <canvas id="particles"></canvas>
+    
+    <!-- Curseur personnalisé -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
     <!-- Navigation -->
-    <nav>
-        <div class="logo">INFRAROUGE</div>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#home">ACCUEIL</a></li>
-            <li><a href="artists.html">ARTISTES</a></li>
-            <li><a href="news.html">ACTUALITÉS</a></li>
-            <li><a href="events.html">ÉVÉNEMENTS</a></li>
-            <li><a href="gallery.html">GALERIE</a></li>
-            <li><a href="about.html">À PROPOS</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
+    <nav class="nav">
+        <div class="nav-logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-text">INFRAROUGE</span>
+            <span class="logo-bracket">]</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link">ACCUEIL</a></li>
+            <li><a href="#about" class="nav-link">À PROPOS</a></li>
+            <li><a href="#services" class="nav-link">SERVICES</a></li>
+            <li><a href="#portfolio" class="nav-link">PORTFOLIO</a></li>
+            <li><a href="#contact" class="nav-link">CONTACT</a></li>
         </ul>
-        <div class="menu-toggle" id="menu-toggle">
+        <div class="nav-burger">
             <span></span>
             <span></span>
             <span></span>
@@ -621,248 +39,288 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <canvas id="particles-canvas"></canvas>
-        <div class="hero-background"></div>
+    <section id="home" class="hero">
         <div class="hero-content">
-            <h1>INFRAROUGE</h1>
-            <p class="hero-subtitle">LE MAGAZINE UNDERGROUND QUI RÉVÈLE L'ART INVISIBLE</p>
-            <a href="#featured" class="cta-button">
-                <span>DÉCOUVRIR</span>
-            </a>
+            <div class="glitch-container">
+                <h1 class="hero-title glitch" data-text="INFRAROUGE">INFRAROUGE</h1>
+            </div>
+            <div class="hero-subtitle-container">
+                <p class="hero-subtitle">
+                    <span class="typing-text">Au-delà du spectre visible_</span>
+                </p>
+            </div>
+            <p class="hero-description">
+                Nous créons des expériences digitales qui défient les limites de l'imagination.
+                <br>Design. Code. Innovation.
+            </p>
+            <div class="hero-cta">
+                <button class="btn btn-primary" data-hover="EXPLORER">
+                    <span>DÉCOUVRIR</span>
+                </button>
+                <button class="btn btn-secondary" data-hover="CONNECTER">
+                    <span>NOUS CONTACTER</span>
+                </button>
+            </div>
         </div>
-        <div class="scroll-indicator"></div>
-    </section>
-
-    <!-- Featured Section -->
-    <section class="featured" id="featured">
-        <h2 class="section-title">À LA UNE</h2>
-        <div class="featured-grid">
-            <div class="featured-card">
-                <div class="card-image"></div>
-                <div class="card-content">
-                    <div class="card-category">RAP FRANÇAIS</div>
-                    <h3 class="card-title">Petite Sœur : L'Ascension d'une Voix Unique</h3>
-                    <p class="card-description">
-                        Découvrez le parcours fascinant de cette artiste qui redéfinit les codes du rap français avec une authenticité rare.
-                    </p>
-                    <a href="artists.html" class="card-link">
-                        LIRE L'ARTICLE →
-                    </a>
-                </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number" data-target="250">0</span>
+                <span class="stat-label">Projets Réalisés</span>
             </div>
-
-            <div class="featured-card">
-                <div class="card-image"></div>
-                <div class="card-content">
-                    <div class="card-category">INTERVIEW</div>
-                    <h3 class="card-title">Lorenzo : Entre Provocation et Poésie</h3>
-                    <p class="card-description">
-                        Une conversation intime avec l'un des artistes les plus controversés et fascinants de la scène underground.
-                    </p>
-                    <a href="artists.html" class="card-link">
-                        LIRE L'INTERVIEW →
-                    </a>
-                </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="15">0</span>
+                <span class="stat-label">Années d'Excellence</span>
             </div>
-
-            <div class="featured-card">
-                <div class="card-image"></div>
-                <div class="card-content">
-                    <div class="card-category">ANALYSE</div>
-                    <h3 class="card-title">Laylow : L'Architecte du Rap Spatial</h3>
-                    <p class="card-description">
-                        Plongée dans l'univers créatif d'un artiste qui repousse constamment les limites de la musique urbaine.
-                    </p>
-                    <a href="artists.html" class="card-link">
-                        DÉCOUVRIR →
-                    </a>
-                </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="98">0</span>
+                <span class="stat-label">% Satisfaction Client</span>
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>SCROLL</span>
         </div>
     </section>
 
-    <!-- Latest Section -->
-    <section class="latest">
-        <h2 class="section-title">DERNIÈRES ACTUALITÉS</h2>
-        <div class="latest-grid">
-            <div class="latest-item">
-                <div class="latest-date">22 DÉC 2025</div>
-                <h3 class="latest-title">La Scène Underground Française en 2025</h3>
-                <p class="latest-excerpt">
-                    Un état des lieux de la nouvelle génération d'artistes qui façonne le paysage culturel français.
-                </p>
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">// QUI SOMMES-NOUS</span>
+                <h2 class="section-title">Dans l'ombre de <span class="highlight">l'innovation</span></h2>
             </div>
-
-            <div class="latest-item">
-                <div class="latest-date">20 DÉC 2025</div>
-                <h3 class="latest-title">Le Street Art Prend d'Assaut Paris</h3>
-                <p class="latest-excerpt">
-                    Comment le street art devient le média privilégié des nouvelles voix artistiques de la capitale.
-                </p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-paragraph">
+                        <strong>INFRAROUGE</strong> n'est pas une simple agence digitale. 
+                        Nous sommes des artisans du code, des architectes de l'impossible, 
+                        des visionnaires qui repoussent les frontières du web.
+                    </p>
+                    <p class="about-paragraph">
+                        Notre philosophie ? Créer des expériences qui marquent les esprits, 
+                        des interfaces qui respirent, des sites qui racontent des histoires. 
+                        Chaque pixel compte. Chaque animation a un sens.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Performance Extrême</h3>
+                            <p>Sites ultra-rapides, optimisés jusqu'au dernier octet</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎨</div>
+                            <h3>Design Innovant</h3>
+                            <p>Interfaces qui défient les conventions</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Sécurité Maximale</h3>
+                            <p>Protection contre toutes les menaces</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="code-title">manifest.json</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="code-key">"mission"</span>: <span class="code-string">"Innovation"</span>,
+<span class="code-key">"values"</span>: [
+  <span class="code-string">"Excellence"</span>,
+  <span class="code-string">"Créativité"</span>,
+  <span class="code-string">"Audace"</span>
+],
+<span class="code-key">"status"</span>: <span class="code-string">"Active"</span>,
+<span class="code-key">"nextLevel"</span>: <span class="code-boolean">true</span></code></pre>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="latest-item">
-                <div class="latest-date">18 DÉC 2025</div>
-                <h3 class="latest-title">Festival Infrarouge : Les Dates Annoncées</h3>
-                <p class="latest-excerpt">
-                    Le premier festival dédié à la culture underground arrive en 2026. Toutes les infos exclusives.
-                </p>
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">// NOS COMPÉTENCES</span>
+                <h2 class="section-title">Expertise <span class="highlight">Multi-Dimensionnelle</span></h2>
             </div>
+            <div class="services-grid">
+                <div class="service-card" data-service="1">
+                    <div class="service-number">01</div>
+                    <div class="service-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <path d="M10 10 L50 10 L50 50 L10 50 Z" stroke="#ff0033" stroke-width="2" fill="none"/>
+                            <path d="M20 20 L40 20 L40 40 L20 40 Z" stroke="#ff0033" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Web Design</h3>
+                    <p class="service-description">
+                        Interfaces modernes, animations fluides, expériences immersives. 
+                        Nous créons des designs qui captivent et convertissent.
+                    </p>
+                    <ul class="service-tags">
+                        <li>UI/UX</li>
+                        <li>Prototypage</li>
+                        <li>Branding</li>
+                    </ul>
+                </div>
 
-            <div class="latest-item">
-                <div class="latest-date">15 DÉC 2025</div>
-                <h3 class="latest-title">Photographie : Les Nouvelles Perspectives</h3>
-                <p class="latest-excerpt">
-                    Rencontre avec les photographes qui capturent l'essence de la culture underground française.
-                </p>
+                <div class="service-card" data-service="2">
+                    <div class="service-number">02</div>
+                    <div class="service-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <rect x="15" y="15" width="30" height="30" stroke="#ff0033" stroke-width="2" fill="none"/>
+                            <path d="M25 25 L35 30 L25 35 Z" fill="#ff0033"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Développement</h3>
+                    <p class="service-description">
+                        Code propre, architectures scalables, technologies de pointe. 
+                        Du frontend au backend, nous maîtrisons l'art du développement.
+                    </p>
+                    <ul class="service-tags">
+                        <li>React</li>
+                        <li>Node.js</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+
+                <div class="service-card" data-service="3">
+                    <div class="service-number">03</div>
+                    <div class="service-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <circle cx="30" cy="30" r="15" stroke="#ff0033" stroke-width="2" fill="none"/>
+                            <path d="M30 15 L30 30 L40 35" stroke="#ff0033" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">SEO & Performance</h3>
+                    <p class="service-description">
+                        Visibilité maximale, vitesse éclair. Nous optimisons chaque aspect 
+                        pour que votre site domine les résultats de recherche.
+                    </p>
+                    <ul class="service-tags">
+                        <li>SEO Technique</li>
+                        <li>Optimisation</li>
+                        <li>Analytics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">// NOS RÉALISATIONS</span>
+                <h2 class="section-title">Portfolio <span class="highlight">Élite</span></h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>PROJECT ALPHA</h3>
+                            <p>E-Commerce Next-Gen</p>
+                            <button class="btn-view">VOIR LE PROJET</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>QUANTUM DASH</h3>
+                            <p>Dashboard Analytics</p>
+                            <button class="btn-view">VOIR LE PROJET</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>NEON STRIKE</h3>
+                            <p>Expérience Interactive</p>
+                            <button class="btn-view">VOIR LE PROJET</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">// CONNECTONS-NOUS</span>
+                <h2 class="section-title">Prêt à <span class="highlight">franchir le seuil</span> ?</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Lançons votre projet</h3>
+                    <p>Que vous ayez une idée précise ou simplement une vision, 
+                       nous sommes là pour la transformer en réalité digitale.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>contact@infrarouge.dev</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span>+33 6 XX XX XX XX</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>Paris, France</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">GITHUB</a>
+                        <a href="#" class="social-link">LINKEDIN</a>
+                        <a href="#" class="social-link">TWITTER</a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Votre message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span>ENVOYER LE MESSAGE</span>
+                    </button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>INFRAROUGE</h3>
-                <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.6;">
-                    Le magazine qui révèle l'invisible. Depuis 2020, nous mettons en lumière les artistes qui façonnent la culture de demain.
-                </p>
-                <div class="social-links">
-                    <a href="#" aria-label="Instagram">IG</a>
-                    <a href="#" aria-label="Twitter">TW</a>
-                    <a href="#" aria-label="SoundCloud">SC</a>
-                    <a href="#" aria-label="YouTube">YT</a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-bracket">[</span>
+                    <span class="logo-text">INFRAROUGE</span>
+                    <span class="logo-bracket">]</span>
                 </div>
+                <p class="footer-tagline">Beyond The Spectrum</p>
             </div>
-
-            <div class="footer-section">
-                <h3>NAVIGATION</h3>
-                <ul class="footer-links">
-                    <li><a href="artists.html">Artistes</a></li>
-                    <li><a href="news.html">Actualités</a></li>
-                    <li><a href="events.html">Événements</a></li>
-                    <li><a href="gallery.html">Galerie</a></li>
-                    <li><a href="about.html">À Propos</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <p>&copy; 2024 INFRAROUGE. Tous droits réservés.</p>
+                <p class="footer-signature">Crafted with <span class="heart">❤️</span> and code</p>
             </div>
-
-            <div class="footer-section">
-                <h3>NEWSLETTER</h3>
-                <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
-                    Recevez nos dernières découvertes directement dans votre boîte mail.
-                </p>
-                <form style="display: flex; gap: 0.5rem;">
-                    <input type="email" placeholder="Votre email" style="flex: 1; padding: 0.8rem; background: var(--light-gray); border: 1px solid rgba(255, 0, 0, 0.2); border-radius: 5px; color: white;">
-                    <button type="submit" style="padding: 0.8rem 1.5rem; background: var(--red); border: none; border-radius: 5px; color: white; font-weight: 600; cursor: pointer;">S'INSCRIRE</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 INFRAROUGE. Tous droits réservés. | Design by Infrarouge Studio</p>
         </div>
     </footer>
 
-    <script>
-        // Custom cursor
-        const cursor = document.getElementById('custom-cursor');
-        const cursorDot = document.getElementById('cursor-dot');
-
-        if (window.innerWidth > 768) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                cursorDot.style.left = (e.clientX - 3) + 'px';
-                cursorDot.style.top = (e.clientY - 3) + 'px';
-            });
-
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'scale(1.5)';
-                    cursor.style.background = 'rgba(255, 0, 0, 0.2)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'scale(1)';
-                    cursor.style.background = 'transparent';
-                });
-            });
-        }
-
-        // Loading animation
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('hidden');
-            }, 1500);
-        });
-
-        // Mobile menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Particles animation
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particles = [];
-        const particleCount = 100;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.5 + 0.2;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-
-            draw() {
-                ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
-            // Draw connections
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 100) {
-                        ctx.strokeStyle = `rgba(255, 0, 0, ${0.1 * (1 - distance / 100)})`;
-                        ctx.lineWidth = 0.1 * (1 - distance / 100);
-                        ctx.beginPath();        }}}}
+    <script src="script.js"></script>
+</body>
+</html>
