@@ -864,4 +864,5 @@
 
                     if (distance < 100) {
                         ctx.strokeStyle = `rgba(255, 0, 0, ${0.1 * (1 - distance / 100)})`;
-                        ctx.lineWidth = 0.
+                        ctx.lineWidth = 0.1 * (1 - distance / 100);
+                        ctx.beginPath();        }}}}
