@@ -1,16 +1,17 @@
 /* === CSS VARIABLES === */
 :root {
-  /* Colors */
-  --color-primary: #ff0033;
-  --color-primary-dark: #cc0029;
-  --color-secondary: #9933ff;
-  --color-success: #00ff88;
-  --color-bg: #000000;
-  --color-bg-secondary: #111111;
-  --color-bg-tertiary: #1a1a1a;
-  --color-text: #ffffff;
-  --color-text-secondary: #cccccc;
-  --color-text-muted: #888888;
+  /* Infrared Theme Colors */
+  --color-primary: #ff4500;        /* Deep infrared red */
+  --color-primary-dark: #cc3300;   /* Darker infrared red */
+  --color-secondary: #ff6600;      /* Infrared orange */
+  --color-accent: #ff8c00;         /* Bright infrared orange */
+  --color-success: #32cd32;        /* Green for success */
+  --color-bg: #0a0a0a;             /* Deep black background */
+  --color-bg-secondary: #1a1a1a;   /* Slightly lighter black */
+  --color-bg-tertiary: #2a2a2a;    /* Tertiary background */
+  --color-text: #ffffff;           /* Pure white text */
+  --color-text-secondary: #e0e0e0; /* Light gray text */
+  --color-text-muted: #a0a0a0;     /* Muted gray text */
 
   /* Fonts */
   --font-display: 'Bebas Neue', sans-serif;
@@ -36,13 +37,15 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(255, 69, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(255, 69, 0, 0.15), 0 2px 4px -1px rgba(255, 69, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(255, 69, 0, 0.2), 0 4px 6px -2px rgba(255, 69, 0, 0.15);
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #ff0033, #9933ff);
-  --gradient-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  /* Infrared Gradients */
+  --gradient-primary: linear-gradient(135deg, #ff4500, #ff6600, #ff8c00);
+  --gradient-surface: linear-gradient(135deg, rgba(255, 69, 0, 0.08), rgba(255, 140, 0, 0.04));
+  --gradient-infrared: linear-gradient(135deg, #ff4500 0%, #ff6600 50%, #ff8c00 100%);
+  --gradient-heat: radial-gradient(circle, rgba(255, 69, 0, 0.3) 0%, rgba(255, 140, 0, 0.1) 50%, transparent 100%);
 }
 
 /* === BASE STYLES === */
@@ -157,11 +160,14 @@ p {
 #quantum-loader {
   position: fixed;
   inset: 0;
-  background: var(--color-bg);
+  background: var(--gradient-heat);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Improved centering */
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 .loader-content {
@@ -386,7 +392,7 @@ p {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #000000, #1a0000, #2a001a);
+  background: var(--gradient-heat);
   z-index: -1;
 }
 
