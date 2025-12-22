@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO - Composants INFRAROUGE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-mobile.css">
+    <style>
+        body {
+            padding: 6rem 2rem;
+        }
+        .demo-section {
+            max-width: 1200px;
+            margin: 0 auto 6rem;
+        }
+        .demo-header {
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 0, 51, 0.3);
+        }
+        .demo-header h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .component-label {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav id="main-nav" class="nav-glass">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-text">INFRA</span><span class="logo-accent">ROUGE</span>
+            </a>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-btn">
+                    <div class="theme-icon">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Demo -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h2>🎨 DEMO COMPOSANTS</h2>
+            <p style="color: var(--color-text-secondary); font-size: 1.1rem;">
+                Testez tous les composants du design system INFRAROUGE
+            </p>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h3 style="font-family: var(--font-display); font-size: 2rem;">Buttons</h3>
+        </div>
+        <div class="demo-grid">
+            <div>
+                <button class="btn-primary">
+                    <span class="btn-text">Button Primary</span>
+                    <span class="btn-glow"></span>
+                </button>
+                <span class="component-label">.btn-primary</span>
+            </div>
+            <div>
+                <button class="btn-secondary">
+                    <span class="btn-text">Button Secondary</span>
+                    <span class="btn-icon">→</span>
+                </button>
+                <span class="component-label">.btn-secondary</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Badges -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h3 style="font-family: var(--font-display); font-size: 2rem;">Badges</h3>
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <span class="section-tag">Section Tag</span>
+            <span class="card-badge" style="position: static;">Card Badge</span>
+            <span class="event-tag">Event Tag</span>
+            <span class="meta-category">Category</span>
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span class="badge-text">Live Badge</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h3 style="font-family: var(--font-display); font-size: 2rem;">Cards</h3>
+        </div>
+        <div class="demo-grid">
+            <!-- Card Article -->
+            <article class="card-premium">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400" alt="Demo">
+                    <div class="card-overlay"></div>
+                    <span class="card-badge">Nouveau</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="meta-category">Interview</span>
+                        <span class="meta-date">22 Déc</span>
+                    </div>
+                    <h3 class="card-title">Titre de l'article</h3>
+                    <p class="card-excerpt">Description courte de l'article pour donner un aperçu du contenu...</p>
+                    <a href="#" class="card-link">
+                        <span>Lire plus</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Card Artiste -->
+            <div class="artist-card">
+                <div class="artist-visual">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400" alt="Artiste">
+                    <div class="artist-overlay">
+                        <div class="artist-socials">
+                            <a href="#" class="social-icon"><span>IG</span></a>
+                            <a href="#" class="social-icon"><span>SC</span></a>
+                            <a href="#" class="social-icon"><span>YT</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="artist-info">
+                    <h3 class="artist-name">Nom Artiste</h3>
+                    <p class="artist-genre">Rap · Paris</p>
+                    <a href="#" class="artist-link">Voir le profil →</a>
+                </div>
+            </div>
+
+            <!-- Card Event -->
+            <div class="event-card">
+                <div class="event-date">
+                    <span class="date-day">28</span>
+                    <span class="date-month">DÉC</span>
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">Showcase Underground</h3>
+                    <p class="event-location">La Machine · Paris</p>
+                    <span class="event-tag">Concert</span>
+                </div>
+                <a href="#" class="event-link">→</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h3 style="font-family: var(--font-display); font-size: 2rem;">Forms</h3>
+        </div>
+        
+        <!-- Newsletter -->
+        <div style="max-width: 600px; margin: 0 auto 3rem;">
+            <h4 style="margin-bottom: 1rem;">Newsletter Form</h4>
+            <form class="newsletter-form" id="demo-newsletter">
+                <input type="email" placeholder="Votre email" class="newsletter-input" required>
+                <button type="submit" class="newsletter-btn">
+                    <span>S'abonner</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <!-- Search -->
+        <div style="max-width: 400px; margin: 0 auto;">
+            <h4 style="margin-bottom: 1rem;">Search Input</h4>
+            <div class="search-container">
+                <input type="text" placeholder="Rechercher..." class="search-input">
+                <button class="search-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h3 style="font-family: var(--font-display); font-size: 2rem;">Typography</h3>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+            <div>
+                <h1 style="font-family: var(--font-display); font-size: 4rem; line-height: 1;">
+                    Heading Display
+                </h1>
+                <span class="component-label">font-family: Bebas Neue</span>
+            </div>
+            <div>
+                <h2 class="section-title">
+                    <span class="gradient-text">Section Title</span>
+                </h2>
+                <span class="component-label">.section-title .gradient-text</span>
+            </div>
+            <div>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: var(--color-text-secondary);">
+                    Body text avec Space Grotesk. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <span class="component-label">font-family: Space Grotesk</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colors -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h3 style="font-family: var(--font-display); font-size: 2rem;">Colors</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
+            <div style="text-align: center;">
+                <div style="width: 100%; height: 100px; background: var(--color-primary); border-radius: var(--radius-md); margin-bottom: 0.5rem;"></div>
+                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Primary</span>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 100%; height: 100px; background: var(--color-accent); border-radius: var(--radius-md); margin-bottom: 0.5rem;"></div>
+                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Accent</span>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 100%; height: 100px; background: var(--color-success); border-radius: var(--radius-md); margin-bottom: 0.5rem;"></div>
+                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Success</span>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 100%; height: 100px; background: var(--gradient-primary); border-radius: var(--radius-md); margin-bottom: 0.5rem;"></div>
+                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Gradient</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing -->
+    <section class="demo-section">
+        <div class="demo-header">
+            <h3 style="font-family: var(--font-display); font-size: 2rem;">Spacing Scale</h3>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: var(--spacing-xs); height: 40px; background: var(--color-primary);"></div>
+                <span>--spacing-xs (0.5rem / 8px)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: var(--spacing-sm); height: 40px; background: var(--color-primary);"></div>
+                <span>--spacing-sm (1rem / 16px)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: var(--spacing-md); height: 40px; background: var(--color-primary);"></div>
+                <span>--spacing-md (2rem / 32px)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: var(--spacing-lg); height: 40px; background: var(--color-primary);"></div>
+                <span>--spacing-lg (4rem / 64px)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: var(--spacing-xl); height: 40px; background: var(--color-primary);"></div>
+                <span>--spacing-xl (6rem / 96px)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to home -->
+    <div style="text-align: center; margin: 4rem 0;">
+        <a href="index.html" class="btn-primary">
+            <span class="btn-text">← Retour à l'accueil</span>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Demo newsletter
+        document.getElementById('demo-newsletter').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span>✓ Abonné !</span>';
+            btn.style.background = 'linear-gradient(135deg, #00ff88 0%, #00cc66 100%)';
+            setTimeout(() => {
+                e.target.reset();
+                btn.innerHTML = originalHTML;
+                btn.style.background = '';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
