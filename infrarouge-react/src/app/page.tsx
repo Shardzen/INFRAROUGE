@@ -30,6 +30,13 @@ export default function Home() {
       genre: 'Rap · Trap',
       image: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=600',
       description: 'L\'évolution du rap français'
+    },
+    {
+      id: 4,
+      name: 'Zola',
+      genre: 'Rap · Trap',
+      image: 'https://img.lemde.fr/2020/11/30/0/0/6000/4000/960/0/75/0/70aee19_860006198-zola-122-koria.jpg',
+      description: 'Le rap imposé par un style'
     }
   ]
 
