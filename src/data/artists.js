@@ -169,6 +169,129 @@ Artiste plasticienne émergente, Lazuli développe un langage visuel unique qui 
         title: 'Chromatic Reverie'
       }
     ]
+  },
+  {
+    id: 'syntheticpsychosis',
+    name: 'Synthetic Psychosis',
+    slug: 'syntheticpsychosis',
+    category: 'Arts Plastiques',
+    genre: 'Art Numérique / Glitch',
+    tags: ['Digital Art', 'Glitch', 'Psychédélique', 'Cyberpunk'],
+    featured: true,
+    coverImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=1600&q=80',
+    bio: `Synthetic Psychosis navigue dans les territoires digitaux de la psyché moderne. Ses œuvres fragmentées et glitchées reflètent la désintégration et la reconstruction perpétuelle de l'identité à l'ère numérique.
+
+À travers une esthétique cyberpunk saturée de néons et de distorsions visuelles, l'artiste crée des univers hallucinatoires qui interrogent notre rapport à la technologie et à la réalité virtuelle.
+
+Chaque création est une plongée vertigineuse dans un futur dystopique où l'organique et le synthétique fusionnent dans une danse chaotique et fascinante.`,
+    instagram: {
+      username: 'sypsy',
+      profileUrl: 'https://www.instagram.com/sypsy'
+    },
+    galleryImages: [
+      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+      'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&q=80',
+      'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80',
+      'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=800&q=80',
+      'https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=800&q=80',
+      'https://images.unsplash.com/photo-1617791160588-241658c0f566?w=800&q=80'
+    ],
+    socialMedia: {
+      instagram: 'https://www.instagram.com/sypsy',
+      behance: '',
+      website: ''
+    },
+    exhibitions: [
+      {
+        date: '2026-02-20',
+        venue: 'Digital Art Space',
+        city: 'Lyon',
+        title: 'Digital Breakdown'
+      }
+    ]
+  },
+  {
+    id: 'paulancuchy',
+    name: 'Paulancuchy',
+    slug: 'paulancuchy',
+    category: 'Arts Plastiques',
+    genre: 'Art Expérimental',
+    tags: ['Avant-garde', 'Installation', 'Conceptuel'],
+    featured: true,
+    coverImage: 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1600&q=80',
+    bio: `Paulancuchy repousse les limites de l'expression artistique avec des œuvres qui défient les conventions. Son travail expérimental fusionne médiums traditionnels et approches contemporaines dans une quête constante de nouvelles formes d'expression.
+
+Chaque création est une expérience immersive qui invite le spectateur à remettre en question ses perceptions et à explorer de nouveaux territoires sensoriels et conceptuels.
+
+Artiste polymorphe, Paulancuchy développe un langage visuel radical qui s'inscrit dans la lignée des grands avant-gardistes tout en affirmant une voix résolument contemporaine.`,
+    instagram: {
+      username: '01010000_01000110',
+      profileUrl: 'https://www.instagram.com/01010000_01000110'
+    },
+    galleryImages: [
+      'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80',
+      'https://images.unsplash.com/photo-1549887534-1541e9326642?w=800&q=80',
+      'https://images.unsplash.com/photo-1578926078627-e7a5c5f3f001?w=800&q=80',
+      'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80',
+      'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800&q=80',
+      'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80'
+    ],
+    socialMedia: {
+      instagram: 'https://www.instagram.com/01010000_01000110',
+      behance: '',
+      website: ''
+    },
+    exhibitions: [
+      {
+        date: '2026-04-10',
+        venue: 'Espace Contemporain',
+        city: 'Marseille',
+        title: 'Binary Expressions'
+      }
+    ]
+  },
+  {
+    id: 'jinxibadda',
+    name: 'Jin.Xibadda',
+    slug: 'jinxibadda',
+    category: 'Arts Plastiques',
+    genre: 'Street Art / Illustration',
+    tags: ['Illustration', 'Urbain', 'Character Design', 'Pop Culture'],
+    featured: true,
+    coverImage: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&q=80',
+    heroImage: 'https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=1600&q=80',
+    bio: `Jin.Xibadda mêle culture urbaine et univers illustratif dans des créations explosives de couleurs et de personnages. Son style unique fusionne influences manga, street art et design contemporain.
+
+Chaque illustration raconte une histoire, peuplée de créatures fantastiques et de personnages charismatiques qui évoluent dans des environnements urbains réinventés avec imagination et audace.
+
+Artiste complet, Jin.Xibadda développe un univers visuel cohérent qui transcende les frontières entre illustration digitale, art mural et culture pop contemporaine.`,
+    instagram: {
+      username: 'jin.x126',
+      profileUrl: 'https://www.instagram.com/jin.x126'
+    },
+    galleryImages: [
+      'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80',
+      'https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=800&q=80',
+      'https://images.unsplash.com/photo-1580477667995-2b94f01c9516?w=800&q=80',
+      'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80',
+      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+      'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&q=80'
+    ],
+    socialMedia: {
+      instagram: 'https://www.instagram.com/jin.x126',
+      behance: '',
+      website: ''
+    },
+    exhibitions: [
+      {
+        date: '2026-05-15',
+        venue: 'Urban Gallery',
+        city: 'Bordeaux',
+        title: 'Character Universe'
+      }
+    ]
   }
 ];
 
