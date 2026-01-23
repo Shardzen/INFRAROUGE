@@ -1,374 +1,130 @@
-# 🚀 GUIDE DE DÉMARRAGE - INFRAROUGE
+# 🔥 INFRAROUGE - Magazine Underground
 
-## ⚡ DÉMARRAGE RAPIDE (30 secondes)
+Magazine digital dédié à la scène artistique underground et alternative.
 
-### Option 1 : Ouvrir directement
+## 🎨 Design System
+
+- **Palette de couleurs :**
+  - `infra-black`: #050505 (Fond principal)
+  - `infra-yellow`: #D9F99D (Accent néon)
+  - `infra-violet`: #8B5CF6 (Glow électrique)
+  - `infra-white`: #F5F5F5 (Texte)
+
+- **Typographie :**
+  - Titres : Police Heavy/Bold (Impact, Arial Black)
+  - Corps : Inter (système)
+
+## 🚀 Installation & Lancement
+
+### Installation des dépendances
 ```bash
-# Double-cliquer sur le fichier
-index.html
+npm install
 ```
 
-### Option 2 : Ligne de commande
+### Développement local
 ```bash
-cd C:\Users\arthu\Desktop\infrarouge
-start index.html
+npm run dev
 ```
+Le site sera accessible sur `http://localhost:5173`
 
-### Option 3 : Live Server (Recommandé)
+### Build de production
 ```bash
-# Avec VSCode + Extension Live Server
-# Clic droit sur index.html > "Open with Live Server"
+npm run build
 ```
 
----
+## 🌐 Déploiement sur Netlify
 
-## 📁 STRUCTURE DU PROJET
+### Option 1 : Via l'interface Netlify (Recommandé)
 
-```
-infrarouge/
-│
-├── 🌟 PAGES PRINCIPALES
-│   ├── index.html          # Homepage (NOUVEAU DESIGN)
-│   ├── artists.html        # Page artistes
-│   ├── news.html          # Actualités
-│   ├── events.html        # Événements
-│   ├── gallery.html       # Galerie photos
-│   ├── about.html         # À propos
-│   └── contact.html       # Contact
-│
-├── 🎨 STYLES
-│   ├── style.css          # Styles principaux (13KB)
-│   └── style-mobile.css   # Responsive design (12KB)
-│
-├── ⚡ SCRIPTS
-│   └── script.js          # JavaScript modulaire (18KB)
-│
-└── 📚 DOCUMENTATION
-    ├── REFONTE.md         # Doc complète refonte
-    ├── CHANGELOG.md       # Historique détaillé
-    └── README.md          # Ce fichier
-```
+1. **Connectez-vous à Netlify** : https://app.netlify.com
+2. **Cliquez sur "Add new site" > "Import an existing project"**
+3. **Connectez votre repo Git** ou faites un "drag & drop" du dossier
+4. **Configuration automatique** : Netlify détectera le `netlify.toml`
+5. **Déployez !**
 
----
+### Option 2 : Via Netlify CLI
 
-## 🎯 FONCTIONNALITÉS CLÉS
-
-### 1. 🎭 Loader Quantique
-**Localisation :** Première chose visible au chargement
-
-**Fonctionnalités :**
-- Animation holographique du logo
-- Particules énergétiques flottantes
-- Barre de progression avec glow
-- Durée : 3 secondes
-- Disparition en fade
-
-**Code :**
-```javascript
-// Classe: QuantumLoader
-// Fichier: script.js ligne 10
-```
-
----
-
-### 2. 🧭 Navigation Premium
-**Localisation :** Top de page, fixed
-
-**Fonctionnalités :**
-- Auto-hide au scroll down
-- Auto-show au scroll up
-- Effet verre dépoli (glassmorphism)
-- Active states sur liens
-- Recherche intégrée
-- Theme toggle
-
-**Personnalisation :**
-```css
-/* Modifier dans style.css */
-.nav-glass {
-    backdrop-filter: blur(20px);
-    background: rgba(0, 0, 0, 0.7);
-}
-```
-
----
-
-### 3. 🌌 Hero 3D
-**Localisation :** Section #home
-
-**Fonctionnalités :**
-- 1000 particules Three.js (300 mobile)
-- Réactivité au mouvement souris
-- Titre avec animation reveal
-- Stats counter animés
-- CTA buttons premium
-
-**Optimisation :**
-```javascript
-// Réduire nombre de particules
-// script.js ligne 180
-for (let i = 0; i < 500; i++) { // Au lieu de 1000
-```
-
----
-
-### 4. 🎨 Theme Toggle
-**Localisation :** Navigation, bouton avec icône
-
-**Fonctionnalités :**
-- Dark mode (défaut)
-- Light mode
-- Transition fluide 300ms
-- Sauvegarde localStorage
-- Icon rotation
-
-**Utilisation :**
-```javascript
-// Récupérer thème actuel
-const theme = localStorage.getItem('theme'); // 'dark' ou 'light'
-```
-
----
-
-### 5. 🔍 Recherche Intelligente
-**Localisation :** Navigation, input avec loupe
-
-**Fonctionnalités :**
-- Auto-navigation vers sections
-- Highlight dans la page
-- Mapping mots-clés intelligent
-- Enter ou clic bouton
-
-**Mots-clés configurés :**
-```javascript
-// Modifier dans script.js ligne 340
-const searchMappings = {
-    'petite sœur': 'artists.html',
-    'lorenzo': 'artists.html',
-    'news': 'news.html',
-    // Ajouter vos propres mappings
-}
-```
-
----
-
-## 🎨 PERSONNALISATION
-
-### Couleurs
-```css
-/* Modifier dans style.css ligne 10 */
-:root {
-    --color-primary: #ff0033;      /* Rouge principal */
-    --color-accent: #9933ff;       /* Violet accent */
-    --color-success: #00ff88;      /* Vert succès */
-    --color-bg: #000000;           /* Fond noir */
-}
-```
-
-### Typographie
-```css
-/* Modifier dans style.css ligne 35 */
-:root {
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-body: 'Space Grotesk', sans-serif;
-}
-```
-
-### Animations
-```css
-/* Modifier vitesse dans style.css ligne 45 */
-:root {
-    --transition-fast: 0.15s ease;
-    --transition-base: 0.3s ease;
-    --transition-slow: 0.6s ease;
-}
-```
-
----
-
-## 📱 RESPONSIVE
-
-### Breakpoints Définis
-```css
-Desktop:  > 1024px   (Expérience complète)
-Tablet:   768-1024px (Navigation simplifiée)
-Mobile:   480-768px  (Menu burger)
-Small:    < 480px    (Layout vertical)
-```
-
-### Tester le Responsive
 ```bash
-# Dans Chrome DevTools
-F12 > Toggle Device Toolbar (Ctrl+Shift+M)
-# Sélectionner différents devices
+# Installation de Netlify CLI (si pas déjà fait)
+npm install -g netlify-cli
+
+# Login
+netlify login
+
+# Déploiement
+netlify deploy --prod
 ```
+
+### Option 3 : Drag & Drop manuel
+
+1. Lancez `npm run build`
+2. Allez sur https://app.netlify.com/drop
+3. Glissez-déposez le dossier `dist/`
+
+## 📁 Structure du projet
+
+```
+INFRAROUGE/
+├── src/
+│   ├── components/
+│   │   ├── Loader.jsx          # Écran d'intro avec effet glitch
+│   │   ├── Navbar.jsx          # Navigation minimaliste
+│   │   ├── HeroSection.jsx     # Section héro avec CTA
+│   │   ├── MosaicGrid.jsx      # Grille Masonry des artistes
+│   │   └── AudioPlayer.jsx     # Lecteur audio sticky
+│   ├── App.jsx                 # Assemblage principal
+│   ├── index.css               # Styles globaux + Tailwind
+│   └── main.jsx                # Point d'entrée
+├── tailwind.config.js          # Configuration Tailwind
+├── netlify.toml                # Configuration Netlify
+└── package.json
+
+```
+
+## ✨ Fonctionnalités
+
+- ✅ **Loader animé** avec effet de glitch au démarrage
+- ✅ **Navigation responsive** avec menu burger mobile
+- ✅ **Hero section** immersive avec typographie massive
+- ✅ **Grille Masonry** type Pinterest avec hover effects
+- ✅ **Lecteur audio** sticky avec visualiseur d'ondes
+- ✅ **Animations fluides** via Framer Motion
+- ✅ **Design underground** avec palette thermique
+
+## 🎯 Optimisations
+
+- Lazy loading des images
+- Animations GPU-accelerated
+- Responsive design (mobile-first)
+- Accessibilité (ARIA labels)
+- SEO-friendly
+
+## 🔧 Technologies
+
+- **React** 18.3.1
+- **Vite** 5.2.0 (Build tool ultra-rapide)
+- **Tailwind CSS** 3.4.0
+- **Framer Motion** 11.0.0 (Animations)
+- **Lucide React** 0.263.1 (Icônes)
+
+## 📝 Notes de développement
+
+### Prochaines étapes possibles :
+1. Ajouter un système de filtrage dans la galerie
+2. Intégrer une vraie API de streaming audio
+3. Créer des pages individuelles pour chaque artiste
+4. Ajouter un système de newsletter
+5. Implémenter un mode sombre/clair
+
+### Performance :
+- Lighthouse Score cible : 95+
+- Temps de chargement : < 2s
+- First Contentful Paint : < 1s
+
+## 📄 Licence
+
+© 2025 INFRAROUGE - Tous droits réservés
 
 ---
 
-## ⚡ PERFORMANCE
-
-### Optimisations Actives
-- ✅ Lazy loading images
-- ✅ Code splitting modulaire
-- ✅ GPU-accelerated animations
-- ✅ Preconnect fonts
-- ✅ Reduced animations (mobile)
-
-### Mesurer les Performances
-```bash
-# Chrome DevTools
-F12 > Lighthouse > Generate Report
-
-Cibles:
-- Performance: > 90
-- Accessibility: 100
-- Best Practices: > 95
-```
-
----
-
-## 🐛 DEBUGGING
-
-### Console Logs Utiles
-```javascript
-// Le site log automatiquement:
-console.log('🔴 INFRAROUGE'); // Confirmation chargement
-console.log('⚡ Page chargée en Xms'); // Performance
-```
-
-### Désactiver les Animations (Test)
-```css
-/* Ajouter temporairement dans style.css */
-* {
-    animation: none !important;
-    transition: none !important;
-}
-```
-
-### Forcer Theme Spécifique
-```javascript
-// Dans Console DevTools
-localStorage.setItem('theme', 'light'); // ou 'dark'
-location.reload();
-```
-
----
-
-## 🔧 MAINTENANCE
-
-### Mise à Jour du Contenu
-
-#### 1. Modifier les Articles Featured
-```html
-<!-- index.html ligne 180 -->
-<article class="featured-main card-premium">
-    <!-- Modifier image, titre, texte -->
-</article>
-```
-
-#### 2. Ajouter un Artiste
-```html
-<!-- index.html ligne 290 -->
-<div class="artist-card">
-    <div class="artist-visual">
-        <img src="URL_IMAGE" alt="NOM">
-    </div>
-    <div class="artist-info">
-        <h3 class="artist-name">NOM</h3>
-        <p class="artist-genre">Genre · Ville</p>
-    </div>
-</div>
-```
-
-#### 3. Ajouter un Event
-```html
-<!-- index.html ligne 370 -->
-<div class="event-card">
-    <div class="event-date">
-        <span class="date-day">28</span>
-        <span class="date-month">DÉC</span>
-    </div>
-    <div class="event-content">
-        <h3 class="event-title">Titre Event</h3>
-        <p class="event-location">Lieu</p>
-        <span class="event-tag">Type</span>
-    </div>
-</div>
-```
-
----
-
-## 🚀 DÉPLOIEMENT
-
-### Option 1 : Hébergement Gratuit (Netlify)
-```bash
-1. Créer compte sur netlify.com
-2. Drag & drop le dossier infrarouge/
-3. Site en ligne en 30 secondes !
-```
-
-### Option 2 : GitHub Pages
-```bash
-1. Créer repo GitHub
-2. Push le dossier
-3. Settings > Pages > Deploy from main
-4. Site accessible à username.github.io/infrarouge
-```
-
-### Option 3 : Serveur Perso
-```bash
-# Upload via FTP
-# Mettre tout dans public_html/
-# Accessible à votre-domaine.com
-```
-
----
-
-## ✨ EASTER EGGS
-
-1. **Logo Glitch** : Hover sur logo navigation
-2. **Particules Souris** : Bouger souris sur hero
-3. **Stats Animation** : Scroll jusqu'aux stats
-4. **Heart Beat** : Footer copyright heart pulse
-5. **Theme Switch** : Rotation icône 90deg
-
----
-
-## 📞 SUPPORT
-
-### Documentation Complète
-- `REFONTE.md` - Détails techniques
-- `CHANGELOG.md` - Historique complet
-- `README.md` - Ce guide
-
-### Ressources Externes
-- [Three.js Docs](https://threejs.org/docs/)
-- [GSAP Docs](https://greensock.com/docs/)
-- [MDN Web Docs](https://developer.mozilla.org/)
-
----
-
-## ✅ CHECKLIST DE LANCEMENT
-
-Avant mise en production :
-
-- [ ] Tester sur Chrome, Firefox, Safari
-- [ ] Tester responsive mobile/tablet
-- [ ] Vérifier tous les liens
-- [ ] Optimiser les images (< 500KB)
-- [ ] Valider HTML/CSS
-- [ ] Lighthouse score > 90
-- [ ] Backup du site
-
----
-
-## 🎉 FÉLICITATIONS !
-
-Votre site INFRAROUGE est maintenant **prêt à conquérir le web** ! 🚀
-
-**Version 2.0** - Design ultra-premium
-**Performance** - Optimisé à 100%
-**Responsive** - Parfait sur tous devices
-**Accessible** - Conforme WCAG 2.1
-
-*Bon lancement ! 🔴*
+Made with 🔥 by a Senior Creative Front-End Developer

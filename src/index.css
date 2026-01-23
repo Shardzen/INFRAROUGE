@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-dark-border;
+  }
+  
+  body {
+    @apply bg-dark-bg text-gray-100 font-sans antialiased;
+    background-image: 
+      radial-gradient(ellipse at top, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(217, 70, 239, 0.05) 0%, transparent 50%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Boutons Premium */
+  .btn-primary {
+    @apply bg-gradient-premium text-white font-semibold px-6 py-3 rounded-lg 
+           transition-all duration-300 hover:shadow-glow hover:scale-105
+           active:scale-95 relative overflow-hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-primary:hover::before {
+    @apply opacity-10;
+  }
+
+  .btn-secondary {
+    @apply bg-dark-card text-primary-400 border-2 border-primary-500/30 font-semibold 
+           px-6 py-3 rounded-lg transition-all duration-300 
+           hover:bg-primary-500/10 hover:border-primary-400 hover:shadow-glow-sm;
+  }
+
+  .btn-ghost {
+    @apply text-gray-300 font-medium px-6 py-3 rounded-lg transition-all duration-300
+           hover:bg-primary-500/10 hover:text-primary-400;
+  }
+
+  /* Cards Premium */
+  .card-premium {
+    @apply bg-dark-card border border-dark-border rounded-2xl p-6 
+           transition-all duration-300 hover:border-primary-500/50 
+           hover:shadow-premium group;
+  }
+
+  .card-glass {
+    @apply backdrop-blur-xl bg-dark-card/60 border border-primary-500/20 
+           rounded-2xl p-6 shadow-glow-sm;
+  }
+
+  /* Sections */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-premium;
+  }
+
+  /* Glow Effects */
+  .glow-effect {
+    @apply shadow-glow animate-glow;
+  }
+
+  /* Input Premium */
+  .input-premium {
+    @apply w-full bg-dark-card border border-dark-border rounded-lg px-4 py-3
+           text-gray-100 placeholder-gray-500 focus:outline-none 
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           transition-all duration-300;
+  }
+
+  /* Scrollbar Custom */
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-dark-bg;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary-500/30 rounded-full hover:bg-primary-500/50;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+  }
+
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+}
+
+/* Animations personnalisées */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite linear;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(168, 85, 247, 0.3) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Effet de survol sur les images */
+.image-hover-effect {
+  @apply relative overflow-hidden;
+}
+
+.image-hover-effect::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-t from-primary-600/80 via-transparent to-transparent
+         opacity-0 transition-opacity duration-500;
+}
+
+.image-hover-effect:hover::after {
+  @apply opacity-100;
+}
+
+/* Selection */
+::selection {
+  @apply bg-primary-500/30 text-white;
+}
+
+/* Loading spinner premium */
+.spinner-premium {
+  @apply w-12 h-12 border-4 border-primary-500/20 border-t-primary-500 
+         rounded-full animate-spin;
+}
