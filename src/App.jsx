@@ -9,7 +9,6 @@ import Artists from './pages/Artists';
 import ArtistDetail from './pages/ArtistDetail';
 import Events from './pages/Events';
 import CategoryPage from './pages/CategoryPage';
-import StyleShowcase from './pages/StyleShowcase';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -45,7 +44,6 @@ function App() {
             <Route path="/artist/:category/:id" element={<ArtistDetail />} />
             <Route path="/events" element={<Events />} />
             <Route path="/category/:category" element={<CategoryPage />} />
-            <Route path="/style" element={<StyleShowcase />} />
           </Routes>
         </main>
         

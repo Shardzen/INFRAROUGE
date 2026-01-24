@@ -21,7 +21,7 @@ const Loader = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-infrared-darker">
       <div className="grain-overlay" />
       
-      <div className="relative z-10 text-center space-y-8">
+      <div className="relative z-10 text-center space-y-8 px-4">
         <div className="relative">
           <div className="text-6xl md:text-8xl font-bold tracking-tighter">
             <span className="text-gradient glow-text">INFRAROUGE</span>
@@ -30,14 +30,14 @@ const Loader = () => {
           <div className="absolute -inset-4 bg-thermal-radial opacity-20 blur-3xl animate-pulse-glow" />
         </div>
 
-        <div className="w-64 h-1 bg-infrared-purple/30 rounded-full overflow-hidden">
+        <div className="w-64 md:w-96 mx-auto h-1 bg-infrared-purple/30 rounded-full overflow-hidden">
           <div 
             className="h-full bg-thermal-gradient transition-all duration-300 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
 
-        <div className="font-mono text-sm text-infrared-hot tracking-widest">
+        <div className="font-mono text-xs md:text-sm text-infrared-hot tracking-widest">
           {progress}% CHARGEMENT
         </div>
 

@@ -21,10 +21,10 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-infrared-deep border-t border-infrared-purple/30 mt-20">
-      <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="space-y-4">
-            <div className="text-3xl font-bold tracking-tighter">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
+          <div className="space-y-4 text-center sm:text-left">
+            <div className="text-2xl sm:text-3xl font-bold tracking-tighter">
               <span className="text-gradient">INFRAROUGE</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -32,8 +32,8 @@ const Footer = () => {
             </p>
           </div>
 
-          <div>
-            <h3 className="font-mono text-sm tracking-widest text-infrared-hot mb-4">
+          <div className="text-center sm:text-left">
+            <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot mb-4">
               NAVIGATION
             </h3>
             <ul className="space-y-2">
@@ -50,11 +50,11 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-mono text-sm tracking-widest text-infrared-hot mb-4">
+          <div className="text-center sm:text-left sm:col-span-2 md:col-span-1">
+            <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot mb-4">
               SOCIAL
             </h3>
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-center sm:justify-start">
               {footerLinks.social.map((social) => (
                 <a
                   key={social.name}
@@ -69,11 +69,11 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-infrared-purple/20 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-infrared-purple/20 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="text-gray-500 text-xs font-mono">
             © {currentYear} INFRAROUGE. Tous droits réservés.
           </p>
-          <div className="flex gap-6 text-xs text-gray-500">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-xs text-gray-500">
             <a href="#" className="hover:text-infrared-hot transition-colors">
               Mentions légales
             </a>
