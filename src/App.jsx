@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import ArtistDetail from './pages/ArtistDetail';
 import About from './pages/About';
+import StyleShowcase from './pages/StyleShowcase';
 import Loader from './components/Loader';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path="/photographie" element={<CategoryPage category="Photographie" />} />
             <Route path="/artiste/:slug" element={<ArtistDetail />} />
             <Route path="/a-propos" element={<About />} />
+            <Route path="/style" element={<StyleShowcase />} />
           </Routes>
         </main>
         <Footer />

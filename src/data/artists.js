@@ -11,8 +11,8 @@ export const artists = [
     genre: 'Electronic / Experimental',
     tags: ['Ambient', 'Experimental', 'Production'],
     featured: true,
-    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1200&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=1600&q=80',
+    coverImage: 'https://i1.sndcdn.com/avatars-Ly443rj4ETVLG3Hm-hXyL6A-t1080x1080.jpg?w=1200&q=80',
+    heroImage: 'https://i1.sndcdn.com/artworks-aFPCeyJxzJCo9mZE-d9mnTw-t500x500.png?w=1600&q=80',
     bio: `Thatcher Blackwood sculpte des paysages sonores qui défient les conventions. Entre ambiance éthérée et expérimentation audacieuse, son univers musical transporte l'auditeur dans des dimensions inexploré es.
 
 Chaque production est une exploration minutieuse des textures sonores, où les synthétiseurs analogiques rencontrent le traitement numérique pour créer des atmosphères uniques et envoûtantes.
@@ -42,8 +42,8 @@ Artiste émergent de la scène électronique underground, Thatcher construit mé
     genre: 'Hip-Hop / R&B',
     tags: ['Rap', 'Mélodique', 'Nouvelle Vague'],
     featured: true,
-    coverImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&q=80',
+    coverImage: 'https://i1.sndcdn.com/avatars-rKirG7zKLzNQ2Yxf-znHHnA-t1080x1080.jpg?w=1200&q=80',
+    heroImage: '	https://i1.sndcdn.com/artworks-sfd3B0eQYb2iowO7-TWRRcg-t500x500.jpg?w=1600&q=80',
     bio: `Sobi incarne la nouvelle génération du rap francophone qui fusionne mélodie et authenticité. Son flow naturel et ses textes introspectifs créent une connexion immédiate avec son audience.
 
 Entre beats lo-fi et production moderne, il navigue avec aisance dans différents registres, offrant une palette musicale riche et variée qui défie les cases traditionnelles du genre.
@@ -73,8 +73,8 @@ Artiste complet, Sobi écrit, compose et produit son propre univers sonore, affi
     genre: 'Trap / Drill',
     tags: ['Drill', 'Énergie', 'Urbain'],
     featured: true,
-    coverImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1600&q=80',
+    coverImage: '	https://i1.sndcdn.com/avatars-BQs7Hsig9WyfGyWC-fUnH5Q-t500x500.jpg?w=1200&q=80',
+    heroImage: 'https://i1.sndcdn.com/artworks-KSBB0iiag4m4O3vs-GS8y3Q-t500x500.jpg?w=1600&q=80',
     bio: `Carbine débarque avec une énergie brute et un flow percutant qui ne laisse pas indifférent. Représentant de la nouvelle vague drill, il impose son style avec des prod lourdes et des lyrics sans filtre.
 
 Son approche directe et sans compromis résonne avec la jeunesse urbaine en quête d'authenticité. Chaque track est une déflagration d'énergie pure qui secoue les codes établis.
@@ -104,8 +104,8 @@ Artiste en pleine ascension, Carbine construit méthodiquement sa place dans le 
     genre: 'Electronic / Bass',
     tags: ['Bass Music', 'Dark', 'Experimental'],
     featured: false,
-    coverImage: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1200&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=1600&q=80',
+    coverImage: 'https://i1.sndcdn.com/artworks-KSBB0iiag4m4O3vs-GS8y3Q-t500x500.jpg?w=1200&q=80',
+    heroImage: 'https://i1.sndcdn.com/artworks-BZsd3w2j3wVvdoyG-FGzlrw-t500x500.png?w=1600&q=80',
     bio: `Wired plonge dans les profondeurs de la bass music avec une approche sombre et cinématique. Ses productions sont des voyages sonores intenses qui explorent les limites du spectre des basses fréquences.
 
 Entre dubstep, drum & bass et expérimentation, il crée des atmosphères oppressantes et captivantes qui transportent l'auditeur dans un univers dystopique fascinant.
