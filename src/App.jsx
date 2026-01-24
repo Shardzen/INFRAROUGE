@@ -42,7 +42,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/artists" element={<Artists />} />
-            <Route path="/artist/:id" element={<ArtistDetail />} />
+            <Route path="/artist/:category/:id" element={<ArtistDetail />} />
             <Route path="/events" element={<Events />} />
             <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/style" element={<StyleShowcase />} />

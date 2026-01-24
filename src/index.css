@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&family=Archivo+Black&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -31,10 +31,20 @@ body {
 }
 
 .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
 }
 
-/* Scrollbar custom */
+.font-display {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.font-heading {
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: -0.02em;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -52,7 +62,6 @@ body {
   background: linear-gradient(180deg, var(--color-infrared-hot), var(--color-infrared-orange));
 }
 
-/* Effets de glow */
 .glow-text {
   text-shadow: 0 0 20px var(--color-glow-primary),
                0 0 40px var(--color-glow-secondary);
@@ -63,7 +72,6 @@ body {
               inset 0 0 20px rgba(255, 107, 74, 0.1);
 }
 
-/* Grain texture subtile */
 .grain-overlay {
   position: fixed;
   top: 0;
@@ -76,7 +84,6 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
 }
 
-/* Animations subtiles */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
@@ -92,6 +99,21 @@ body {
   100% { transform: translateY(100vh); }
 }
 
+@keyframes glitch {
+  0%, 100% { 
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  33% { 
+    transform: translate(-2px, 2px);
+    filter: hue-rotate(90deg);
+  }
+  66% { 
+    transform: translate(2px, -2px);
+    filter: hue-rotate(-90deg);
+  }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -100,7 +122,10 @@ body {
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* Gradient backgrounds */
+.animate-glitch {
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
 .bg-infrared-gradient {
   background: linear-gradient(135deg, 
     var(--color-infrared-deep) 0%, 
@@ -115,13 +140,11 @@ body {
     var(--color-infrared-orange) 100%);
 }
 
-/* Blur effects */
 .backdrop-blur-custom {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
-/* Selection */
 ::selection {
   background: var(--color-infrared-hot);
   color: #fff;
@@ -132,17 +155,14 @@ body {
   color: #fff;
 }
 
-/* Transitions globales */
 * {
   transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
 }
 
-/* Disable transitions on page load */
 .preload * {
   transition: none !important;
 }
 
-/* Link hover effect */
 a {
   position: relative;
   text-decoration: none;
@@ -163,7 +183,6 @@ a:hover::after {
   width: 100%;
 }
 
-/* Button base styles */
 button {
   cursor: pointer;
   position: relative;
@@ -188,7 +207,6 @@ button:hover::before {
   height: 300px;
 }
 
-/* Grid lines effect */
 .grid-lines {
   background-image: 
     linear-gradient(rgba(139, 45, 110, 0.1) 1px, transparent 1px),
@@ -196,7 +214,6 @@ button:hover::before {
   background-size: 50px 50px;
 }
 
-/* Scanline effect */
 .scanline {
   position: relative;
   overflow: hidden;
@@ -217,7 +234,6 @@ button:hover::before {
   pointer-events: none;
 }
 
-/* Image filters */
 .img-infrared {
   filter: contrast(1.2) saturate(1.3) hue-rotate(-10deg);
   transition: filter 0.4s ease;
@@ -227,7 +243,6 @@ button:hover::before {
   filter: contrast(1.3) saturate(1.5) hue-rotate(-5deg);
 }
 
-/* Loading states */
 .skeleton {
   background: linear-gradient(
     90deg,
@@ -244,7 +259,6 @@ button:hover::before {
   100% { background-position: -200% 0; }
 }
 
-/* Custom utilities */
 .text-gradient {
   background: linear-gradient(135deg, var(--color-infrared-hot), var(--color-infrared-orange));
   -webkit-background-clip: text;
@@ -259,24 +273,90 @@ button:hover::before {
     linear-gradient(135deg, var(--color-infrared-magenta), var(--color-infrared-hot)) border-box;
 }
 
-/* Focus states */
 *:focus-visible {
   outline: 2px solid var(--color-infrared-hot);
   outline-offset: 2px;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.category-music {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+
+.category-visual {
+  font-family: 'Archivo Black', sans-serif;
+  text-transform: uppercase;
+}
+
+.category-photo {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.1em;
+}
+
+.category-video {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.artist-card {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.artist-card:hover {
+  transform: translateY(-8px);
+}
+
+.artist-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--color-infrared-hot), var(--color-infrared-magenta));
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.artist-card:hover::before {
+  opacity: 0.3;
+  filter: blur(20px);
+}
+
+iframe {
+  border: none;
+  border-radius: 8px;
+}
+
+.instagram-embed {
+  background: var(--color-infrared-deep);
+  border: 1px solid rgba(139, 45, 110, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.instagram-embed:hover {
+  border-color: var(--color-infrared-hot);
+  box-shadow: 0 0 20px rgba(255, 107, 74, 0.2);
+}
+
+@media (max-width: 768px) {
+  .font-display {
+    font-size: clamp(2rem, 8vw, 4rem);
+  }
 }
