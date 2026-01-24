@@ -1,197 +1,241 @@
-import { motion } from 'framer-motion';
-import { Calendar, MapPin, Clock, Euro } from 'lucide-react';
-import { upcomingEvents } from '../data/mockData';
+import React, { useState } from 'react';
 
-export default function Events() {
-  // Trier les événements par date
-  const sortedEvents = [...upcomingEvents].sort((a, b) => 
-    new Date(a.date) - new Date(b.date)
-  );
+const Events = () => {
+  const [selectedFilter, setSelectedFilter] = useState('all');
 
-  // Grouper par mois
-  const eventsByMonth = sortedEvents.reduce((acc, event) => {
-    const monthYear = new Date(event.date).toLocaleDateString('fr-FR', { 
-      month: 'long', 
-      year: 'numeric' 
-    });
-    if (!acc[monthYear]) {
-      acc[monthYear] = [];
-    }
-    acc[monthYear].push(event);
-    return acc;
-  }, {});
+  const events = [
+    {
+      id: 1,
+      title: 'NOCTURNE SESSIONS',
+      date: '15 FÉV 2026',
+      time: '23:00',
+      venue: 'Le Warehouse',
+      city: 'Paris',
+      category: 'Festival',
+      description: 'Une nuit immersive au cœur de l\'underground parisien. Trois scènes, douze artistes, une expérience sonore inoubliable.',
+      lineup: ['NEON SPECTRE', 'CRIMSON PULSE', 'THERMAL DECAY'],
+      price: '25€',
+      status: 'On Sale',
+    },
+    {
+      id: 2,
+      title: 'THERMAL WAVES',
+      date: '22 FÉV 2026',
+      time: '21:00',
+      venue: 'Club Silencio',
+      city: 'Paris',
+      category: 'Showcase',
+      description: 'Découverte de nouveaux talents émergents de la scène électronique underground.',
+      lineup: ['VOID ECHO', 'OBSIDIAN WAVE'],
+      price: '15€',
+      status: 'On Sale',
+    },
+    {
+      id: 3,
+      title: 'INFRARED EXPERIENCE',
+      date: '08 MAR 2026',
+      time: '22:00',
+      venue: 'La Station',
+      city: 'Lyon',
+      category: 'Événement',
+      description: 'Une expérience audiovisuelle totale combinant musique live, installations visuelles et performances artistiques.',
+      lineup: ['ULTRAVIOLET', 'NEON SPECTRE'],
+      price: '30€',
+      status: 'On Sale',
+    },
+    {
+      id: 4,
+      title: 'DARK FREQUENCY',
+      date: '20 MAR 2026',
+      time: '23:30',
+      venue: 'Rex Club',
+      city: 'Paris',
+      category: 'Club Night',
+      description: 'Une soirée dédiée aux sons les plus sombres et expérimentaux de la scène techno.',
+      lineup: ['NEON SPECTRE', 'THERMAL DECAY'],
+      price: '20€',
+      status: 'Soon',
+    },
+  ];
+
+  const categories = ['all', ...new Set(events.map((event) => event.category))];
+
+  const filteredEvents =
+    selectedFilter === 'all'
+      ? events
+      : events.filter((event) => event.category === selectedFilter);
 
   return (
-    <div className="min-h-screen bg-black text-white pt-32 pb-20">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16"
-        >
-          <div className="flex items-center gap-6 mb-6">
-            <Calendar size={80} className="text-yellow-400" />
-            <h1 className="text-8xl md:text-9xl font-black leading-none">
+    <div className="pt-32 pb-20 px-6">
+      <div className="container mx-auto">
+        <div className="mb-16 text-center space-y-6">
+          <div className="relative inline-block">
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-gradient">
               ÉVÉNEMENTS
             </h1>
+            <div className="absolute -inset-8 bg-thermal-radial opacity-20 blur-3xl animate-pulse-glow" />
           </div>
-          <div className="w-40 h-2 bg-yellow-400 mb-8" />
-          <p className="text-2xl text-gray-400 max-w-3xl">
-            Les prochaines dates à ne pas manquer pour vibrer au rythme de la scène underground.
+
+          <div className="h-1 w-32 bg-thermal-gradient mx-auto rounded-full" />
+
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Rejoignez-nous pour des expériences sonores underground inoubliables
           </p>
-        </motion.div>
+        </div>
 
-        {/* ÉVÉNEMENTS PAR MOIS */}
-        {Object.entries(eventsByMonth).map(([month, events], monthIndex) => (
-          <motion.div
-            key={month}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: monthIndex * 0.1 }}
-            className="mb-16"
-          >
-            {/* TITRE MOIS */}
-            <div className="mb-8 pb-4 border-b-2 border-purple-500/30">
-              <h2 className="text-4xl font-black uppercase">{month}</h2>
-            </div>
-
-            {/* LISTE ÉVÉNEMENTS */}
-            <div className="space-y-6">
-              {events.map((event, eventIndex) => {
-                const eventDate = new Date(event.date);
-                const dayName = eventDate.toLocaleDateString('fr-FR', { weekday: 'long' });
-                const day = eventDate.getDate();
-                const monthName = eventDate.toLocaleDateString('fr-FR', { month: 'short' });
-
-                return (
-                  <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: eventIndex * 0.05 }}
-                    className="group"
-                  >
-                    <div className="relative overflow-hidden border-2 border-white/10 hover:border-yellow-400 transition-all duration-300 bg-black">
-                      <div className="flex flex-col md:flex-row">
-                        {/* DATE BLOCK - Style Flyer */}
-                        <div className="w-full md:w-48 bg-gradient-to-br from-yellow-400 to-yellow-500 text-black flex flex-col items-center justify-center p-8 flex-shrink-0">
-                          <span className="text-sm font-bold uppercase mb-2">
-                            {dayName}
-                          </span>
-                          <span className="text-7xl font-black leading-none mb-2">
-                            {day}
-                          </span>
-                          <span className="text-xl font-bold uppercase">
-                            {monthName}
-                          </span>
-                        </div>
-
-                        {/* IMAGE */}
-                        <div className="relative w-full md:w-80 h-64 md:h-auto overflow-hidden flex-shrink-0">
-                          <img 
-                            src={event.image}
-                            alt={event.artist}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent md:bg-gradient-to-r" />
-                        </div>
-
-                        {/* INFO */}
-                        <div className="flex-1 p-8 flex flex-col justify-between">
-                          <div>
-                            <div className="flex items-center gap-3 mb-4">
-                              <span className="px-3 py-1 bg-purple-500 text-xs font-bold">
-                                CONCERT
-                              </span>
-                              <span className="text-gray-500 text-sm font-mono">
-                                #{event.id}
-                              </span>
-                            </div>
-
-                            <h3 className="text-5xl font-black mb-3 group-hover:text-yellow-400 transition-colors">
-                              {event.artist}
-                            </h3>
-
-                            <p className="text-2xl text-purple-400 font-bold mb-6">
-                              {event.title}
-                            </p>
-
-                            <div className="space-y-3 text-gray-400">
-                              <div className="flex items-center gap-3">
-                                <MapPin size={20} className="text-yellow-400 flex-shrink-0" />
-                                <div>
-                                  <p className="font-bold text-white">{event.venue}</p>
-                                  <p className="text-sm">{event.city}</p>
-                                </div>
-                              </div>
-
-                              <div className="flex items-center gap-3">
-                                <Clock size={20} className="text-purple-400 flex-shrink-0" />
-                                <p className="text-sm">
-                                  Portes : 19h00 • Concert : 20h30
-                                </p>
-                              </div>
-
-                              <div className="flex items-center gap-3">
-                                <Euro size={20} className="text-yellow-400 flex-shrink-0" />
-                                <p className="text-2xl font-black text-yellow-400">
-                                  {event.price}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="mt-8 flex gap-4">
-                            <a
-                              href={event.ticketUrl}
-                              className="flex-1 text-center px-8 py-4 bg-yellow-400 text-black font-bold text-lg hover:bg-white transition-colors"
-                            >
-                              ACHETER DES BILLETS
-                            </a>
-                            <button className="px-6 py-4 border-2 border-purple-500 text-purple-400 font-bold hover:bg-purple-500 hover:text-white transition-colors">
-                              PLUS D'INFOS
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* DECORATION CORNER */}
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500 opacity-10 transform rotate-45 translate-x-16 -translate-y-16" />
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        ))}
-
-        {/* ABONNEMENT NEWSLETTER */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20 border-2 border-yellow-400 p-12 text-center"
-        >
-          <h2 className="text-4xl font-black mb-4">
-            NE RATEZ AUCUN ÉVÉNEMENT
-          </h2>
-          <p className="text-xl text-gray-400 mb-8">
-            Inscrivez-vous à notre newsletter pour recevoir les dernières annonces
-          </p>
-          <div className="max-w-xl mx-auto flex gap-4">
-            <input 
-              type="email"
-              placeholder="votre@email.com"
-              className="flex-1 px-6 py-4 bg-white/10 border-2 border-white/30 focus:border-yellow-400 outline-none text-lg"
-            />
-            <button className="px-8 py-4 bg-yellow-400 text-black font-bold text-lg hover:bg-white transition-colors">
-              S'ABONNER
+        <div className="mb-12 flex flex-wrap gap-3 justify-center">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedFilter(category)}
+              className={`px-5 py-2 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 ${
+                selectedFilter === category
+                  ? 'bg-thermal-gradient text-white shadow-glow'
+                  : 'bg-infrared-deep/50 border border-infrared-purple/30 text-gray-400 hover:border-infrared-hot/50 hover:text-infrared-hot'
+              }`}
+            >
+              {category}
             </button>
+          ))}
+        </div>
+
+        <div className="space-y-6">
+          {filteredEvents.map((event, index) => (
+            <div
+              key={event.id}
+              className="group relative border border-infrared-purple/30 rounded-lg overflow-hidden hover:border-infrared-hot/50 transition-all duration-500"
+              style={{
+                opacity: 0,
+                animation: `fadeInUp 0.6s ease-out ${index * 0.1}s forwards`,
+              }}
+            >
+              <div className="absolute inset-0 bg-thermal-radial opacity-0 group-hover:opacity-5 blur-3xl transition-opacity duration-500" />
+
+              <div className="relative z-10 p-6 md:p-8">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                  <div className="md:col-span-3 space-y-2">
+                    <div className="font-mono text-3xl font-bold text-gradient">
+                      {event.date.split(' ')[0]}
+                    </div>
+                    <div className="font-mono text-sm text-gray-400 uppercase">
+                      {event.date.split(' ').slice(1).join(' ')}
+                    </div>
+                    <div className="font-mono text-xs text-infrared-hot">{event.time}</div>
+                    <div className="pt-2">
+                      <span
+                        className={`inline-block px-3 py-1 rounded text-xs font-mono ${
+                          event.status === 'On Sale'
+                            ? 'bg-infrared-hot/20 text-infrared-hot border border-infrared-hot/30'
+                            : 'bg-infrared-purple/20 text-infrared-purple border border-infrared-purple/30'
+                        }`}
+                      >
+                        {event.status === 'On Sale' ? 'EN VENTE' : 'BIENTÔT'}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="md:col-span-6 space-y-4">
+                    <div>
+                      <div className="font-mono text-xs tracking-widest text-infrared-orange mb-2 uppercase">
+                        {event.category}
+                      </div>
+                      <h2 className="text-3xl font-bold tracking-tighter mb-3 text-white group-hover:text-gradient transition-colors">
+                        {event.title}
+                      </h2>
+                      <div className="flex items-center gap-2 text-gray-400 text-sm mb-4">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        <span>
+                          {event.venue}, {event.city}
+                        </span>
+                      </div>
+                      <p className="text-gray-400 leading-relaxed">{event.description}</p>
+                    </div>
+
+                    <div>
+                      <div className="font-mono text-xs tracking-widest text-infrared-hot mb-2 uppercase">
+                        Line-up
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {event.lineup.map((artist, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 text-sm border border-infrared-purple/50 rounded bg-infrared-darker/50 text-gray-300"
+                          >
+                            {artist}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="md:col-span-3 flex flex-col justify-between items-start md:items-end">
+                    <div className="text-right">
+                      <div className="text-3xl font-bold text-gradient mb-1">{event.price}</div>
+                      <div className="text-xs text-gray-500 font-mono">Prévente</div>
+                    </div>
+
+                    <button
+                      className={`w-full md:w-auto px-6 py-3 rounded-lg font-mono text-sm tracking-widest transition-all duration-300 ${
+                        event.status === 'On Sale'
+                          ? 'bg-thermal-gradient text-white hover:shadow-glow-strong'
+                          : 'bg-infrared-purple/30 text-gray-500 border border-infrared-purple/30 cursor-not-allowed'
+                      }`}
+                      disabled={event.status !== 'On Sale'}
+                    >
+                      {event.status === 'On Sale' ? 'RÉSERVER' : 'BIENTÔT'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center space-y-6">
+          <div className="relative inline-block">
+            <h2 className="text-4xl font-bold tracking-tighter text-gradient">
+              NE MANQUEZ RIEN
+            </h2>
+            <div className="absolute -inset-4 bg-thermal-radial opacity-20 blur-3xl animate-pulse-glow" />
           </div>
-        </motion.section>
+          <p className="text-gray-400">
+            Inscrivez-vous à notre newsletter pour être informé des prochains événements
+          </p>
+          <button className="px-8 py-4 bg-thermal-gradient rounded-lg text-white font-mono text-sm tracking-widest hover:shadow-glow-strong transition-all duration-300">
+            S'INSCRIRE
+          </button>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
-}
+};
+
+export default Events;

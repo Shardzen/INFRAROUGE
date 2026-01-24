@@ -1,21 +1,24 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import CategoryPage from './pages/CategoryPage';
-import ArtistDetail from './pages/ArtistDetail';
-import About from './pages/About';
-import StyleShowcase from './pages/StyleShowcase';
 import Loader from './components/Loader';
+import Home from './pages/Home';
+import About from './pages/About';
+import Artists from './pages/Artists';
+import ArtistDetail from './pages/ArtistDetail';
+import Events from './pages/Events';
+import CategoryPage from './pages/CategoryPage';
+import StyleShowcase from './pages/StyleShowcase';
 
 function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulation du chargement initial
+    document.body.classList.add('preload');
     const timer = setTimeout(() => {
       setLoading(false);
+      document.body.classList.remove('preload');
     }, 2000);
 
     return () => clearTimeout(timer);
@@ -27,20 +30,25 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-dark-bg text-white flex flex-col">
+      <div className="relative min-h-screen bg-infrared-darker">
+        <div className="grain-overlay" />
+        <div className="scanline" />
+        <div className="grid-lines fixed inset-0 pointer-events-none opacity-20" />
+        
         <Navbar />
-        <main className="flex-grow">
+        
+        <main className="relative z-10">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/musique" element={<CategoryPage category="Musique" />} />
-            <Route path="/arts-plastiques" element={<CategoryPage category="Arts Plastiques" />} />
-            <Route path="/street-art" element={<CategoryPage category="Street Art" />} />
-            <Route path="/photographie" element={<CategoryPage category="Photographie" />} />
-            <Route path="/artiste/:slug" element={<ArtistDetail />} />
-            <Route path="/a-propos" element={<About />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/artists" element={<Artists />} />
+            <Route path="/artist/:id" element={<ArtistDetail />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/style" element={<StyleShowcase />} />
           </Routes>
         </main>
+        
         <Footer />
       </div>
     </Router>
