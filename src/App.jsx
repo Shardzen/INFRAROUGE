@@ -31,7 +31,7 @@ const PageTransitionWrapper = ({ children }) => {
 
   return (
     <div
-      className={transitionStage === "fadeIn" ? "page-transition-glitch" : ""}
+      className={transitionStage === "fadeIn" ? "page-transition-fast" : ""}
       onAnimationEnd={handleAnimationEnd}
     >
       {children}
@@ -59,7 +59,6 @@ function App() {
   return (
     <Router>
       <div className="relative min-h-screen bg-infrared-darker">
-        <div className="grain-overlay" />
         <div className="scanline" />
         <div className="grid-lines fixed inset-0 pointer-events-none opacity-20" />
         
