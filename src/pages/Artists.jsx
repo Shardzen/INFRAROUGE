@@ -1,11 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { artists } from '../data/artists';
+import { db } from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { artists as fallbackArtists } from '../data/artists';
 
 const Artists = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [artists, setArtists] = useState(fallbackArtists);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "artists"));
+        if (!querySnapshot.empty) {
+          const artistsData = { music: [], visualArts: [], photography: [], videography: [] };
+          querySnapshot.forEach((doc) => {
+            const data = { ...doc.data(), id: doc.id };
+            const cat = data.categoryKey || 'music';
+            if (artistsData[cat]) artistsData[cat].push(data);
+          });
+          setArtists(artistsData);
+        }
+      } catch (e) {
+        console.error("Error fetching artists:", e);
+      }
+      setLoading(false);
+    };
+    fetchArtists();
+  }, []);
 
   const categories = [
     { key: 'all', label: 'TOUS', icon: '◆' },

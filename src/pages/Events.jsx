@@ -1,12 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { events } from '../data/events';
+import { db } from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { events as fallbackEvents } from '../data/events';
 
 const Events = () => {
   const [filter, setFilter] = useState('all');
+  const [events, setEvents] = useState(fallbackEvents);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = 'Événements | INFRAROUGE';
+    
+    const fetchEvents = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "events"));
+        if (!querySnapshot.empty) {
+          const eventsList = [];
+          querySnapshot.forEach((doc) => {
+            eventsList.push({ ...doc.data(), id: doc.id });
+          });
+          setEvents(eventsList);
+        }
+      } catch (e) {
+        console.error("Error fetching events:", e);
+      }
+      setLoading(false);
+    };
+    fetchEvents();
+
     return () => {
       document.title = 'INFRAROUGE';
     };

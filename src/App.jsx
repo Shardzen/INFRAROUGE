@@ -12,30 +12,12 @@ import CategoryPage from './pages/CategoryPage';
 import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
 
-// Wrapper component to trigger glitch animation on route change
+// Wrapper component to trigger fast animation on route change
 const PageTransitionWrapper = ({ children }) => {
   const location = useLocation();
-  const [displayLocation, setDisplayLocation] = useState(location);
-  const [transitionStage, setTransitionStage] = useState("fadeIn");
-
-  useEffect(() => {
-    if (location !== displayLocation) {
-      setTransitionStage("fadeOut");
-    }
-  }, [location, displayLocation]);
-
-  const handleAnimationEnd = () => {
-    if (transitionStage === "fadeOut") {
-      setTransitionStage("fadeIn");
-      setDisplayLocation(location);
-    }
-  };
 
   return (
-    <div
-      className={transitionStage === "fadeIn" ? "page-transition-fast" : ""}
-      onAnimationEnd={handleAnimationEnd}
-    >
+    <div key={location.pathname} className="page-transition-fast">
       {children}
     </div>
   );
