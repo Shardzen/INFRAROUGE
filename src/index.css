@@ -59,20 +59,48 @@ body {
   color: var(--color-primary);
 }
 
-/* Cartes Artistes Éditoriales */
+/* Parallax Container & Image */
+.parallax-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.parallax-img {
+  height: 120%; /* Plus grande pour avoir de la marge de mouvement */
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: -10%; /* Centrage initial */
+  left: 0;
+  will-change: transform;
+  transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+}
+
 .editorial-card {
   position: relative;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
 
 .editorial-card img {
-  filter: grayscale(1) contrast(1.1);
+  filter: grayscale(1) contrast(1.1) brightness(0.9);
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  image-rendering: -webkit-optimize-contrast;
+  object-position: center 20%;
 }
 
 .editorial-card:hover img {
-  filter: grayscale(0) contrast(1);
-  transform: scale(1.05);
+  filter: grayscale(0) contrast(1.05) brightness(1.1);
+  transform: scale(1.08);
+}
+
+/* Vignette Effect for more depth */
+.editorial-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 15;
+  pointer-events: none;
 }
 
 /* Masque thermique au survol */

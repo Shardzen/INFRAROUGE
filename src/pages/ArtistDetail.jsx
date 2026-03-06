@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { artists } from '../data/artists';
 
 const ArtistDetail = () => {
   const { category, id } = useParams();
   const navigate = useNavigate();
+  const heroRef = useRef(null);
+  const [offset, setOffset] = useState(0);
 
   const artist = artists[category]?.find((a) => a.id === id);
 
@@ -17,6 +19,23 @@ const ArtistDetail = () => {
       document.title = 'INFRAROUGE';
     };
   }, [artist]);
+
+  useEffect(() => {
+    let requestRef;
+    const updateParallax = () => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        // Ne calcule que si l'élément est visible à l'écran
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          const relativePos = rect.top / window.innerHeight;
+          setOffset(relativePos * 100); // Décalage de 100px pour un effet plus marqué sur les grandes bannières
+        }
+      }
+      requestRef = requestAnimationFrame(updateParallax);
+    };
+    requestRef = requestAnimationFrame(updateParallax);
+    return () => cancelAnimationFrame(requestRef);
+  }, []);
 
   if (!artist) {
     return (
@@ -48,16 +67,17 @@ const ArtistDetail = () => {
       {/* Hero Image Section - Full Width */}
       {artist.heroImage && (
         <div className="container mx-auto max-w-7xl mb-8 sm:mb-12">
-          <div className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden border border-infrared-purple/30 group">
+          <div ref={heroRef} className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden border border-infrared-purple/30 group parallax-container">
             <img 
               src={artist.heroImage} 
               alt={`${artist.name} hero`}
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              className="parallax-img transition-transform duration-700 group-hover:scale-105"
+              style={{ transform: `translateY(${offset}px)` }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-infrared-darker/50 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient" />
-            <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8">
+            <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-infrared-darker/50 to-transparent z-10" />
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient z-20" />
+            <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 z-30">
               <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-2xl font-display break-words animate-float">
                 {artist.name}
               </h1>

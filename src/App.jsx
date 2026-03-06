@@ -9,6 +9,8 @@ import Artists from './pages/Artists';
 import ArtistDetail from './pages/ArtistDetail';
 import Events from './pages/Events';
 import CategoryPage from './pages/CategoryPage';
+import Login from './pages/admin/Login';
+import Dashboard from './pages/admin/Dashboard';
 
 // Wrapper component to trigger glitch animation on route change
 const PageTransitionWrapper = ({ children }) => {
@@ -77,6 +79,8 @@ function App() {
               <Route path="/artist/:category/:id" element={<ArtistDetail />} />
               <Route path="/events" element={<Events />} />
               <Route path="/category/:category" element={<CategoryPage />} />
+              <Route path="/admin" element={<Login />} />
+              <Route path="/admin/dashboard" element={<Dashboard />} />
             </Routes>
           </PageTransitionWrapper>
         </main>

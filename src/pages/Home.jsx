@@ -1,30 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import { artists } from '../data/artists';
 import { events } from '../data/events';
 
 const Home = () => {
+  const [scrollY, setScrollY] = useState(0);
   const featuredMusic = artists.music.slice(0, 3);
   const featuredVisual = artists.visualArts.slice(0, 3);
   const upcomingEvents = events.slice(0, 2);
 
-  const ArtistCard = ({ artist, categoryKey, size = 'normal' }) => (
-    <Link
-      to={`/artist/${categoryKey}/${artist.id}`}
-      className={`editorial-card group relative overflow-hidden ${size === 'large' ? 'aspect-[4/5] sm:col-span-2' : 'aspect-[4/5]'}`}
-    >
-      <div className="thermal-reveal absolute inset-0 z-10" />
-      
-      {artist.coverImage ? (
-        <img 
-          src={artist.coverImage} 
-          alt={artist.name}
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <div className="w-full h-full bg-[#111]" />
-      )}
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const ArtistCard = ({ artist, categoryKey, size = 'normal', index }) => {
+    const cardRef = useRef(null);
+    const [offset, setOffset] = useState(0);
+
+    useEffect(() => {
+      let requestRef;
+      const updateParallax = () => {
+        if (cardRef.current) {
+          const rect = cardRef.current.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          // Calcule la position relative de la carte par rapport au centre de l'écran
+          const relativePos = (rect.top + rect.height / 2) / windowHeight - 0.5;
+          setOffset(relativePos * 40); // 40px de décalage max
+        }
+        requestRef = requestAnimationFrame(updateParallax);
+      };
+      requestRef = requestAnimationFrame(updateParallax);
+      return () => cancelAnimationFrame(requestRef);
+    }, []);
+
+    return (
+      <Link
+        ref={cardRef}
+        to={`/artist/${categoryKey}/${artist.id}`}
+        className={`editorial-card parallax-container group relative overflow-hidden ${size === 'large' ? 'aspect-[4/5] sm:col-span-2' : 'aspect-[4/5]'}`}
+      >
+        <div className="thermal-reveal absolute inset-0 z-10" />
+
+        {artist.coverImage ? (
+          <img 
+            src={artist.coverImage} 
+            alt={artist.name}
+            className="parallax-img transition-transform duration-700 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0"
+            style={{ transform: `translateY(${offset}px)` }}
+          />
+        ) : (
+          <div className="w-full h-full bg-[#111]" />
+        )}
+
 
       <div className="absolute inset-0 z-20 p-6 sm:p-10 flex flex-col justify-between">
         <div className="font-mono text-[10px] tracking-[0.4em] text-white/50 uppercase">
