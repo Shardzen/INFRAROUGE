@@ -20,7 +20,7 @@ const About = () => {
           <span className="text-infrared-hot font-mono text-[10px] tracking-[0.8em] uppercase reveal-text">
             System_Origins_v1.0
           </span>
-          <h1 className="text-7xl sm:text-[15vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8] reveal-text">
+          <h1 className="text-5xl sm:text-7xl md:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.9] reveal-text">
             L'Essence<br /><span className="text-outline">Infra</span>rouge
           </h1>
         </div>
