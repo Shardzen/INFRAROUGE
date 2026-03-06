@@ -2,7 +2,15 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Fix for common build resolution errors
+[context.production.environment]
+  NODE_OPTIONS = "--no-warnings"
