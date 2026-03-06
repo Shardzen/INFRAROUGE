@@ -42,13 +42,16 @@ function App() {
 
   return (
     <Router>
-      <div className="relative min-h-screen bg-[#050505]">
-        {/* Animated Light Leaks */}
-        <div className="light-leak leak-1" />
-        <div className="light-leak leak-2" />
+      <div className="relative min-h-screen bg-[#050505] selection:bg-infrared-hot/30">
+        {/* Enhanced Light Leaks Background */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="light-leak leak-1 opacity-30" />
+          <div className="light-leak leak-2 opacity-20" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] bg-infrared-magenta/5 blur-[150px] rounded-full" />
+        </div>
         
-        <div className="scanline" />
-        <div className="grid-lines fixed inset-0 pointer-events-none opacity-10" />
+        <div className="scanline z-50" />
+        <div className="grid-lines fixed inset-0 pointer-events-none opacity-5 z-0" />
         
         <Navbar />
         

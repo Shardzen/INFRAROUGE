@@ -21,7 +21,7 @@ const About = () => {
             System_Origins_v1.0
           </span>
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-display font-black tracking-tighter text-white uppercase leading-[0.9] reveal-text">
-            L'Essence<br /><span className="text-outline">Infra</span>rouge
+            <span className="text-gradient">L'Essence</span><br /><span className="text-outline">Infra</span>rouge
           </h1>
         </div>
 

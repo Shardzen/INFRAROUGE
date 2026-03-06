@@ -84,7 +84,7 @@ const ArtistDetail = () => {
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
           <span className="text-infrared-hot font-mono text-[10px] tracking-[0.8em] uppercase mb-6 reveal-text">Profil_Artiste_{artist.id.slice(0, 4)}</span>
           <h1 className="text-7xl sm:text-[15vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8] reveal-text">
-            {artist.name}
+            <span className="text-gradient">{artist.name}</span>
           </h1>
           <div className="mt-10 flex gap-4 reveal-text animate-delay-500">
             {artist.genres?.map((g, i) => (

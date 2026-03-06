@@ -110,7 +110,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative bg-[#050505]">
+    <div className="relative">
       <HeroSection />
 
       {/* Marquee Section */}
@@ -281,7 +281,7 @@ const Home = () => {
             <div className="space-y-4">
               <div className="text-infrared-hot font-mono text-[10px] tracking-[0.5em] uppercase">Recrutement_Ouvert</div>
               <h2 className="text-5xl sm:text-8xl font-display font-black tracking-tighter text-white uppercase leading-none">
-                Rejoins le<br /><span className="text-gradient">Collectif</span>
+                Rejoins le<br />Collectif
               </h2>
             </div>
             <p className="text-gray-500 text-lg sm:text-xl font-light max-w-2xl mx-auto leading-relaxed">
