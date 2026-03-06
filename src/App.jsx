@@ -58,9 +58,13 @@ function App() {
 
   return (
     <Router>
-      <div className="relative min-h-screen bg-infrared-darker">
+      <div className="relative min-h-screen bg-[#050505]">
+        {/* Animated Light Leaks */}
+        <div className="light-leak leak-1" />
+        <div className="light-leak leak-2" />
+        
         <div className="scanline" />
-        <div className="grid-lines fixed inset-0 pointer-events-none opacity-20" />
+        <div className="grid-lines fixed inset-0 pointer-events-none opacity-10" />
         
         <Navbar />
         

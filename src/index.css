@@ -1,113 +1,130 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&family=Archivo+Black&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Archivo+Black&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-infrared-deep: #1a0a1e;
-  --color-infrared-purple: #4a1a5c;
-  --color-infrared-magenta: #8b2d6e;
-  --color-infrared-hot: #d84a7f;
-  --color-infrared-orange: #ff6b4a;
-  --color-infrared-yellow: #ffb347;
-  --color-glow-primary: rgba(255, 107, 74, 0.4);
-  --color-glow-secondary: rgba(139, 45, 110, 0.3);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --color-bg: #050505;
+  --color-primary: #ff2d55;
+  --color-secondary: #ff6b4a;
+  --color-accent: #8b2d6e;
+  --color-thermal-hot: #ffff00;
 }
 
 body {
   font-family: 'Space Grotesk', sans-serif;
-  background: #0a0a0f;
-  color: #e8e8e8;
+  background-color: var(--color-bg);
+  color: #ffffff;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-.font-mono {
-  font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+/* Halos de lumière en arrière-plan (Light Leaks) */
+.light-leak {
+  position: fixed;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.leak-1 { top: -10%; right: -10%; background: var(--color-primary); animation: drift 20s infinite alternate; }
+.leak-2 { bottom: -10%; left: -10%; background: var(--color-accent); animation: drift 25s infinite alternate-reverse; }
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(10%, 10%) scale(1.2); }
 }
 
 .font-display {
   font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.9;
 }
 
-.font-heading {
-  font-family: 'Archivo Black', sans-serif;
-  letter-spacing: -0.02em;
+/* Titre avec effet de contour (Outline) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.5s ease;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+.text-outline:hover {
+  -webkit-text-stroke: 1px var(--color-primary);
+  color: var(--color-primary);
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(26, 10, 30, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-infrared-magenta), var(--color-infrared-hot));
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--color-infrared-hot), var(--color-infrared-orange));
-}
-
-.glow-text {
-  text-shadow: 0 0 20px var(--color-glow-primary),
-               0 0 40px var(--color-glow-secondary);
-}
-
-.glow-border {
-  box-shadow: 0 0 20px var(--color-glow-primary),
-              inset 0 0 20px rgba(255, 107, 74, 0.1);
-}
-
-/* Grain effect removed as requested */
-.grain-overlay {
-  display: none;
-}
-
-/* Fast Premium Transition (replacing slow glitch) */
-.page-transition-fast {
-  animation: page-flash 0.3s cubic-bezier(0.19, 1, 0.22, 1) both;
-}
-
-@keyframes page-flash {
-  0% {
-    opacity: 0;
-    filter: brightness(2) blur(10px);
-    transform: scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    filter: brightness(1) blur(0);
-    transform: scale(1);
-  }
-}
-
-/* Refined Industrial Panel */
-.industrial-panel {
-  background: linear-gradient(135deg, rgba(26, 10, 30, 0.4) 0%, rgba(10, 10, 15, 0.6) 100%);
-  border: 1px solid rgba(139, 45, 110, 0.2);
-  backdrop-filter: blur(10px);
+/* Cartes Artistes Éditoriales */
+.editorial-card {
   position: relative;
-  transition: all 0.4s ease;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.industrial-panel:hover {
-  border-color: var(--color-infrared-hot);
-  box-shadow: 0 0 40px rgba(216, 74, 127, 0.1);
+.editorial-card img {
+  filter: grayscale(1) contrast(1.1);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.editorial-card:hover img {
+  filter: grayscale(0) contrast(1);
+  transform: scale(1.05);
+}
+
+/* Masque thermique au survol */
+.thermal-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-thermal-hot));
+  mix-blend-mode: color;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.editorial-card:hover .thermal-reveal::after {
+  opacity: 0.4;
+}
+
+/* Animations de texte */
+.reveal-text {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@keyframes reveal {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+/* Bouton Minimaliste Premium */
+.btn-premium {
+  padding: 1rem 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.btn-premium:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Scrollbar élégante */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: #333; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
 
 /* Industrial Component Styles */
 .industrial-panel {
