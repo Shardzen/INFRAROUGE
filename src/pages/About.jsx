@@ -16,11 +16,11 @@ const About = () => {
       <div className="container mx-auto px-4 sm:px-10 relative z-10">
         
         {/* Header Section */}
-        <div className="mb-32 space-y-8">
+        <div className="mb-24 sm:mb-32 space-y-6">
           <span className="text-infrared-hot font-mono text-[10px] tracking-[0.8em] uppercase reveal-text">
             System_Origins_v1.0
           </span>
-          <h1 className="text-5xl sm:text-7xl md:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.9] reveal-text">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-display font-black tracking-tighter text-white uppercase leading-[0.9] reveal-text">
             L'Essence<br /><span className="text-outline">Infra</span>rouge
           </h1>
         </div>
