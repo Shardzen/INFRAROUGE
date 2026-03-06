@@ -8,13 +8,14 @@ export default defineConfig({
     open: true,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'],
+    include: ['react', 'react-dom', 'firebase/app', 'firebase/firestore', 'firebase/auth'],
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
+          firebase: ['firebase/app', 'firebase/firestore', 'firebase/auth'],
         },
       },
     },
