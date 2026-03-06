@@ -1,223 +1,113 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const About = () => {
-  const [visibleSections, setVisibleSections] = useState([]);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => [...new Set([...prev, entry.target.id])]);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    document.querySelectorAll('.observe-section').forEach((section) => {
-      observer.observe(section);
-    });
-
-    return () => observer.disconnect();
+    window.scrollTo(0, 0);
+    document.title = 'Manifeste | INFRAROUGE';
   }, []);
 
-  const values = [
-    {
-      title: 'UNDERGROUND',
-      description: 'Cultiver l\'authenticité et l\'indépendance artistique loin des sentiers battus.',
-      icon: '◆',
-    },
-    {
-      title: 'INNOVATION',
-      description: 'Repousser les limites sonores et visuelles pour créer des expériences uniques.',
-      icon: '◇',
-    },
-    {
-      title: 'COMMUNAUTÉ',
-      description: 'Rassembler artistes et passionnés autour d\'une culture partagée.',
-      icon: '◈',
-    },
-  ];
-
   return (
-    <div className="pt-32 pb-20 px-6">
-      <div className="container mx-auto max-w-6xl">
-        <section
-          id="intro"
-          className="observe-section mb-32 text-center space-y-8"
-          style={{
-            opacity: visibleSections.includes('intro') ? 1 : 0,
-            transform: visibleSections.includes('intro') ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 1s ease-out',
-          }}
-        >
-          <div className="relative inline-block">
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-gradient">
-              À PROPOS
-            </h1>
-            <div className="absolute -inset-8 bg-thermal-radial opacity-20 blur-3xl animate-pulse-glow" />
-          </div>
+    <div className="bg-[#050505] min-h-screen pt-32 pb-40 overflow-hidden relative">
+      {/* Background Elements */}
+      <div className="light-leak leak-1 opacity-20" />
+      <div className="light-leak leak-2 opacity-10" />
+      
+      <div className="container mx-auto px-4 sm:px-10 relative z-10">
+        
+        {/* Header Section */}
+        <div className="mb-32 space-y-8">
+          <span className="text-infrared-hot font-mono text-[10px] tracking-[0.8em] uppercase reveal-text">
+            System_Origins_v1.0
+          </span>
+          <h1 className="text-7xl sm:text-[15vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8] reveal-text">
+            L'Essence<br /><span className="text-outline">Infra</span>rouge
+          </h1>
+        </div>
 
-          <div className="h-1 w-32 bg-thermal-gradient mx-auto rounded-full" />
-
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            INFRAROUGE est né d'une vision : créer un espace où la musique underground contemporaine 
-            peut s'exprimer librement, loin des conventions et des formats standardisés.
-          </p>
-        </section>
-
-        <section
-          id="mission"
-          className="observe-section mb-32 relative"
-          style={{
-            opacity: visibleSections.includes('mission') ? 1 : 0,
-            transform: visibleSections.includes('mission') ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 1s ease-out 0.2s',
-          }}
-        >
-          <div className="absolute top-0 left-0 w-1 h-full bg-thermal-gradient rounded-full" />
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
           
-          <div className="pl-12 space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gradient">
-              NOTRE MISSION
-            </h2>
-            
-            <div className="space-y-4 text-gray-300 leading-relaxed text-lg">
-              <p>
-                Nous sommes une plateforme dédiée à la promotion et à la diffusion de la musique électronique 
-                underground et expérimentale. Notre objectif est de connecter les artistes émergents avec un 
-                public passionné, de créer des événements immersifs et de cultiver une communauté authentique.
+          {/* Main Manifesto Text */}
+          <div className="lg:col-span-7 space-y-16">
+            <div className="space-y-8">
+              <h2 className="text-gray-800 font-display font-black text-4xl sm:text-6xl uppercase">La Vision</h2>
+              <p className="text-white text-2xl sm:text-4xl font-light leading-tight tracking-tight">
+                L'infrarouge est une fréquence invisible à l'œil nu, mais dont on ressent la chaleur. 
+                <span className="text-infrared-hot"> C'est exactement là que se situe l'underground.</span>
               </p>
-              
+            </div>
+
+            <div className="space-y-10 text-gray-400 text-lg sm:text-xl font-light leading-relaxed max-w-2xl">
               <p>
-                Dans un monde saturé de contenus formatés, INFRAROUGE se positionne comme un refuge pour 
-                l'innovation sonore, l'expérimentation audacieuse et l'expression artistique sans compromis.
+                Infrarouge Collective est né d'un constat simple : la scène contemporaine regorge de talents dont la fréquence est trop brute, trop pure ou trop expérimentale pour les circuits traditionnels.
+              </p>
+              <p>
+                Basé à Rennes, France, notre mouvement s'est donné pour mission de capturer ces ondes et de les projeter dans une esthétique premium. Nous ne sommes pas une simple galerie ; nous sommes un amplificateur pour ceux qui cultivent l'élégance du chaos.
+              </p>
+              <div className="h-px w-20 bg-infrared-hot opacity-50" />
+              <p className="italic text-white/60">
+                "Nous ne cherchons pas la lumière des projecteurs, mais la chaleur de la création pure."
               </p>
             </div>
           </div>
-        </section>
 
-        <section
-          id="values"
-          className="observe-section mb-32"
-          style={{
-            opacity: visibleSections.includes('values') ? 1 : 0,
-            transform: visibleSections.includes('values') ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 1s ease-out 0.4s',
-          }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-center mb-16 text-gradient">
-            NOS VALEURS
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <div
-                key={value.title}
-                className="group relative p-8 border border-infrared-purple/30 rounded-lg hover:border-infrared-hot/50 transition-all duration-500"
-                style={{
-                  opacity: visibleSections.includes('values') ? 1 : 0,
-                  transform: visibleSections.includes('values') ? 'translateY(0)' : 'translateY(20px)',
-                  transition: `all 0.8s ease-out ${0.6 + index * 0.2}s`,
-                }}
-              >
-                <div className="absolute inset-0 bg-thermal-radial opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500" />
-                
-                <div className="relative z-10 space-y-4">
-                  <div className="text-5xl text-infrared-hot group-hover:text-infrared-orange transition-colors duration-300">
-                    {value.icon}
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold tracking-tight text-gradient font-mono">
-                    {value.title}
-                  </h3>
-                  
-                  <p className="text-gray-400 leading-relaxed">
-                    {value.description}
-                  </p>
+          {/* Pillars Side Column */}
+          <div className="lg:col-span-5 space-y-12 lg:pt-20">
+            <div className="p-8 sm:p-12 rounded-3xl bg-white/[0.02] border border-white/5 space-y-12 relative overflow-hidden group">
+              <div className="absolute top-[-10%] right-[-10%] text-[15vw] font-display font-black text-white/[0.02] pointer-events-none uppercase">
+                Pillars
+              </div>
+              
+              <div className="space-y-8 relative z-10">
+                <div className="space-y-2">
+                  <div className="text-infrared-hot font-mono text-[8px] uppercase tracking-widest">01 / Curations</div>
+                  <h3 className="text-white font-display text-2xl uppercase">Radicalité Visuelle</h3>
+                  <p className="text-gray-500 text-sm font-light">Une sélection sans compromis d'artistes plasticiens et photographes redéfinissant l'image contemporaine.</p>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              </div>
-            ))}
-          </div>
-        </section>
+                <div className="space-y-2">
+                  <div className="text-infrared-orange font-mono text-[8px] uppercase tracking-widest">02 / Sonics</div>
+                  <h3 className="text-white font-display text-2xl uppercase">Exploration Sonore</h3>
+                  <p className="text-gray-500 text-sm font-light">De l'ambient expérimental à la techno industrielle, nous documentons les textures qui font vibrer la scène nocturne.</p>
+                </div>
 
-        <section
-          id="vision"
-          className="observe-section mb-32 relative"
-          style={{
-            opacity: visibleSections.includes('vision') ? 1 : 0,
-            transform: visibleSections.includes('vision') ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 1s ease-out 0.6s',
-          }}
-        >
-          <div className="absolute inset-0 bg-infrared-purple/5 rounded-2xl" />
-          
-          <div className="relative z-10 p-12 space-y-8">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gradient">
-              NOTRE VISION
-            </h2>
-            
-            <div className="space-y-6 text-gray-300 leading-relaxed text-lg">
-              <p>
-                INFRAROUGE aspire à devenir un carrefour incontournable pour la scène underground européenne. 
-                Nous imaginons un écosystème où les artistes peuvent expérimenter sans contraintes, où le public 
-                découvre des univers sonores inédits, et où chaque événement devient une expérience mémorable.
-              </p>
-              
-              <p>
-                Au-delà de la musique, nous cherchons à créer une identité visuelle et culturelle forte, 
-                reconnaissable, qui incarne l'esprit de notre époque : sombre, élégante, expérimentale et 
-                résolument contemporaine.
-              </p>
+                <div className="space-y-2">
+                  <div className="text-infrared-magenta font-mono text-[8px] uppercase tracking-widest">03 / Community</div>
+                  <h3 className="text-white font-display text-2xl uppercase">Réseau Alternatif</h3>
+                  <p className="text-gray-500 text-sm font-light">Un point de ralliement pour les visionnaires, créant des ponts entre digital et performance live.</p>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <section
-          id="contact"
-          className="observe-section text-center space-y-8"
-          style={{
-            opacity: visibleSections.includes('contact') ? 1 : 0,
-            transform: visibleSections.includes('contact') ? 'translateY(0)' : 'translateY(30px)',
-            transition: 'all 1s ease-out 0.8s',
-          }}
-        >
-          <div className="relative inline-block">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tighter text-gradient">
-              TRAVAILLONS ENSEMBLE
-            </h2>
-            <div className="absolute -inset-4 bg-thermal-radial opacity-20 blur-3xl animate-pulse-glow" />
-          </div>
-
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Artiste, organisateur, passionné ? Contactez-nous pour collaborer, proposer un événement 
-            ou simplement échanger autour de la scène underground.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <a
-              href="mailto:contact@infrarouge.fr"
-              className="group relative px-8 py-4 bg-thermal-gradient rounded-lg overflow-hidden transition-all duration-300 hover:shadow-glow-strong"
-            >
-              <span className="relative z-10 font-mono text-sm tracking-widest text-white">
-                NOUS CONTACTER
+        {/* Marquee effect */}
+        <div className="mt-40 border-y border-white/5 py-10 opacity-20">
+          <div className="flex whitespace-nowrap animate-marquee font-display font-black text-4xl sm:text-6xl text-white uppercase">
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="mx-10 italic">
+                Rennes Underground <span className="text-outline">Experimental Arts</span> Digital Chaos
               </span>
-            </a>
-
-            <a
-              href="#"
-              className="group relative px-8 py-4 border border-infrared-purple rounded-lg overflow-hidden hover:border-infrared-orange transition-all duration-300"
-            >
-              <span className="relative z-10 font-mono text-sm tracking-widest text-gray-300 group-hover:text-infrared-orange transition-colors">
-                DEVENIR PARTENAIRE
-              </span>
-            </a>
+            ))}
           </div>
-        </section>
+        </div>
+
+        {/* Closing CTA */}
+        <div className="mt-40 text-center space-y-12">
+          <h2 className="text-4xl sm:text-7xl font-display font-black text-white uppercase leading-none">
+            Vous faites partie<br />du <span className="text-infrared-hot">spectre</span> ?
+          </h2>
+          <div className="flex flex-col sm:flex-row justify-center gap-8">
+            <Link to="/artists" className="btn-premium px-12">Voir les membres</Link>
+            <button className="btn-premium px-12 bg-white text-black border-white hover:bg-transparent hover:text-white transition-all">Rejoindre</button>
+          </div>
+        </div>
+
       </div>
+
+      {/* Decorative vertical line */}
+      <div className="absolute left-1/2 bottom-0 w-[1px] h-40 bg-gradient-to-t from-white/20 to-transparent transform -translate-x-1/2 opacity-30"></div>
     </div>
   );
 };
