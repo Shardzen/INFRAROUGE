@@ -25,7 +25,7 @@ const Artists = () => {
           setArtists(artistsData);
         }
       } catch (e) {
-        console.error("Error fetching artists:", e);
+        console.error("Firebase error:", e);
       }
       setLoading(false);
     };
@@ -33,11 +33,11 @@ const Artists = () => {
   }, []);
 
   const categories = [
-    { key: 'all', label: 'TOUS', icon: '◆' },
-    { key: 'music', label: 'MUSIQUE', icon: '♪' },
-    { key: 'visualArts', label: 'ARTS PLASTIQUES', icon: '◈' },
-    { key: 'photography', label: 'PHOTOGRAPHIE', icon: '◇' },
-    { key: 'videography', label: 'VIDÉOGRAPHIE', icon: '▸' },
+    { key: 'all', label: 'Tout', icon: '◆' },
+    { key: 'music', label: 'Musique', icon: '♪' },
+    { key: 'visualArts', label: 'Visuels', icon: '◈' },
+    { key: 'photography', label: 'Photo', icon: '◇' },
+    { key: 'videography', label: 'Vidéo', icon: '▸' },
   ];
 
   const getAllArtists = () => {
@@ -50,286 +50,114 @@ const Artists = () => {
     return all;
   };
 
-  const handleRandomArtist = () => {
-    const all = getAllArtists();
-    const randomIndex = Math.floor(Math.random() * all.length);
-    const randomArtist = all[randomIndex];
-    navigate(`/artist/${randomArtist.categoryKey}/${randomArtist.id}`);
-  };
-
-  const getFilteredArtists = () => {
-    let filtered = [];
-    
-    if (selectedCategory === 'all') {
-      filtered = getAllArtists();
-    } else {
-      filtered = (artists[selectedCategory] || []).map((artist) => ({
-        ...artist,
-        categoryKey: selectedCategory,
-      }));
-    }
-
-    if (searchTerm) {
-      filtered = filtered.filter((artist) =>
-        artist.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        artist.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (artist.genres && artist.genres.some((g) => g.toLowerCase().includes(searchTerm.toLowerCase())))
-      );
-    }
-
-    return filtered;
-  };
-
-  const filteredArtists = getFilteredArtists();
-
-  const getCategoryClass = (categoryKey) => {
-    const classes = {
-      music: 'category-music',
-      visualArts: 'category-visual',
-      photography: 'category-photo',
-      videography: 'category-video',
-    };
-    return classes[categoryKey] || '';
-  };
+  const filteredArtists = (selectedCategory === 'all' 
+    ? getAllArtists() 
+    : (artists[selectedCategory] || []).map(a => ({...a, categoryKey: selectedCategory}))
+  ).filter(a => 
+    a.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    a.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="pt-24 sm:pt-32 pb-20 px-4 sm:px-6">
-      <div className="container mx-auto">
-        <div className="mb-12 sm:mb-16 text-center space-y-4 sm:space-y-6">
-          <div className="relative inline-block">
-            <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter font-display text-gradient px-4">
-              ARTISTES
-            </h1>
-            <div className="absolute -inset-8 bg-thermal-radial opacity-20 blur-3xl animate-pulse-glow" />
-          </div>
-
-          <div className="h-1 w-24 sm:w-32 bg-thermal-gradient mx-auto rounded-full" />
-
-          <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto font-mono px-4">
-            Découvrez les créateurs qui façonnent l'underground contemporain
-          </p>
-        </div>
-
-        <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-          <div className="relative max-w-2xl mx-auto">
-            <input
-              type="text"
-              placeholder="Rechercher un artiste, style..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-infrared-deep/50 border border-infrared-purple/30 rounded-lg text-white placeholder-gray-500 focus:border-infrared-hot focus:outline-none transition-colors font-mono text-xs sm:text-sm"
-            />
-            <div className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2">
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5 text-infrared-hot"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+    <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
+      <div className="container mx-auto px-4 sm:px-10">
+        {/* Header Style Magazine */}
+        <div className="mb-20 sm:mb-32 space-y-10">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+            <div className="space-y-4">
+              <span className="text-infrared-hot font-mono text-xs tracking-[0.5em] uppercase">Archive_Global</span>
+              <h1 className="text-7xl sm:text-[12vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8]">
+                Index<br /><span className="text-outline">Artistes</span>
+              </h1>
+            </div>
+            <div className="max-w-xs space-y-6">
+              <p className="text-gray-500 font-mono text-[10px] tracking-widest uppercase leading-relaxed">
+                Base de données exhaustive des créateurs du collectif Infrarouge. Scanné et mis à jour en temps réel.
+              </p>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="RECHERCHER_"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full bg-white/[0.03] border-b border-white/10 py-4 font-mono text-[10px] tracking-widest text-white focus:outline-none focus:border-infrared-hot transition-all uppercase placeholder:text-gray-800"
                 />
-              </svg>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
-            <button
-              onClick={handleRandomArtist}
-              className="group px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 relative overflow-hidden border border-infrared-hot/50 text-infrared-hot hover:bg-infrared-hot hover:text-white animate-pulse-glow"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                <span>✨</span>
-                DÉCOUVERTE ALÉATOIRE
-              </span>
-            </button>
-            <div className="w-full sm:w-auto h-px sm:h-auto sm:w-px bg-infrared-purple/30 my-2 sm:my-0 sm:mx-2" />
+          {/* Filtres Centrés */}
+          <div className="flex flex-wrap gap-4 border-y border-white/5 py-8">
             {categories.map((cat) => (
               <button
                 key={cat.key}
                 onClick={() => setSelectedCategory(cat.key)}
-                className={`group px-3 sm:px-6 py-2 sm:py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 relative overflow-hidden ${
+                className={`px-8 py-2 rounded-full font-mono text-[10px] tracking-widest uppercase transition-all duration-500 ${
                   selectedCategory === cat.key
-                    ? 'bg-thermal-gradient text-white shadow-glow'
-                    : 'bg-infrared-deep/50 border border-infrared-purple/30 text-gray-400 hover:border-infrared-hot/50 hover:text-infrared-hot'
+                    ? 'bg-white text-black shadow-glow'
+                    : 'text-gray-500 hover:text-white border border-white/5'
                 }`}
               >
-                <span className="relative z-10 flex items-center gap-1 sm:gap-2">
-                  <span className="text-base sm:text-lg">{cat.icon}</span>
-                  <span className="hidden xs:inline">{cat.label}</span>
-                </span>
+                {cat.label}
               </button>
             ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm font-mono text-gray-500 max-w-2xl mx-auto px-2">
-            <span>
-              {filteredArtists.length} artiste{filteredArtists.length > 1 ? 's' : ''} trouvé
-              {filteredArtists.length > 1 ? 's' : ''}
-            </span>
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm('')}
-                className="text-infrared-hot hover:text-infrared-orange transition-colors"
-              >
-                Effacer la recherche
-              </button>
-            )}
           </div>
         </div>
 
-        {filteredArtists.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {filteredArtists.map((artist, index) => (
-              <Link
-                key={`${artist.categoryKey}-${artist.id}`}
-                to={`/artist/${artist.categoryKey}/${artist.id}`}
-                className="artist-card group relative aspect-square overflow-hidden rounded-lg border border-infrared-purple/30 hover:border-infrared-hot/50 transition-all duration-500"
-                style={{
-                  opacity: 0,
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.05}s forwards`,
-                }}
-              >
-                {/* Image de fond si disponible */}
-                {artist.coverImage ? (
-                  <div className="absolute inset-0">
-                    <img 
-                      src={artist.coverImage} 
-                      alt={artist.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-infrared-darker/80 to-infrared-darker/40" />
-                  </div>
-                ) : (
-                  <div className="absolute inset-0 bg-infrared-gradient">
-                    <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-infrared-darker/80 to-transparent" />
-                  </div>
-                )}
-
-                <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-between">
-                  <div className="flex justify-between items-start">
-                    <span className={`px-2 sm:px-3 py-1 text-xs font-mono border border-infrared-purple/50 rounded bg-infrared-darker/50 text-gray-300 backdrop-blur-sm ${getCategoryClass(artist.categoryKey)}`}>
-                      {artist.category}
-                    </span>
-                    
-                    {artist.categoryKey === 'music' && (
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-xl sm:text-2xl text-infrared-hot animate-pulse-glow">
-                        ♪
-                      </div>
-                    )}
-                    {artist.categoryKey === 'visualArts' && (
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-xl sm:text-2xl text-infrared-orange animate-float">
-                        ◈
-                      </div>
-                    )}
-                    {artist.categoryKey === 'photography' && (
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-xl sm:text-2xl text-infrared-magenta">
-                        ◇
-                      </div>
-                    )}
-                    {artist.categoryKey === 'videography' && (
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-xl sm:text-2xl text-infrared-yellow">
-                        ▸
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="space-y-2 sm:space-y-3">
-                    <h3 className={`text-xl sm:text-2xl md:text-3xl font-bold text-gradient ${getCategoryClass(artist.categoryKey)}`}>
-                      {artist.name}
-                    </h3>
-                    
-                    <p className="text-xs sm:text-sm text-gray-300 line-clamp-2">
-                      {artist.description}
-                    </p>
-
-                    {artist.genres && (
-                      <div className="flex flex-wrap gap-1 sm:gap-2">
-                        {artist.genres.slice(0, 3).map((genre, i) => (
-                          <span
-                            key={i}
-                            className="px-2 py-1 text-xs font-mono border border-infrared-purple/30 rounded bg-infrared-darker/30 backdrop-blur-sm"
-                          >
-                            {genre}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="flex gap-2 pt-1 sm:pt-2">
-                      {artist.socials?.soundcloud && (
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-infrared-hot/30 rounded text-xs font-mono text-infrared-hot backdrop-blur-sm bg-infrared-darker/30">
-                          SC
-                        </div>
-                      )}
-                      {artist.socials?.instagram && (
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-infrared-orange/30 rounded text-xs font-mono text-infrared-orange backdrop-blur-sm bg-infrared-darker/30">
-                          IG
-                        </div>
-                      )}
-                      {artist.socials?.youtube && (
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center border border-infrared-magenta/30 rounded text-xs font-mono text-infrared-magenta backdrop-blur-sm bg-infrared-darker/30">
-                          YT
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-
-                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 border border-infrared-hot/30 rounded-full flex items-center justify-center backdrop-blur-sm bg-infrared-darker/50 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:rotate-90">
-                  <svg
-                    className="w-4 h-4 sm:w-5 sm:h-5 text-infrared-hot"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20 space-y-4">
-            <div className="text-4xl sm:text-6xl text-infrared-purple/30">◇</div>
-            <p className="text-gray-500 font-mono text-xs sm:text-sm px-4">
-              Aucun artiste trouvé pour cette recherche
-            </p>
-            <button
-              onClick={() => {
-                setSearchTerm('');
-                setSelectedCategory('all');
-              }}
-              className="text-infrared-hot hover:text-infrared-orange transition-colors text-xs sm:text-sm"
+        {/* Liste des Artistes (Layout Éditorial) */}
+        <div className="space-y-1 bg-white/5 border border-white/5 rounded-3xl overflow-hidden">
+          {filteredArtists.map((artist, index) => (
+            <Link
+              key={artist.id}
+              to={`/artist/${artist.categoryKey}/${artist.id}`}
+              className="group relative flex flex-col md:flex-row items-center gap-8 p-8 sm:p-12 bg-[#050505] hover:bg-white/[0.02] transition-all duration-700"
             >
-              Réinitialiser les filtres
-            </button>
+              <div className="text-gray-800 font-display font-black text-4xl sm:text-6xl group-hover:text-infrared-hot transition-colors duration-500">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              
+              <div className="w-full md:w-48 aspect-square rounded-2xl overflow-hidden bg-gray-900 flex-shrink-0">
+                <img 
+                  src={artist.coverImage} 
+                  alt={artist.name} 
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-60 group-hover:opacity-100"
+                />
+              </div>
+
+              <div className="flex-1 space-y-4 text-center md:text-left">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <h2 className="text-4xl sm:text-6xl font-display font-black tracking-tighter text-white uppercase group-hover:translate-x-4 transition-transform duration-700">
+                    {artist.name}
+                  </h2>
+                  <span className="hidden md:block px-3 py-1 border border-white/10 rounded-full font-mono text-[8px] text-gray-500 uppercase">
+                    {artist.category}
+                  </span>
+                </div>
+                <p className="text-gray-500 text-sm max-w-xl font-light line-clamp-1">
+                  {artist.description}
+                </p>
+              </div>
+
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden lg:block">
+                <div className="w-16 h-16 rounded-full border border-infrared-hot flex items-center justify-center text-infrared-hot group-hover:bg-infrared-hot group-hover:text-white transition-all">
+                  →
+                </div>
+              </div>
+
+              {/* Background text on hover */}
+              <div className="absolute right-10 top-1/2 -translate-y-1/2 text-[10vw] font-display font-black text-white/[0.01] pointer-events-none group-hover:text-white/[0.03] transition-all uppercase select-none">
+                {artist.id.slice(0, 4)}
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {filteredArtists.length === 0 && (
+          <div className="text-center py-40 border border-white/5 rounded-3xl">
+            <p className="font-mono text-[10px] text-gray-600 tracking-[0.5em] uppercase">No_Artist_Found</p>
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };

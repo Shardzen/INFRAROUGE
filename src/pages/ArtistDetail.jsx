@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 import { artists } from '../data/artists';
 
 const ArtistDetail = () => {
@@ -7,17 +9,36 @@ const ArtistDetail = () => {
   const navigate = useNavigate();
   const heroRef = useRef(null);
   const [offset, setOffset] = useState(0);
+  const [artist, setArtist] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const artist = artists[category]?.find((a) => a.id === id);
+  useEffect(() => {
+    const fetchArtist = async () => {
+      setLoading(true);
+      try {
+        const docRef = doc(db, "artists", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setArtist(docSnap.data());
+        } else {
+          // Fallback local
+          const localArtist = artists[category]?.find((a) => a.id === id);
+          setArtist(localArtist);
+        }
+      } catch (e) {
+        const localArtist = artists[category]?.find((a) => a.id === id);
+        setArtist(localArtist);
+      }
+      setLoading(false);
+    };
+    fetchArtist();
+  }, [id, category]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     if (artist) {
       document.title = `${artist.name} | INFRAROUGE`;
     }
-    return () => {
-      document.title = 'INFRAROUGE';
-    };
   }, [artist]);
 
   useEffect(() => {
@@ -25,10 +46,8 @@ const ArtistDetail = () => {
     const updateParallax = () => {
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
-        // Ne calcule que si l'élément est visible à l'écran
         if (rect.top < window.innerHeight && rect.bottom > 0) {
-          const relativePos = rect.top / window.innerHeight;
-          setOffset(relativePos * 100); // Décalage de 100px pour un effet plus marqué sur les grandes bannières
+          setOffset(rect.top / 10);
         }
       }
       requestRef = requestAnimationFrame(updateParallax);
@@ -37,353 +56,124 @@ const ArtistDetail = () => {
     return () => cancelAnimationFrame(requestRef);
   }, []);
 
+  if (loading) return <div className="min-h-screen bg-[#050505]" />;
+
   if (!artist) {
     return (
-      <div className="pt-32 pb-20 px-4 sm:px-6 text-center">
-        <div className="text-4xl sm:text-6xl text-infrared-purple/30 mb-4">◇</div>
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-400 mb-8">Artiste non trouvé</h2>
-        <Link
-          to="/artists"
-          className="inline-block px-6 py-3 bg-thermal-gradient rounded-lg text-white font-mono text-xs sm:text-sm tracking-widest"
-        >
-          RETOUR AUX ARTISTES
-        </Link>
+      <div className="pt-40 pb-20 px-4 text-center bg-[#050505] min-h-screen">
+        <h2 className="text-4xl font-display text-white mb-8 uppercase">Artiste introuvable</h2>
+        <Link to="/artists" className="btn-premium">RETOUR INDEX</Link>
       </div>
     );
   }
 
-  const getCategoryIcon = (cat) => {
-    const icons = {
-      music: '♪',
-      visualArts: '◈',
-      photography: '◇',
-      videography: '▸',
-    };
-    return icons[cat] || '◆';
-  };
-
   return (
-    <div className="pt-24 sm:pt-32 pb-20 px-4 sm:px-6">
-      {/* Hero Image Section - Full Width */}
-      {artist.heroImage && (
-        <div className="container mx-auto max-w-7xl mb-8 sm:mb-12">
-          <div ref={heroRef} className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden border border-infrared-purple/30 group parallax-container">
-            <img 
-              src={artist.heroImage} 
-              alt={`${artist.name} hero`}
-              loading="lazy"
-              className="parallax-img transition-transform duration-700 group-hover:scale-105"
-              style={{ transform: `translateY(${offset}px)` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-infrared-darker/50 to-transparent z-10" />
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient z-20" />
-            <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 z-30">
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-2xl font-display break-words animate-float">
-                {artist.name}
-              </h1>
-            </div>
+    <div className="bg-[#050505] min-h-screen pb-40">
+      {/* Cinematic Hero */}
+      <section className="relative h-[90vh] overflow-hidden parallax-container">
+        <div ref={heroRef} className="absolute inset-0">
+          <img 
+            src={artist.heroImage || artist.coverImage} 
+            alt={artist.name}
+            className="parallax-img scale-110 brightness-50"
+            style={{ transform: `translateY(${offset}px)` }}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10" />
+        
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+          <span className="text-infrared-hot font-mono text-[10px] tracking-[0.8em] uppercase mb-6 reveal-text">Profil_Artiste_{artist.id.slice(0, 4)}</span>
+          <h1 className="text-7xl sm:text-[15vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8] reveal-text">
+            {artist.name}
+          </h1>
+          <div className="mt-10 flex gap-4 reveal-text animate-delay-500">
+            {artist.genres?.map((g, i) => (
+              <span key={i} className="px-4 py-1 border border-white/20 rounded-full font-mono text-[8px] text-gray-400 uppercase tracking-widest">{g}</span>
+            ))}
           </div>
         </div>
-      )}
 
-      <div className="container mx-auto max-w-7xl">
-        <button
+        <button 
           onClick={() => navigate(-1)}
-          className="group flex items-center gap-2 text-gray-400 hover:text-infrared-hot transition-colors mb-6 sm:mb-8 font-mono text-xs sm:text-sm"
+          className="absolute top-32 left-4 sm:left-10 z-30 font-mono text-[8px] text-gray-500 hover:text-white tracking-[0.5em] transition-colors uppercase"
         >
-          <svg
-            className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-x-1 transition-transform"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          RETOUR
+          ← Retour
         </button>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 mb-12 sm:mb-16">
-          <div className="lg:col-span-1 space-y-4 sm:space-y-6">
-            {/* Cover Image - Left Column */}
-            <div className="relative aspect-square rounded-lg overflow-hidden border border-infrared-purple/30 group">
-              {artist.coverImage ? (
-                <>
-                  <img 
-                    src={artist.coverImage} 
-                    alt={artist.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-transparent to-transparent" />
-                </>
-              ) : (
-                <div className="w-full h-full bg-infrared-gradient flex items-center justify-center">
-                  <div className="text-7xl sm:text-9xl font-bold text-white/10">{getCategoryIcon(category)}</div>
-                </div>
-              )}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient" />
-            </div>
-
-            <div className="space-y-3 sm:space-y-4 p-4 sm:p-6 border border-infrared-purple/30 rounded-lg bg-infrared-deep/30">
-              <div className="font-mono text-xs tracking-widest text-infrared-orange uppercase">
-                Réseaux
-              </div>
-              
-              <div className="space-y-2 sm:space-y-3">
-                {artist.socials?.soundcloud && (
-                  <a
-                    href={artist.socials.soundcloud}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-2 sm:p-3 border border-infrared-purple/30 rounded-lg hover:border-infrared-hot/50 transition-all group"
-                  >
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-infrared-hot/20 rounded text-infrared-hot font-mono text-xs">
-                      SC
-                    </div>
-                    <span className="text-xs sm:text-sm text-gray-300 group-hover:text-infrared-hot transition-colors">
-                      SoundCloud
-                    </span>
-                  </a>
-                )}
-                
-                {artist.socials?.instagram && (
-                  <a
-                    href={artist.socials.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-2 sm:p-3 border border-infrared-purple/30 rounded-lg hover:border-infrared-orange/50 transition-all group"
-                  >
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-infrared-orange/20 rounded text-infrared-orange font-mono text-xs">
-                      IG
-                    </div>
-                    <span className="text-xs sm:text-sm text-gray-300 group-hover:text-infrared-orange transition-colors">
-                      Instagram
-                    </span>
-                  </a>
-                )}
-                
-                {artist.socials?.youtube && (
-                  <a
-                    href={artist.socials.youtube}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-2 sm:p-3 border border-infrared-purple/30 rounded-lg hover:border-infrared-magenta/50 transition-all group"
-                  >
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-infrared-magenta/20 rounded text-infrared-magenta font-mono text-xs">
-                      YT
-                    </div>
-                    <span className="text-xs sm:text-sm text-gray-300 group-hover:text-infrared-magenta transition-colors">
-                      YouTube
-                    </span>
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {artist.genres && (
-              <div className="p-4 sm:p-6 border border-infrared-purple/30 rounded-lg bg-infrared-deep/30">
-                <div className="font-mono text-xs tracking-widest text-infrared-orange mb-3 sm:mb-4 uppercase">
-                  Genres / Styles
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {artist.genres.map((genre, i) => (
-                    <span
-                      key={i}
-                      className="px-2 sm:px-3 py-1 text-xs sm:text-sm border border-infrared-purple/50 rounded bg-infrared-darker/50 text-gray-300"
-                    >
-                      {genre}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="lg:col-span-2 space-y-6 sm:space-y-8">
-            {/* Only show title here if no hero image */}
-            {!artist.heroImage && (
-              <div>
-                <div className="font-mono text-xs sm:text-sm tracking-widest text-infrared-orange mb-3 uppercase flex items-center gap-2">
-                  <span className="text-xl sm:text-2xl">{getCategoryIcon(category)}</span>
-                  {artist.category}
-                </div>
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-gradient mb-4 sm:mb-6 font-display break-words">
-                  {artist.name}
-                </h1>
-              </div>
-            )}
-
-            <div>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed mb-6 sm:mb-8">
+      <div className="container mx-auto px-4 sm:px-10 mt-20 sm:mt-40">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+          
+          {/* Bio Column */}
+          <div className="lg:col-span-7 space-y-12 sm:space-y-20">
+            <div className="space-y-8">
+              <h2 className="text-gray-800 font-display font-black text-4xl sm:text-6xl uppercase leading-none">Manifeste</h2>
+              <p className="text-white text-xl sm:text-3xl font-light leading-relaxed">
                 {artist.description}
               </p>
             </div>
 
-            <div className="space-y-3 sm:space-y-4">
-              <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot uppercase">
-                Biographie
-              </h3>
-              <p className="text-gray-400 leading-relaxed text-base sm:text-lg">
+            <div className="space-y-8">
+              <div className="h-px w-20 bg-infrared-hot opacity-50" />
+              <p className="text-gray-400 text-lg leading-relaxed max-w-2xl font-light">
                 {artist.bio}
               </p>
             </div>
 
-            {category === 'music' && artist.embedUrl && (
-              <div className="space-y-3 sm:space-y-4">
-                <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot uppercase">
-                  Écouter
-                </h3>
-                <div className="rounded-lg overflow-hidden border border-infrared-purple/30">
-                  <iframe
-                    width="100%"
-                    height="450"
-                    scrolling="no"
-                    frameBorder="no"
-                    allow="autoplay"
-                    src={artist.embedUrl}
-                    className="w-full"
-                  ></iframe>
+            {/* Media Content */}
+            {artist.embedUrl && (
+              <div className="pt-10 space-y-8">
+                <h3 className="text-gray-800 font-display font-black text-4xl uppercase">Soundcloud_Stream</h3>
+                <div className="rounded-3xl overflow-hidden border border-white/5 bg-black">
+                  <iframe width="100%" height="450" scrolling="no" frameBorder="no" allow="autoplay" src={artist.embedUrl}></iframe>
                 </div>
               </div>
             )}
 
-            {/* Instagram Feed pour Arts Plastiques et Photographie */}
-            {(category === 'visualArts' || category === 'photography') && artist.instagramHandle && (
-              <div className="space-y-3 sm:space-y-4">
-                <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot uppercase">
-                  Portfolio Instagram
-                </h3>
-                
-                {/* Widget Instagram Embed */}
-                <div className="rounded-lg overflow-hidden border border-infrared-purple/30 bg-infrared-deep/30">
-                  <div className="p-4 sm:p-6 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-infrared-orange/20 flex items-center justify-center">
-                          <span className="text-infrared-orange font-mono text-sm">IG</span>
-                        </div>
-                        <div>
-                          <a 
-                            href={artist.socials.instagram}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base sm:text-lg font-bold text-white hover:text-infrared-orange transition-colors"
-                          >
-                            @{artist.instagramHandle}
-                          </a>
-                          <p className="text-xs text-gray-500 font-mono">Instagram</p>
-                        </div>
-                      </div>
-                      <a
-                        href={artist.socials.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-thermal-gradient rounded-lg text-white font-mono text-xs tracking-widest hover:shadow-glow transition-all duration-300"
-                      >
-                        SUIVRE
-                      </a>
-                    </div>
-
-                    {/* Message pour voir sur Instagram */}
-                    <div className="text-center py-8 space-y-4 border-t border-infrared-purple/20">
-                      <div className="text-infrared-orange text-4xl">◈</div>
-                      <p className="text-sm sm:text-base text-gray-400">
-                        Découvrez le portfolio complet de <span className="text-infrared-hot font-bold">@{artist.instagramHandle}</span>
-                      </p>
-                      <a
-                        href={artist.socials.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block px-6 py-3 bg-infrared-purple/30 border border-infrared-orange/50 rounded-lg text-infrared-orange font-mono text-xs sm:text-sm tracking-widest hover:border-infrared-orange hover:shadow-glow transition-all duration-300"
-                      >
-                        VOIR SUR INSTAGRAM →
-                      </a>
-                      <p className="text-xs text-gray-500 font-mono">
-                        Photos • Créations • Behind the scenes
-                      </p>
-                    </div>
-                  </div>
+            {artist.videos?.map((v, i) => (
+              <div key={i} className="pt-10 space-y-8">
+                <h3 className="text-gray-800 font-display font-black text-4xl uppercase">{v.title}</h3>
+                <div className="aspect-video rounded-3xl overflow-hidden border border-white/5 bg-black">
+                  <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/${v.embedId}`} frameBorder="0" allowFullScreen></iframe>
                 </div>
               </div>
-            )}
-
-            {category === 'videography' && artist.videos && artist.videos.length > 0 && (
-              <div className="space-y-4 sm:space-y-6">
-                <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot uppercase">
-                  Vidéos
-                </h3>
-                <div className="space-y-4 sm:space-y-6">
-                  {artist.videos.map((video, index) => (
-                    <div key={index} className="space-y-3">
-                      {video.title && (
-                        <h4 className="text-base sm:text-lg font-bold text-white">{video.title}</h4>
-                      )}
-                      
-                      {video.type === 'instagram' ? (
-                        <div className="p-4 sm:p-6 border border-infrared-purple/30 rounded-lg bg-infrared-deep/30 text-center space-y-4">
-                          <p className="text-sm sm:text-base text-gray-400">Contenu Instagram</p>
-                          <a
-                            href={video.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-thermal-gradient rounded-lg text-white font-mono text-xs sm:text-sm tracking-widest hover:shadow-glow-strong transition-all duration-300"
-                          >
-                            VOIR SUR INSTAGRAM
-                          </a>
-                        </div>
-                      ) : video.embedId ? (
-                        <div className="relative rounded-lg overflow-hidden border border-infrared-purple/30 aspect-video">
-                          <iframe
-                            width="100%"
-                            height="100%"
-                            src={`https://www.youtube.com/embed/${video.embedId}`}
-                            title={video.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="w-full h-full"
-                          ></iframe>
-                        </div>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {category === 'videography' && artist.instagramHandle && !artist.videos && (
-              <div className="space-y-3 sm:space-y-4">
-                <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot uppercase">
-                  Contenus Instagram
-                </h3>
-                <div className="p-4 sm:p-6 border border-infrared-purple/30 rounded-lg bg-infrared-deep/30 text-center space-y-4">
-                  <p className="text-sm sm:text-base text-gray-400">
-                    Découvrez le travail de <span className="text-infrared-hot">@{artist.instagramHandle}</span> sur Instagram
-                  </p>
-                  <a
-                    href={artist.socials.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-thermal-gradient rounded-lg text-white font-mono text-xs sm:text-sm tracking-widest hover:shadow-glow-strong transition-all duration-300"
-                  >
-                    VOIR SUR INSTAGRAM
-                  </a>
-                </div>
-              </div>
-            )}
+            ))}
           </div>
-        </div>
 
-        <div className="mt-12 sm:mt-16 text-center space-y-4 sm:space-y-6 p-6 sm:p-8 border border-infrared-purple/30 rounded-lg bg-infrared-deep/30">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tighter text-gradient">
-            Découvrez d'autres artistes
-          </h2>
-          <Link
-            to="/artists"
-            className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-thermal-gradient rounded-lg text-white font-mono text-xs sm:text-sm tracking-widest hover:shadow-glow-strong transition-all duration-300"
-          >
-            VOIR TOUS LES ARTISTES
-          </Link>
+          {/* Side Info Column */}
+          <div className="lg:col-span-5 space-y-12 sticky top-32">
+            <div className="aspect-square rounded-3xl overflow-hidden border border-white/5">
+              <img src={artist.coverImage} alt="" className="w-full h-full object-cover" />
+            </div>
+
+            <div className="p-8 sm:p-12 rounded-3xl bg-white/[0.02] border border-white/5 space-y-8">
+              <div className="space-y-2">
+                <div className="text-gray-600 font-mono text-[8px] uppercase tracking-widest">Localisation</div>
+                <div className="text-white font-display text-2xl uppercase">Rennes, FR</div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="text-gray-600 font-mono text-[8px] uppercase tracking-widest">Connectivité</div>
+                <div className="flex flex-col gap-4">
+                  {artist.socials?.instagram && (
+                    <a href={artist.socials.instagram} target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
+                      <span className="font-mono text-[10px] uppercase text-gray-400 group-hover:text-white transition-colors">Instagram</span>
+                      <span className="text-infrared-orange group-hover:translate-x-2 transition-transform">↗</span>
+                    </a>
+                  )}
+                  {artist.socials?.soundcloud && (
+                    <a href={artist.socials.soundcloud} target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
+                      <span className="font-mono text-[10px] uppercase text-gray-400 group-hover:text-white transition-colors">Soundcloud</span>
+                      <span className="text-infrared-hot group-hover:translate-x-2 transition-transform">↗</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <button className="w-full btn-premium py-4 text-[10px]">Partager le profil</button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
