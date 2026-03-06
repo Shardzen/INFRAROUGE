@@ -74,14 +74,94 @@ body {
 
 .grain-overlay {
   position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  opacity: 0.06;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+  animation: noise-move 0.2s steps(2) infinite;
+}
+
+@keyframes noise-move {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(-2%, 1%); }
+  30% { transform: translate(1%, -2%); }
+  40% { transform: translate(-1%, 2%); }
+  50% { transform: translate(-2%, 1%); }
+  60% { transform: translate(2%, 0); }
+  70% { transform: translate(0, 2%); }
+  80% { transform: translate(-2%, 0); }
+  90% { transform: translate(1%, 1%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Glitch Page Transition Effect */
+.page-transition-glitch {
+  animation: page-glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes page-glitch {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+    filter: hue-rotate(90deg) contrast(150%);
+  }
+  20% {
+    opacity: 0.5;
+    transform: scale(1) translate(-5px, 2px);
+    filter: hue-rotate(-45deg) contrast(120%);
+  }
+  40% {
+    transform: translate(5px, -2px);
+    filter: hue-rotate(45deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(0);
+    filter: hue-rotate(0deg) contrast(100%);
+  }
+}
+
+/* Industrial Component Styles */
+.industrial-panel {
+  background: rgba(10, 10, 15, 0.8);
+  border: 1px solid rgba(74, 26, 92, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.industrial-panel::before {
+  content: "";
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 4px;
   height: 100%;
-  pointer-events: none;
-  opacity: 0.03;
-  z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+  background: var(--color-infrared-hot);
+}
+
+.btn-industrial {
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 1rem 2rem;
+  background: transparent;
+  border: 1px solid var(--color-infrared-hot);
+  color: var(--color-infrared-hot);
+  position: relative;
+  transition: all 0.3s;
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+}
+
+.btn-industrial:hover {
+  background: var(--color-infrared-hot);
+  color: white;
+  box-shadow: 0 0 30px var(--color-glow-primary);
+  transform: translateY(-2px);
 }
 
 @keyframes float {

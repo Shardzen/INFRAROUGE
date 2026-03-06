@@ -10,7 +10,13 @@ const ArtistDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    if (artist) {
+      document.title = `${artist.name} | INFRAROUGE`;
+    }
+    return () => {
+      document.title = 'INFRAROUGE';
+    };
+  }, [artist]);
 
   if (!artist) {
     return (
@@ -42,16 +48,17 @@ const ArtistDetail = () => {
       {/* Hero Image Section - Full Width */}
       {artist.heroImage && (
         <div className="container mx-auto max-w-7xl mb-8 sm:mb-12">
-          <div className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden border border-infrared-purple/30">
+          <div className="relative h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden border border-infrared-purple/30 group">
             <img 
               src={artist.heroImage} 
               alt={`${artist.name} hero`}
-              className="w-full h-full object-cover"
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-infrared-darker/50 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-thermal-gradient" />
             <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8">
-              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-2xl font-display break-words">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-2xl font-display break-words animate-float">
                 {artist.name}
               </h1>
             </div>
@@ -78,13 +85,14 @@ const ArtistDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 mb-12 sm:mb-16">
           <div className="lg:col-span-1 space-y-4 sm:space-y-6">
             {/* Cover Image - Left Column */}
-            <div className="relative aspect-square rounded-lg overflow-hidden border border-infrared-purple/30">
+            <div className="relative aspect-square rounded-lg overflow-hidden border border-infrared-purple/30 group">
               {artist.coverImage ? (
                 <>
                   <img 
                     src={artist.coverImage} 
                     alt={artist.name}
-                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-infrared-darker via-transparent to-transparent" />
                 </>

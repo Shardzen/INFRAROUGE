@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { artists } from '../data/artists';
 
 const Artists = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const categories = [
     { key: 'all', label: 'TOUS', icon: '◆' },
@@ -22,6 +23,13 @@ const Artists = () => {
       });
     });
     return all;
+  };
+
+  const handleRandomArtist = () => {
+    const all = getAllArtists();
+    const randomIndex = Math.floor(Math.random() * all.length);
+    const randomArtist = all[randomIndex];
+    navigate(`/artist/${randomArtist.categoryKey}/${randomArtist.id}`);
   };
 
   const getFilteredArtists = () => {
@@ -104,6 +112,16 @@ const Artists = () => {
           </div>
 
           <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
+            <button
+              onClick={handleRandomArtist}
+              className="group px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 relative overflow-hidden border border-infrared-hot/50 text-infrared-hot hover:bg-infrared-hot hover:text-white animate-pulse-glow"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <span>✨</span>
+                DÉCOUVERTE ALÉATOIRE
+              </span>
+            </button>
+            <div className="w-full sm:w-auto h-px sm:h-auto sm:w-px bg-infrared-purple/30 my-2 sm:my-0 sm:mx-2" />
             {categories.map((cat) => (
               <button
                 key={cat.key}

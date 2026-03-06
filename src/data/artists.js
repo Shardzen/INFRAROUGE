@@ -11,7 +11,7 @@ export const artists = {
       heroImage: 'https://i1.sndcdn.com/visuals-000959002741-m49FwV-t2480x520.jpg',
       socials: {
         soundcloud: 'https://soundcloud.com/thatcherblackwood',
-        instagram: '#',
+        instagram: 'https://www.instagram.com/thatcherblackwood/?hl=fr',
       },
       embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/thatcherblackwood&color=%23ff6b4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
@@ -26,7 +26,7 @@ export const artists = {
       heroImage: 'https://i1.sndcdn.com/visuals-000100654964-VldrHF-t2480x520.jpg',
       socials: {
         soundcloud: 'https://soundcloud.com/sobi_a01',
-        instagram: '#'
+        instagram: 'https://www.instagram.com/sobi_a01'
       },
       embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sobi_a01&color=%23ff6b4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
@@ -41,7 +41,7 @@ export const artists = {
       heroImage: 'https://fr.freepik.com/photos/fond-banniere-grise',
       socials: {
         soundcloud: 'https://soundcloud.com/saycarbine',
-        instagram: '#',
+        instagram: 'https://www.instagram.com/saycarbine/',
       },
       embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/saycarbine&color=%23ff6b4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
@@ -71,7 +71,7 @@ export const artists = {
       heroImage: 'https://i1.sndcdn.com/visuals-000301957926-45LcHS-t2480x520.jpg',
       socials: {
         soundcloud: 'https://soundcloud.com/sadsadsergievposad',
-        instagram: '#',
+        instagram: 'https://www.instagram.com/sadsadsergievposad/',
       },
       embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sadsadsergievposad&color=%23ff6b4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
