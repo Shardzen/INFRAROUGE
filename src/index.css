@@ -1,2 +1,40 @@
-﻿@font-face {`r`n  font-family: 'Jak-Sharp';`r`n  src: url('../police/Jak-Sharp.otf') format('opentype');`r`n  font-weight: normal;`r`n  font-style: normal;`r`n}
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Archivo+Black&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');`r`n`r`n@tailwind base;`r`n@tailwind components;`r`n@tailwind utilities;`r`n`r`n:root {`r`n  --color-bg: #050505;`r`n  --color-primary: #ff2d55;`r`n  --color-secondary: #ff6b4a;`r`n  --color-accent: #8b2d6e;`r`n  --color-thermal-hot: #ffff00;`r`n}`r`n`r`nbody {`r`n  font-family: 'Space Grotesk', sans-serif;`r`n  background-color: var(--color-bg);`r`n  color: #ffffff;`r`n  overflow-x: hidden;`r`n  -webkit-font-smoothing: antialiased;`r`n}`r`n`r`n.font-display {`r`n  font-family: 'Jak-Sharp', sans-serif;`r`n  text-transform: uppercase;`r`n  line-height: 0.9;`r`n}`r`n`r`n.category-music {`r`n  font-family: 'Jak-Sharp', sans-serif;`r`n  font-weight: 700;`r`n}
+﻿@font-face {
+  font-family: 'Jak-Sharp';
+  src: url('../police/Jak-Sharp.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Archivo+Black&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #050505;
+  --color-primary: #ff2d55;
+  --color-secondary: #ff6b4a;
+  --color-accent: #8b2d6e;
+  --color-thermal-hot: #ffff00;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--color-bg);
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: 'Jak-Sharp', sans-serif;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+.category-music {
+  font-family: 'Jak-Sharp', sans-serif;
+  font-weight: 700;
+}
+
+
