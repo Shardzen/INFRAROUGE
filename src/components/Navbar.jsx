@@ -26,17 +26,21 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-infrared-darker/80 backdrop-blur-custom shadow-glow'
+          ? 'bg-black/85 backdrop-blur-custom border-b border-infrared-red/20'
           : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="relative group">
-            <div className="text-xl sm:text-2xl font-bold tracking-tighter">
-              <span className="text-gradient">INFRAROUGE</span>
-            </div>
-            <div className="absolute -inset-2 bg-thermal-radial opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
+          <Link to="/" className="relative group flex items-center">
+            <video
+              src="/infrarouge.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
@@ -47,12 +51,12 @@ const Navbar = () => {
                 className={`font-mono text-xs lg:text-sm tracking-wider relative group transition-colors ${
                   location.pathname === link.path
                     ? 'text-infrared-hot'
-                    : 'text-gray-300 hover:text-infrared-orange'
+                    : 'text-gray-300 hover:text-infrared-yellow'
                 }`}
               >
                 {link.name}
                 {location.pathname === link.path && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-px bg-thermal-gradient" />
+                  <div className="absolute -bottom-1 left-0 right-0 h-px bg-infrared-hot" />
                 )}
               </Link>
             ))}
@@ -69,12 +73,12 @@ const Navbar = () => {
               }`}
             />
             <span
-              className={`block w-6 h-0.5 bg-infrared-orange transition-all duration-300 ${
+              className={`block w-6 h-0.5 bg-infrared-yellow transition-all duration-300 ${
                 mobileMenuOpen ? 'opacity-0' : ''
               }`}
             />
             <span
-              className={`block w-6 h-0.5 bg-infrared-magenta transition-all duration-300 ${
+              className={`block w-6 h-0.5 bg-infrared-blue transition-all duration-300 ${
                 mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
             />
@@ -83,7 +87,7 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`md:hidden fixed inset-0 bg-infrared-darker/95 backdrop-blur-custom transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 bg-black/97 backdrop-blur-custom transition-all duration-500 ${
           mobileMenuOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
@@ -97,8 +101,8 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(false)}
               className={`font-mono text-xl sm:text-2xl tracking-wider transition-all duration-300 ${
                 location.pathname === link.path
-                  ? 'text-gradient scale-110'
-                  : 'text-gray-300 hover:text-infrared-hot'
+                  ? 'text-infrared-hot'
+                  : 'text-gray-300 hover:text-infrared-yellow'
               }`}
               style={{
                 transitionDelay: mobileMenuOpen ? `${index * 100}ms` : '0ms',

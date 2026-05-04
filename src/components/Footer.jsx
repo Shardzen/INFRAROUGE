@@ -20,20 +20,25 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-infrared-deep border-t border-infrared-purple/30 mt-20">
+    <footer className="relative bg-black border-t border-infrared-red/20 mt-20">
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
           <div className="space-y-4 text-center sm:text-left">
-            <div className="text-2xl sm:text-3xl font-bold tracking-tighter">
-              <span className="text-gradient">INFRAROUGE</span>
-            </div>
+            <video
+              src="/infrarouge.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-10 w-auto object-contain mx-auto sm:mx-0"
+            />
             <p className="text-gray-400 text-sm leading-relaxed">
               Une expérience underground contemporaine. Là où la musique rencontre l'obscurité élégante.
             </p>
           </div>
 
           <div className="text-center sm:text-left">
-            <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot mb-4">
+            <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-red mb-4">
               NAVIGATION
             </h3>
             <ul className="space-y-2">
@@ -41,7 +46,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-infrared-orange text-sm transition-colors"
+                    className="text-gray-400 hover:text-infrared-yellow text-sm transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -51,7 +56,7 @@ const Footer = () => {
           </div>
 
           <div className="text-center sm:text-left sm:col-span-2 md:col-span-1">
-            <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-hot mb-4">
+            <h3 className="font-mono text-xs sm:text-sm tracking-widest text-infrared-red mb-4">
               SOCIAL
             </h3>
             <div className="flex gap-3 justify-center sm:justify-start">
@@ -59,7 +64,7 @@ const Footer = () => {
                 <a
                   key={social.name}
                   href={social.url}
-                  className="w-10 h-10 flex items-center justify-center border border-infrared-purple/50 hover:border-infrared-hot rounded-lg text-xs font-mono text-gray-400 hover:text-infrared-hot transition-all hover:shadow-glow"
+                  className="w-10 h-10 flex items-center justify-center border border-white/10 hover:border-infrared-red rounded-lg text-xs font-mono text-gray-400 hover:text-infrared-red transition-all hover:shadow-glow"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -69,25 +74,25 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-infrared-purple/20 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="text-gray-500 text-xs font-mono">
             © {currentYear} INFRAROUGE. Tous droits réservés.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-xs text-gray-500">
-            <a href="#" className="hover:text-infrared-hot transition-colors">
+            <a href="#" className="hover:text-infrared-yellow transition-colors">
               Mentions légales
             </a>
-            <a href="#" className="hover:text-infrared-hot transition-colors">
+            <a href="#" className="hover:text-infrared-yellow transition-colors">
               Politique de confidentialité
             </a>
-            <a href="#" className="hover:text-infrared-hot transition-colors">
+            <a href="#" className="hover:text-infrared-yellow transition-colors">
               Contact
             </a>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-infrared-hot to-transparent opacity-50" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-infrared-red to-transparent opacity-40" />
     </footer>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20 bg-[#050505]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20 bg-black">
       {/* Background technical labels */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-10">
         <div className="absolute top-[15%] left-[5%] font-mono text-[10px] tracking-[1em] text-white rotate-90 origin-left">
@@ -13,6 +13,10 @@ const HeroSection = () => {
           UNDERGROUND_COLLECTIVE
         </div>
       </div>
+
+      {/* Color accent blobs */}
+      <div className="absolute top-20 right-10 w-64 h-64 bg-infrared-red/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-48 h-48 bg-infrared-blue/10 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col items-center text-center space-y-16">
@@ -24,12 +28,12 @@ const HeroSection = () => {
               </h1>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-gray-500 font-mono text-[10px] tracking-[0.4em] uppercase">
-              <span className="text-infrared-hot opacity-80">Sonore</span>
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-mono text-[10px] tracking-[0.4em] uppercase">
+              <span className="text-infrared-red opacity-90">Sonore</span>
               <span className="w-1 h-1 rounded-full bg-white/20"></span>
               <span className="text-white opacity-80">Visuel</span>
               <span className="w-1 h-1 rounded-full bg-white/20"></span>
-              <span className="text-infrared-hot opacity-80">Digital</span>
+              <span className="text-infrared-yellow opacity-90">Digital</span>
             </div>
           </div>
 
@@ -50,10 +54,9 @@ const HeroSection = () => {
       </div>
 
       {/* Decorative vertical line */}
-      <div className="absolute left-1/2 bottom-0 w-[1px] h-40 bg-gradient-to-t from-infrared-hot/40 via-white/10 to-transparent transform -translate-x-1/2"></div>
+      <div className="absolute left-1/2 bottom-0 w-[1px] h-40 bg-gradient-to-t from-infrared-red/40 via-white/10 to-transparent transform -translate-x-1/2"></div>
     </section>
   );
 };
-
 
 export default HeroSection;

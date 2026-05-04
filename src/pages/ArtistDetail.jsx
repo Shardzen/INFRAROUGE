@@ -56,11 +56,11 @@ const ArtistDetail = () => {
     return () => cancelAnimationFrame(requestRef);
   }, []);
 
-  if (loading) return <div className="min-h-screen bg-[#050505]" />;
+  if (loading) return <div className="min-h-screen bg-black" />;
 
   if (!artist) {
     return (
-      <div className="pt-40 pb-20 px-4 text-center bg-[#050505] min-h-screen">
+      <div className="pt-40 pb-20 px-4 text-center bg-black min-h-screen">
         <h2 className="text-4xl font-display text-white mb-8 uppercase">Artiste introuvable</h2>
         <Link to="/artists" className="btn-premium">RETOUR INDEX</Link>
       </div>
@@ -68,7 +68,7 @@ const ArtistDetail = () => {
   }
 
   return (
-    <div className="bg-[#050505] min-h-screen pb-40">
+    <div className="bg-black min-h-screen pb-40">
       {/* Cinematic Hero */}
       <section className="relative h-[90vh] overflow-hidden parallax-container">
         <div ref={heroRef} className="absolute inset-0">
@@ -79,10 +79,10 @@ const ArtistDetail = () => {
             style={{ transform: `translateY(${offset}px)` }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
         
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
-          <span className="text-infrared-hot font-mono text-[10px] tracking-[0.8em] uppercase mb-6 reveal-text">Profil_Artiste_{artist.id.slice(0, 4)}</span>
+          <span className="text-infrared-red font-mono text-[10px] tracking-[0.8em] uppercase mb-6 reveal-text">Profil_Artiste_{artist.id.slice(0, 4)}</span>
           <h1 className="text-7xl sm:text-[15vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8] reveal-text">
             <span className="text-gradient">{artist.name}</span>
           </h1>
@@ -114,7 +114,7 @@ const ArtistDetail = () => {
             </div>
 
             <div className="space-y-8">
-              <div className="h-px w-20 bg-infrared-hot opacity-50" />
+              <div className="h-px w-20 bg-infrared-red opacity-50" />
               <p className="text-gray-400 text-lg leading-relaxed max-w-2xl font-light">
                 {artist.bio}
               </p>
@@ -158,13 +158,13 @@ const ArtistDetail = () => {
                   {artist.socials?.instagram && (
                     <a href={artist.socials.instagram} target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
                       <span className="font-mono text-[10px] uppercase text-gray-400 group-hover:text-white transition-colors">Instagram</span>
-                      <span className="text-infrared-orange group-hover:translate-x-2 transition-transform">↗</span>
+                      <span className="text-infrared-yellow group-hover:translate-x-2 transition-transform">↗</span>
                     </a>
                   )}
                   {artist.socials?.soundcloud && (
                     <a href={artist.socials.soundcloud} target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
                       <span className="font-mono text-[10px] uppercase text-gray-400 group-hover:text-white transition-colors">Soundcloud</span>
-                      <span className="text-infrared-hot group-hover:translate-x-2 transition-transform">↗</span>
+                      <span className="text-infrared-red group-hover:translate-x-2 transition-transform">↗</span>
                     </a>
                   )}
                 </div>

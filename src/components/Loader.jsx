@@ -18,23 +18,28 @@ const Loader = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505]">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black">
       <div className="light-leak leak-1 opacity-20" />
       <div className="light-leak leak-2 opacity-20" />
-      
-      <div className="relative z-10 text-center space-y-12 px-4">
-        <div className="relative overflow-hidden">
-          <div className="text-6xl md:text-9xl font-display font-black tracking-tighter reveal-text">
-            <span className="text-white">INFRA</span>
-            <span className="text-outline">ROUGE</span>
-          </div>
-        </div>
+
+      <div className="relative z-10 text-center space-y-12 px-4 flex flex-col items-center">
+        <video
+          src="/infrarouge.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-24 md:h-40 w-auto object-contain"
+        />
 
         <div className="space-y-4">
           <div className="w-48 md:w-64 mx-auto h-[1px] bg-white/10 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-white transition-all duration-300 ease-out"
-              style={{ width: `${progress}%` }}
+            <div
+              className="h-full transition-all duration-300 ease-out"
+              style={{
+                width: `${progress}%`,
+                background: `linear-gradient(90deg, #FF1100, #FFE500)`
+              }}
             />
           </div>
 

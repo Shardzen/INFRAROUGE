@@ -41,7 +41,7 @@ const Events = () => {
     : events.filter(e => e.location.includes(filter));
 
   return (
-    <div className="pt-32 pb-20 bg-[#050505] min-h-screen relative overflow-hidden">
+    <div className="pt-32 pb-20 bg-black min-h-screen relative overflow-hidden">
       {/* Background Decorative */}
       <div className="light-leak leak-1 opacity-10" />
       
@@ -49,7 +49,7 @@ const Events = () => {
         <div className="mb-20 sm:mb-32 space-y-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
             <div className="space-y-4">
-              <span className="text-infrared-hot font-mono text-xs tracking-[0.5em] uppercase">Timeline_Live</span>
+              <span className="text-infrared-red font-mono text-xs tracking-[0.5em] uppercase">Timeline_Live</span>
               <h1 className="text-7xl sm:text-[12vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8]">
                 Agenda<br /><span className="text-outline">Nocturne</span>
               </h1>
@@ -80,7 +80,7 @@ const Events = () => {
                 <div className="text-gray-800 font-display font-black text-6xl sm:text-8xl group-hover:text-white/10 transition-colors">
                   {new Date(event.date).getDate()}
                 </div>
-                <div className="font-mono text-xs tracking-[0.4em] text-infrared-hot uppercase">
+                <div className="font-mono text-xs tracking-[0.4em] text-infrared-red uppercase">
                   {new Date(event.date).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
                 </div>
               </div>
@@ -102,13 +102,13 @@ const Events = () => {
                 <div className="space-y-4">
                   <div className="font-mono text-[10px] text-gray-500 tracking-widest uppercase flex items-center gap-4">
                     <span>{event.location}</span>
-                    <span className="w-1 h-1 rounded-full bg-infrared-hot" />
+                    <span className="w-1 h-1 rounded-full bg-infrared-red" />
                     <span>{event.time}</span>
                   </div>
                   <h2 className="text-4xl sm:text-6xl font-display font-black tracking-tighter text-white uppercase leading-none">
                     {event.title}
                   </h2>
-                  <div className="text-infrared-orange font-mono text-xs tracking-[0.3em] uppercase">
+                  <div className="text-infrared-yellow font-mono text-xs tracking-[0.3em] uppercase">
                     {event.artist}
                   </div>
                 </div>

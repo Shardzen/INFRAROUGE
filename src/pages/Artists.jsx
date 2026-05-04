@@ -59,13 +59,13 @@ const Artists = () => {
   );
 
   return (
-    <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
+    <div className="pt-32 pb-20 bg-black min-h-screen">
       <div className="container mx-auto px-4 sm:px-10">
         {/* Header Style Magazine */}
         <div className="mb-20 sm:mb-32 space-y-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
             <div className="space-y-4">
-              <span className="text-infrared-hot font-mono text-xs tracking-[0.5em] uppercase">Archive_Global</span>
+              <span className="text-infrared-red font-mono text-xs tracking-[0.5em] uppercase">Archive_Global</span>
               <h1 className="text-7xl sm:text-[12vw] font-display font-black tracking-tighter text-white uppercase leading-[0.8]">
                 Index<br /><span className="text-outline">Artistes</span>
               </h1>
@@ -80,7 +80,7 @@ const Artists = () => {
                   placeholder="RECHERCHER_"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-white/[0.03] border-b border-white/10 py-4 font-mono text-[10px] tracking-widest text-white focus:outline-none focus:border-infrared-hot transition-all uppercase placeholder:text-gray-800"
+                  className="w-full bg-white/[0.03] border-b border-white/10 py-4 font-mono text-[10px] tracking-widest text-white focus:outline-none focus:border-infrared-red transition-all uppercase placeholder:text-gray-800"
                 />
               </div>
             </div>
@@ -110,9 +110,9 @@ const Artists = () => {
             <Link
               key={artist.id}
               to={`/artist/${artist.categoryKey}/${artist.id}`}
-              className="group relative flex flex-col md:flex-row items-center gap-8 p-8 sm:p-12 bg-[#050505] hover:bg-white/[0.02] transition-all duration-700"
+              className="group relative flex flex-col md:flex-row items-center gap-8 p-8 sm:p-12 bg-black hover:bg-white/[0.02] transition-all duration-700"
             >
-              <div className="text-gray-800 font-display font-black text-4xl sm:text-6xl group-hover:text-infrared-hot transition-colors duration-500">
+              <div className="text-gray-800 font-display font-black text-4xl sm:text-6xl group-hover:text-infrared-red transition-colors duration-500">
                 {String(index + 1).padStart(2, '0')}
               </div>
               
@@ -139,7 +139,7 @@ const Artists = () => {
               </div>
 
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden lg:block">
-                <div className="w-16 h-16 rounded-full border border-infrared-hot flex items-center justify-center text-infrared-hot group-hover:bg-infrared-hot group-hover:text-white transition-all">
+                <div className="w-16 h-16 rounded-full border border-infrared-red flex items-center justify-center text-infrared-red group-hover:bg-infrared-red group-hover:text-white transition-all">
                   →
                 </div>
               </div>

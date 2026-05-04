@@ -8,27 +8,29 @@ export default {
     extend: {
       colors: {
         infrared: {
-          deep: '#1a0a1e',
-          darker: '#0a0a0f',
-          purple: '#4a1a5c',
-          magenta: '#8b2d6e',
-          hot: '#d84a7f',
-          orange: '#ff6b4a',
-          yellow: '#ffb347',
+          deep: '#000000',
+          darker: '#050505',
+          purple: '#000a1f',
+          magenta: '#003CFF',
+          hot: '#FF1100',
+          orange: '#FFE500',
+          yellow: '#FFE500',
+          blue: '#003CFF',
+          red: '#FF1100',
         },
         glow: {
-          primary: 'rgba(255, 107, 74, 0.4)',
-          secondary: 'rgba(139, 45, 110, 0.3)',
+          primary: 'rgba(255, 17, 0, 0.4)',
+          secondary: 'rgba(0, 60, 255, 0.3)',
         }
       },
       fontFamily: {
         sans: ['Space Grotesk', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       backgroundImage: {
-        'infrared-gradient': 'linear-gradient(135deg, #1a0a1e 0%, #4a1a5c 50%, #8b2d6e 100%)',
-        'thermal-gradient': 'linear-gradient(180deg, #8b2d6e 0%, #d84a7f 50%, #ff6b4a 100%)',
-        'thermal-radial': 'radial-gradient(circle at center, #ff6b4a 0%, #d84a7f 35%, #8b2d6e 70%, #1a0a1e 100%)',
+        'infrared-gradient': 'linear-gradient(135deg, #000000 0%, #000a1f 50%, #003CFF 100%)',
+        'thermal-gradient': 'linear-gradient(180deg, #003CFF 0%, #FF1100 50%, #FFE500 100%)',
+        'thermal-radial': 'radial-gradient(circle at center, #FF1100 0%, #FF1100 35%, #000a1f 70%, #000000 100%)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
@@ -58,9 +60,11 @@ export default {
         'custom': '20px',
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(255, 107, 74, 0.4), 0 0 40px rgba(139, 45, 110, 0.3)',
-        'glow-strong': '0 0 30px rgba(255, 107, 74, 0.6), 0 0 60px rgba(139, 45, 110, 0.4)',
-        'inner-glow': 'inset 0 0 20px rgba(255, 107, 74, 0.1)',
+        'glow': '0 0 20px rgba(255, 17, 0, 0.4), 0 0 40px rgba(0, 60, 255, 0.2)',
+        'glow-strong': '0 0 30px rgba(255, 17, 0, 0.6), 0 0 60px rgba(0, 60, 255, 0.3)',
+        'inner-glow': 'inset 0 0 20px rgba(255, 17, 0, 0.1)',
+        'glow-yellow': '0 0 20px rgba(255, 229, 0, 0.4), 0 0 40px rgba(255, 229, 0, 0.2)',
+        'glow-blue': '0 0 20px rgba(0, 60, 255, 0.4), 0 0 40px rgba(0, 60, 255, 0.2)',
       },
     },
   },

@@ -13,7 +13,7 @@ export const artists = {
         soundcloud: 'https://soundcloud.com/thatcherblackwood',
         instagram: 'https://www.instagram.com/thatcherblackwood/?hl=fr',
       },
-      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/thatcherblackwood&color=%23ff2d55&auto_play=false&hide_related=true',
+      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/thatcherblackwood/basalt&color=%23FF1100&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
     {
       id: 'Sobi',
@@ -28,7 +28,7 @@ export const artists = {
         soundcloud: 'https://soundcloud.com/sobi_a01',
         instagram: 'https://www.instagram.com/sobi_a01'
       },
-      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sobi_a01&color=%23ff2d55&auto_play=false&hide_related=true',
+      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sobi_a01/cut-the-chord&color=%23FF1100&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
     {
       id: 'Carbine',
@@ -43,7 +43,7 @@ export const artists = {
         soundcloud: 'https://soundcloud.com/saycarbine',
         instagram: 'https://www.instagram.com/saycarbine/',
       },
-      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/saycarbine&color=%23ff2d55&auto_play=false&hide_related=true',
+      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/saycarbine/rupt&color=%23FF1100&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
     {
       id: 'Wired',
@@ -58,7 +58,22 @@ export const artists = {
         soundcloud: 'https://soundcloud.com/wire_d_d',
         instagram: '#',
       },
-      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/wire_d_d&color=%23ff6b4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
+      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/wire_d_d/skaphe-ft-kazvelvetskin&color=%23FF1100&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
+    },
+    {
+      id: 'SelimBradley',
+      name: 'Selim Bradley',
+      category: 'Musique',
+      genres: ['Electronic', 'Experimental', 'Ambient'],
+      description: 'Compositions atmosphériques entre ambient et électronique expérimental',
+      bio: 'Artiste électronique aux compositions profondes et atmosphériques, explorant les frontières de l\'ambient et de l\'expérimental.',
+      coverImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=90',
+      heroImage: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=2000&q=90',
+      socials: {
+        soundcloud: 'https://soundcloud.com/selimbradley',
+        instagram: '#',
+      },
+      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/selimbradley/structure&color=%23FF1100&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
     {
       id: 'SADSADSERGIEVPOSAD',
@@ -67,16 +82,16 @@ export const artists = {
       genres: ['Experimental', 'Noise', 'Ambient'],
       description: 'Expérimentations noise et ambient pour des voyages sonores introspectifs',
       bio: 'Projet expérimental explorant les territoires entre noise, ambient et sound art. Des compositions qui repoussent les limites de la perception sonore.',
-      coverImage: '	https://i1.sndcdn.com/avatars-000553185582-h2z0dj-t500x500.jpg',
+      coverImage: 'https://i1.sndcdn.com/avatars-000553185582-h2z0dj-t500x500.jpg',
       heroImage: 'https://i1.sndcdn.com/visuals-000301957926-45LcHS-t2480x520.jpg',
       socials: {
         soundcloud: 'https://soundcloud.com/sadsadsergievposad',
         instagram: 'https://www.instagram.com/sadsadsergievposad/',
       },
-      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sadsadsergievposad&color=%23ff6b4a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
+      embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/sadsadsergievposad&color=%23FF1100&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false',
     },
   ],
-  
+
   visualArts: [
     {
       id: 'Lazuliren',
@@ -84,7 +99,7 @@ export const artists = {
       category: 'Arts Plastiques',
       description: 'Créations visuelles expérimentales et explorations artistiques contemporaines',
       bio: 'Artiste visuel explorant les frontières entre art digital et traditionnel. Des œuvres qui questionnent la perception et l\'identité à travers des compositions uniques.',
-      coverImage: 'https://scontent-cdg4-2.cdninstagram.com/v/t51.288…Air7A3ANrb5LdXRMtMrDtw&oe=697AD606&_nc_sid=8b3546',
+      coverImage: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=800&q=80',
       heroImage: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=1600&q=80',
       socials: {
         instagram: 'https://www.instagram.com/lazuliren',
