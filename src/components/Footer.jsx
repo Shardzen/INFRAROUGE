@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LogoAnimated from './LogoAnimated';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -25,9 +24,11 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12">
           <div className="space-y-4 text-center sm:text-left">
-            <div className="mx-auto sm:mx-0">
-              <LogoAnimated className="h-10" />
-            </div>
+            <img
+              src="/logo.gif"
+              alt="INFRAROUGE"
+              className="h-10 w-auto object-contain mx-auto sm:mx-0"
+            />
             <p className="text-gray-400 text-sm leading-relaxed">
               Une expérience underground contemporaine. Là où la musique rencontre l'obscurité élégante.
             </p>

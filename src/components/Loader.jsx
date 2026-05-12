@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LogoAnimated from './LogoAnimated';
 
 const Loader = () => {
   const [progress, setProgress] = useState(0);
@@ -24,7 +23,11 @@ const Loader = () => {
       <div className="light-leak leak-2 opacity-20" />
 
       <div className="relative z-10 text-center space-y-12 px-4 flex flex-col items-center">
-        <LogoAnimated className="h-24 md:h-40" />
+        <img
+          src="/logo.gif"
+          alt="INFRAROUGE"
+          className="h-24 md:h-40 w-auto object-contain"
+        />
 
         <div className="space-y-4">
           <div className="w-48 md:w-64 mx-auto h-[1px] bg-white/10 rounded-full overflow-hidden">
@@ -36,7 +39,6 @@ const Loader = () => {
               }}
             />
           </div>
-
           <div className="font-mono text-[8px] md:text-[10px] text-gray-500 tracking-[0.5em] uppercase">
             Initialisation {progress}%
           </div>
