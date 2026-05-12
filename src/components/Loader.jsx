@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import LogoAnimated from './LogoAnimated';
 
 const Loader = () => {
   const [progress, setProgress] = useState(0);
@@ -23,14 +24,7 @@ const Loader = () => {
       <div className="light-leak leak-2 opacity-20" />
 
       <div className="relative z-10 text-center space-y-12 px-4 flex flex-col items-center">
-        <video
-          src="/infrarouge.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="h-24 md:h-40 w-auto object-contain"
-        />
+        <LogoAnimated className="h-24 md:h-40" />
 
         <div className="space-y-4">
           <div className="w-48 md:w-64 mx-auto h-[1px] bg-white/10 rounded-full overflow-hidden">
@@ -38,7 +32,7 @@ const Loader = () => {
               className="h-full transition-all duration-300 ease-out"
               style={{
                 width: `${progress}%`,
-                background: `linear-gradient(90deg, #FF1100, #FFE500)`
+                background: 'linear-gradient(90deg, #FF1100, #FFE500)'
               }}
             />
           </div>

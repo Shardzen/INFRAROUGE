@@ -25,3 +25,9 @@ dist-ssr
 
 # Netlify
 .netlify
+
+# Large media files (à héberger sur un CDN externe)
+*.mp4
+*.mov
+*.avi
+*.webm

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import LogoAnimated from './LogoAnimated';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -33,14 +34,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="relative group flex items-center">
-            <video
-              src="/infrarouge.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
+            <LogoAnimated className="h-10 sm:h-12" />
           </Link>
 
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
